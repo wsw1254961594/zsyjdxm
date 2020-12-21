@@ -4,6 +4,8 @@ package com.study.config;
 * 1、Controller的返回类型,全部要变成MyResult
 */
 
+import com.github.pagehelper.PageInfo;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -31,6 +33,16 @@ public class MyResult implements Serializable {
        this.code=1;
        this.objs=objs;
    }
+
+
+    /** 成功并携带分页集合数据
+     * @param list
+     * @return
+     */
+    public  static  MyResult okAndpage(PageInfo<?> list){
+        return new MyResult(list);
+    }
+
 
    //当代码发生错误时调用
    public static MyResult ERROR(String msg){
