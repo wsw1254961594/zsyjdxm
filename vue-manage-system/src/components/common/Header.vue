@@ -37,7 +37,7 @@
         <!--用户下拉菜单-->
         <el-dropdown class="user-name" trigger="click" @command="handleCommand">
           <span class="el-dropdown-link">
-            {{username}}
+            {{this.$store.state.ename}}
             <i class="el-icon-caret-bottom"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
@@ -61,7 +61,7 @@
         collapse: false,
         fullscreen: false,
         name: 'linxin',
-        message: 2
+        message: 2,
       }
     },
     computed: {
@@ -74,6 +74,8 @@
       //用户下拉菜单选择事件
       handleCommand(command) {
         if (command == 'loginout') {
+          this.$store.commit('clearAll')
+          window.sessionStorage.clear()
           localStorage.removeItem('ms_username')
           this.$router.push('/login')
         }
@@ -115,6 +117,7 @@
       if (document.body.clientWidth < 1500) {
         this.collapseChange()
       }
+      console.log("window:emp",window.sessionStorage.getItem("emp"))
     }
   }
 </script>
