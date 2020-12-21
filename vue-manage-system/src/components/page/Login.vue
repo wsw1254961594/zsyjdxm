@@ -9,8 +9,8 @@
       <div class="ms-title">后台管理系统</div>
       <el-form :model="param" :rules="rules" ref="login"
                label-width="0px" class="ms-content">
-        <el-form-item prop="username">
-          <el-input v-model="param.username" placeholder="username">
+        <el-form-item prop="ename">
+          <el-input v-model="param.ename" placeholder="username">
             <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
           </el-input>
         </el-form-item>
@@ -29,31 +29,51 @@
 </template>
 
 <script>
+  import {empHttp} from "../../api/emp";
+
   export default {
     name: "Login",
     data() {
       return {
         param : {
-          username : 'admin',
-          password : '123123'
+          ename : '',
+          password : ''
         },
         rules : {
-          username : [{required: true, message: '请输入用户名', trigger: 'blur'}],
+          ename : [{required: true, message: '请输入用户名', trigger: 'blur'}],
           password : [{required: true, message: '请输入密码', trigger: 'blur'}]
         }
       }
     },
     methods : {
       submitForm() {
-        this.$refs.login.validate(valid => {
-          if(valid) {
+        this.$refs.login.validate(async valid => {
+          /*if(valid) {
             this.$message.success("登录成功")
             localStorage.setItem('ms_username',this.param.username)
             this.$router.push('/')
           } else {
             this.$message.error('请输入账号和密码')
             return false
-          }
+          }*/
+          if (!valid) return
+          empHttp.login(this.param).then(res => {
+            if (res.code === 1) {
+              const emp = {
+                empno:res.obj.empno,
+                ename:res.obj.ename,
+                ephone:res.obj.ephone,
+                deptno:res.obj.deptno
+              }
+              this.$store.commit('addEmp',emp)
+              this.$router.push('/dashboard')
+            } else {
+              this.$message({
+                message:"报错了",
+                type:"error"
+              })
+            }
+          })
         })
       }
     }
