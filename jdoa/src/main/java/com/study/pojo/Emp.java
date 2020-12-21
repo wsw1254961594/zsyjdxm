@@ -21,6 +21,7 @@ public class Emp {
     private BigDecimal sal;
     private Integer state;
     private Date ofday;
+    
     private List<Borrow> borrow;
     private List<Contract> contracts;
     private Dimission dimissions;

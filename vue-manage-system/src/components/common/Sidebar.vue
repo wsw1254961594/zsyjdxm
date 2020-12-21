@@ -132,7 +132,7 @@
             title: '人事关系',
             subs: [
               {
-                index: 'ruzhi',
+                index: '/emps',
                 title: '员工入职'
               },
               {
