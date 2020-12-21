@@ -18,7 +18,7 @@
         select sum(cmoney) from contract where empno=#{empno} and ctype=1 and cstate=2
     </select>
 
-    <resultMap id="contract" type="com.study.pojo.Contract">
+    <resultMap id="contract" type="com.study.vo.contractlist">
         <id column="cid" property="cid"/>
         <result column="ctitle" property="ctitle"/>
         <result column="cbody" property="cbody"/>
@@ -27,10 +27,8 @@
         <result column="ctype" property="ctype"/>
         <result column="cday" property="cday"/>
         <result column="cstate" property="cstate"/>
-        <collection property="payments" ofType="Payment" column="{cid=cid}" select="selectFkmoney">
-            <id column="pmid" property="pmid"/>
-            <result column="pmmoney" property="pmmoney"/>
-        </collection>
+        <association property="money" javaType="java.lang.Integer" column="{cid=cid}" select="selectFkmoney">
+        </association>
     </resultMap>
     
     <!--查询我的所有合同-->
@@ -39,7 +37,7 @@
     </select>
 
     <!--查询合同已付款金额-->
-    <select id="selectFkmoney" resultType="Payment">
-        select * from payment where cid=#{cid}
+    <select id="selectFkmoney" resultType="java.lang.Integer">
+       select sum(pmmoney) as money from payment where cid=#{cid}
     </select>
 </mapper>

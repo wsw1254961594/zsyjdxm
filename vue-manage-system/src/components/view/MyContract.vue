@@ -115,6 +115,14 @@
 					            <span v-else-if="scope.row.cstate=3"> <el-button type="danger" plain>解除</el-button></span>
 					           </template>
 					         </el-table-column>
+							 
+							 <el-table-column
+							   label="付款进度">
+							   <template slot-scope="scope">
+									<el-progress :percentage="Math.floor(scope.row.money/scope.row.cmoney*100)"></el-progress>			
+								</template>
+							 </el-table-column>
+							
 					         <el-table-column
 					           label="操作">
 					           <template slot-scope="scope">
@@ -234,7 +242,8 @@
 			/* 采购合同已完成金额 */
 			cgtotalend:0,
 			/* 采购合同 */
-			cgList:[]
+			cgList:[],
+			sum:0
 	      };
 	    },
 	    methods: {
