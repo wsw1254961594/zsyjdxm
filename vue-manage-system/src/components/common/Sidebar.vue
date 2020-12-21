@@ -87,7 +87,7 @@
             title: '合同管理',
             subs: [
               {
-                index: 'contractmenu',
+                index: 'test',
                 title: '合同首页'
               },
               {
@@ -103,7 +103,7 @@
                 title: '合同执行',
                 subs: [
                   {
-                    index: 'mycontract',
+                    index: 'wodehetong',
                     title: '我的合同'
                   },
                   {
