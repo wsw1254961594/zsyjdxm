@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  * @description:
  */
 @Repository
-public interface IEmpMapper {
+public interface ILoginMapper {
     Emp login(String ename);
 }
