@@ -192,7 +192,11 @@
               {
                 index: 'huiyirenwu',
                 title: '会议任务'
-              }
+              },
+			  {
+			    index: 'dizhi',
+			    title: '会议室详情'
+			  }
             ]
           },
           {

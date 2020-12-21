@@ -17,10 +17,11 @@ public class Xiangqing {
     private Timestamp kaishitimedate;
     private Timestamp jieshutime;
     private String neirong;
-    private Integer empid;
+
     private Shiyong myshiyong;
     private List<Emp> emps;
     private Dizhi mydizhi;
+    private Emp ese;
 
     @Id
     @Column(name = "hydzid", nullable = false)
@@ -72,15 +73,9 @@ public class Xiangqing {
         this.neirong = neirong;
     }
 
-    @Basic
-    @Column(name = "empid", nullable = true)
-    public Integer getEmpid() {
-        return empid;
-    }
 
-    public void setEmpid(Integer empid) {
-        this.empid = empid;
-    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -91,13 +86,13 @@ public class Xiangqing {
                 Objects.equals(hyrw, xiangqing.hyrw) &&
                 Objects.equals(kaishitimedate, xiangqing.kaishitimedate) &&
                 Objects.equals(jieshutime, xiangqing.jieshutime) &&
-                Objects.equals(neirong, xiangqing.neirong) &&
-                Objects.equals(empid, xiangqing.empid);
+                Objects.equals(neirong, xiangqing.neirong)
+                ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hydzid, hyrw, kaishitimedate, jieshutime, neirong, empid);
+        return Objects.hash(hydzid, hyrw, kaishitimedate, jieshutime, neirong);
     }
 
     @OneToOne(mappedBy = "myxiangqing")
@@ -127,5 +122,15 @@ public class Xiangqing {
 
     public void setMydizhi(Dizhi mydizhi) {
         this.mydizhi = mydizhi;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "empid", referencedColumnName = "empno")
+    public Emp getEse() {
+        return ese;
+    }
+
+    public void setEse(Emp ese) {
+        this.ese = ese;
     }
 }

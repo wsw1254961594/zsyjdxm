@@ -47,6 +47,11 @@ const routes = [
 	    path: '/mycontract',
 	    component: () => import('../components/view/MyContract'),
 	    meta: {title: '我的合同'}
+	  },
+	  {
+	    path: '/dizhi',
+	    component: () => import('../components/view/Dizhi'),
+	    meta: {title: '会议室使用详情'}
 	  }
     ]
   },

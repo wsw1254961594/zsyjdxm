@@ -36,6 +36,7 @@ public class Emp {
     private List<Property> propertys;
     private List<Prreturn> prreturns;
     private List<Xiangqing> xiangqings;
+    private List<Xiangqing> xqs;
 
     @Id
     @Column(name = "empno", nullable = false)
@@ -272,5 +273,14 @@ public class Emp {
 
     public void setXiangqings(List<Xiangqing> xiangqings) {
         this.xiangqings = xiangqings;
+    }
+
+    @OneToMany(mappedBy = "ese")
+    public List<Xiangqing> getXqs() {
+        return xqs;
+    }
+
+    public void setXqs(List<Xiangqing> xqs) {
+        this.xqs = xqs;
     }
 }
