@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.IPrreturnMapper">
+    <resultMap id="IPrreturn" type="Prreturn">
+        <id property="rtid" column="rtid"/>
+        <result property="rserial" column="rserial"/>
+        <result property="rname" column="rname"/>
+        <result property="rstate" column="rstate"/>
+        <result property="rquantity" column="rquantity"/>
+        <result property="bunits" column="bunits"/>
+        <result property="rstorage" column="rstorage"/>
+        <result property="rget" column="rget"/>
+        <result property="rvalue" column="rvalue"/>
+    </resultMap>
+
+    <!--查询资产归还-->
+    <select id="selectPrreturnAll" resultMap="IPrreturn">
+        select * from prreturn
+    </select>
+</mapper>

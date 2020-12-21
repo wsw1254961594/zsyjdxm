@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.IPropertyMapper">
+    <resultMap id="IProperty" type="Property">
+        <id property="cpid" column="cpid"/>
+        <result property="pserial" column="pserial"/>
+        <result property="pname" column="pname"/>
+        <result property="pstate" column="pstate"/>
+        <result property="pquantity" column="pquantity"/>
+        <result property="punits" column="punits"/>
+        <result property="pstorage" column="pstorage"/>
+        <result property="pget" column="pget"/>
+        <result property="pvalue" column="pvalue"/>
+        <result property="premark" column="premark"/>
+    </resultMap>
+    <select id="selectPropertyAll" resultMap="IProperty">
+        select * from property
+    </select>
+</mapper>
