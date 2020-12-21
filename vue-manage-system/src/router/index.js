@@ -37,7 +37,7 @@ const routes = [
         path: '/editor',
         component: () => import('../components/page/Test'),
         meta: {title: '编辑'}
-      },
+      },  
 	  {
         path: '/contractmenu',
         component: () => import('../components/view/ContractMenu'),
@@ -52,6 +52,11 @@ const routes = [
 	    path: '/emps',
 	    component: () => import('../components/view/emps'),
 	    meta: {title: '员工入职'}
+	  },
+	  {
+	    path: '/dizhi',
+	    component: () => import('../components/view/Dizhi'),
+	    meta: {title: '会议室使用详情'}
 	  }
     ]
   },
