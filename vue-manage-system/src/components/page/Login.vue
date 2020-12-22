@@ -63,7 +63,7 @@
                 empno:res.obj.empno,
                 ename:res.obj.ename,
                 ephone:res.obj.ephone,
-                deptno:res.obj.deptno
+                mgr:res.obj.mgr
               }
               this.$store.commit('addEmp',emp)
               this.$router.push('/dashboard')

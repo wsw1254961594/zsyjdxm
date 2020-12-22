@@ -47,7 +47,9 @@
 	                  this.total = r.data.total;
 	                  console.log(this.List)
 	                }
-	              })
+	              }).catch(e=>{
+					  alert(e)
+				  })
 	            },
 	                  handleCurrentChange(pagerindex){
 	                    //参数是当前页码

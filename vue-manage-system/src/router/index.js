@@ -91,12 +91,26 @@ const routes = [
             component: () => import('../components/view/WorkOverTime'),
             meta: {title: '加班'}
         }
-	  },
+	  ,
 	  {
 	    path: '/project',
 	    component: () => import('../components/view/project'),
 	    meta: {title: '项目执行'}
-	  }
+	  },{
+	    path: '/chaxunhy',
+	    component: () => import('../components/view/Chaxunhy'),
+	    meta: {title: '查询会议'}
+	  },
+	  {
+	    path: '/huiyitianjia',
+	    component: () => import('../components/view/Huiyitianjia'),
+	    meta: {title: '会议使用情况'}
+	  },
+	  {
+	    path: '/tianjiahuiyi',
+	    component: () => import('../components/view/Tianjiahuiyi'),
+	    meta: {title: '添加会议'}
+	  },
     ]
   },
   {
