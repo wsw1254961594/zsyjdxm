@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.ITasklistMapper">
+
+    <resultMap id="TasklistResult" type="com.study.pojo.Tasklist">
+        <id property="tid" column="tid"/>
+        <result property="mname" column="mname"/>
+        <result property="stage" column="stage"/>
+        <result property="startingtime" column="startingtime"/>
+        <result property="endtime" column="endtime"/>
+        <result property="actualstarttime" column="actualstarttime"/>
+        <result property="actualendtime" column="actualendtime"/>
+        <result property="schedule" column="schedule"/>
+        <result property="taskdescription" column="taskdescription"/>
+
+        <association property="Itemlist" javaType="com.study.pojo.Itemlist">
+            <id property="iid" column="iid"/>
+            <result property="pname" column="pname"/>
+            <result property="type" column="type"/>
+            <result property="status" column="status"/>
+            <result property="jobtype" column="jobtype"/>
+            <result property="progress" column="progress"/>
+            <result property="stageof" column="stageof"/>
+            <result property="planstartdate" column="planstartdate"/>
+            <result property="planenddate" column="planenddate"/>
+            <result property="actualstartdate" column="actualstartdate"/>
+            <result property="actualenddate" column="actualenddate"/>
+            <result property="empid" column="empid"/>
+        </association>
+    </resultMap>
+
+    <select id="selectAll" resultMap="TasklistResult">
+            select * from tasklist t left join itemlist i on i.iid=t.iid
+    </select>
+
+</mapper>

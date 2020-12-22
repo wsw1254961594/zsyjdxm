@@ -66,12 +66,12 @@
                 title: '常用流程',
                 subs: [
                   {
-                    index: 'editor',
-                    title: '富文本编辑器'
+                    index: '/leaves',
+                    title: '请假'
                   },
                   {
-                    index: 'markdown',
-                    title: 'markdown编辑器'
+                    index: '/workovertime',
+                    title: '加班'
                   }
                 ]
               },
@@ -91,7 +91,7 @@
                 title: '合同首页'
               },
               {
-                index: 'qicao',
+                index: 'contractadd',
                 title: '合同起草'
               },
               {
@@ -163,7 +163,7 @@
             title: '人事档案',
             subs: [
               {
-                index: 'wodekapian',
+                index: '/card',
                 title: '我的卡片'
               },
               {
@@ -205,7 +205,7 @@
             title: '资产管理',
             subs: [
               {
-                index: 'wodezichan',
+                index: 'property',
                 title: '我的资产'
               },
               {
@@ -217,11 +217,11 @@
                 title: '入库申请'
               },
               {
-                index: 'zichanjieyong',
+                index: 'asset',
                 title: '资产借用'
               },
               {
-                index: 'zichanguihuan',
+                index: 'prreturn',
                 title: '资产归还'
               }
             ]
@@ -236,7 +236,7 @@
                 title: '新建项目'
               },
               {
-                index: 'xiangmuzhixing',
+                index: '/project',
                 title: '项目执行',
               },
               {
@@ -371,6 +371,8 @@
 </script>
 
 <style scoped>
+
+	
   .sidebar {
     display: block;
     position: absolute;

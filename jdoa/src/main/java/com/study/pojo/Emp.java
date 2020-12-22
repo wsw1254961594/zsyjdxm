@@ -1,8 +1,11 @@
 package com.study.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +23,8 @@ public class Emp {
     private Integer mgr;
     private BigDecimal sal;
     private Integer state;
-    private Date ofday;
+    @JsonFormat(pattern ="yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
+    private Timestamp ofday;
     
     private List<Borrow> borrow;
     private List<Contract> contracts;
@@ -40,7 +44,19 @@ public class Emp {
     private List<Xiangqing> xqs;
     private List<Huiyirenyuan> ry;
 
+    //前台数据接收
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "empno", nullable = false)
     public Integer getEmpno() {
         return empno;
@@ -112,11 +128,11 @@ public class Emp {
 
     @Basic
     @Column(name = "ofday", nullable = true)
-    public Date getOfday() {
+    public Timestamp getOfday() {
         return ofday;
     }
 
-    public void setOfday(Date ofday) {
+    public void setOfday(Timestamp ofday) {
         this.ofday = ofday;
     }
 

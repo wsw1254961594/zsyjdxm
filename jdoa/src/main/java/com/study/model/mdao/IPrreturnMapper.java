@@ -2,6 +2,7 @@ package com.study.model.mdao;
 
 import com.study.pojo.Prreturn;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,4 +18,9 @@ import java.util.List;
 public interface IPrreturnMapper {
     /*查询资产归还*/
     List<Prreturn> selectPrreturnAll();
+
+    /*高级查询资产归还表根据 名称 归还日期 价格查询*/
+    List<Prreturn> selectsPrreturn(@Param("rname")String rname,
+                                   @Param("rget")String rget,
+                                   @Param("rvalue")String rvalue);
 }

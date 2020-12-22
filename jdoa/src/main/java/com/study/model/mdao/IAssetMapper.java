@@ -2,6 +2,7 @@ package com.study.model.mdao;
 
 import com.study.pojo.Asset;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,4 +17,7 @@ import java.util.List;
 public interface IAssetMapper {
     /*查询资产表信息*/
    List<Asset> selectAssetAll();
+
+    /*高级查询*/
+    List<Asset> selectsAsset(@Param("atname") String atname, @Param("atmodel") String atmodel, @Param("price") String aunits);
 }

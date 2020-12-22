@@ -32,7 +32,7 @@
 				
 				<el-col :span="11" style="margin-left: 80px;">			
 			   <el-form-item label="发布人" label-width="100px">			     
-			      <el-input v-model="row.fbr"></el-input>			    
+			      <el-input v-model="row.fbr"></el-input>
 			    </el-form-item>
 				  </el-col>
 		   </el-row>
@@ -80,6 +80,7 @@
 		   				
 		   				<el-col :span="11" style="margin-left: 80px;">			
 		   			   <el-form-item label="会议室" label-width="100px">			     
+<<<<<<< HEAD
 		   			   
 									 <el-select v-model="value3" placeholder="请选择">
 									     <el-option
@@ -89,6 +90,9 @@
 									       :value="item.leixingname">
 									     </el-option>
 									   </el-select>
+=======
+		   			      <el-input></el-input>			    
+>>>>>>> origin/master
 		   			    </el-form-item>
 		   				  </el-col>
 		   </el-row>
@@ -96,6 +100,7 @@
 		   <el-row>
 		   			   <el-col :span="11">
 		   			   <el-form-item label="人员" label-width="100px">			      
+<<<<<<< HEAD
 		   			      <el-select v-model="value4" multiple placeholder="请选择">
 		   			          <el-option
 		   			            v-for="item in yg"
@@ -104,6 +109,9 @@
 		   			            :value="item.ename">
 		   			          </el-option>
 		   			        </el-select>		      
+=======
+		   			      <el-input></el-input>			      
+>>>>>>> origin/master
 		   			    </el-form-item>
 		   				</el-col>
 		   				
@@ -116,6 +124,10 @@
            </el-form-item>
          </div>
        </el-form>
+<<<<<<< HEAD
+=======
+     
+>>>>>>> origin/master
     </div>
 </template>
 
@@ -123,17 +135,23 @@
   export default{
       data(){
         return {
+<<<<<<< HEAD
 		value3:'',
 		value4:'',
+=======
+>>>>>>> origin/master
 		contract:[],
          tableData: [],
 		 value1: '',
 		  value2: '',
 		  row:{},
 		  dz:[],
+<<<<<<< HEAD
 		  huiyi:{},
 		  list:[],
 		  yg:[],
+=======
+>>>>>>> origin/master
         }
         },methods:{
 			      handleDelete(index) {
@@ -141,6 +159,7 @@
 			         
 			      },
 				 huiyishi(){
+<<<<<<< HEAD
 					 this.row.fbz=this.$store.state.ename;
 					this.$axios.post("http://localhost:8888/huiyi/xla").then(r => {
 						this.dz = r.data;
@@ -154,6 +173,15 @@
 					}).catch(e => {
 					
 					});
+=======
+					 let url = "http://localhost:8888/huiyi/dizhi";
+					 this.$axios.get(url).then(r => {
+					 	this.dz=r.data
+					 }).catch(e => {
+					 	alert(e)
+					 
+					 });
+>>>>>>> origin/master
 				 } 
          
         }, created() {

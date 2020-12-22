@@ -7,7 +7,7 @@ const state = {
   empno:'',
   ename:'',
   ephone:'',
-  deptno:''
+  mgr:''
 }
 
 const mutations = {
@@ -15,13 +15,13 @@ const mutations = {
     state.empno = payload.empno
     state.ename = payload.ename
     state.ephone = payload.ephone
-    state.deptno = payload.deptno
+    state.mgr = payload.mgr
   },
   clearAll(state) {
     state.empno = ''
     state.ename = ''
     state.ephone = ''
-    state.deptno = ''
+    state.mgr = ''
   }
 }
 

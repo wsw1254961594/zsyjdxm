@@ -5,6 +5,8 @@ import com.github.pagehelper.PageInfo;
 import com.study.model.mdao.IContractMapper;
 import com.study.pojo.Contract;
 import com.study.pojo.Emp;
+import com.study.pojo.Payment;
+import com.study.pojo.Productcg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +39,7 @@ public class ContractServices {
         return mapper.selectCgMoneyEnd(empno);
     }
 
-    //查询已完成采购合同金额
+    //查询采购合同
     public PageInfo<Contract> selectCgAll(Integer pageNo,Integer pageSize,Integer empno){
         PageHelper.startPage(pageNo,pageSize);
         List<Contract> list=mapper.selectCgAll(empno);
@@ -45,6 +47,22 @@ public class ContractServices {
         return info;
     }
 
+    //多条件查询
+    public PageInfo<Contract> selectCgBylike(String ctitle,
+                                           String cnumber,
+                                           Integer cstate,
+                                           Integer empno,
+                                           Integer pageNo,
+                                           Integer pageSize){
+        PageHelper.startPage(pageNo,pageSize);
+        List<Contract> list=mapper.selectCgBylike(ctitle, cnumber, cstate, empno);
+        PageInfo<Contract> info=new PageInfo<>(list);
+        return info;
+    }
 
+    //查询所有采购产品
+    public List<Productcg> selectAllPr(){
+        return mapper.selectAllPr();
+    }
 
 }

@@ -19,6 +19,9 @@ public class LoginService {
     public MyResult login(Emp emp) {
         String ename = emp.getEname();
         Emp empResp = empMapper.login(ename);
+        if (!emp.getPassword().equals(empResp.getPassword())) {
+            return MyResult.ERROR("密码错误");
+        }
         return MyResult.returnObj(empResp);
     }
 }
