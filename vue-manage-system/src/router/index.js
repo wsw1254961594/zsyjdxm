@@ -54,6 +54,21 @@ const routes = [
 	    meta: {title: '员工入职'}
 	  },
 	  {
+	    path: '/property',
+	    component: () => import('../components/view/Property'),
+	    meta: {title: '我的资产'}
+	  },
+	  {
+	    path: '/asset',
+	    component: () => import('../components/view/Asset'),
+	    meta: {title: '资产和类别'}
+	  },
+	  {
+	    path: '/prreturn',
+	    component: () => import('../components/view/Prreturn'),
+	    meta: {title: '资产归还'}
+	  },
+	  {
 	    path: '/dizhi',
 	    component: () => import('../components/view/Dizhi'),
 	    meta: {title: '会议室使用详情'}

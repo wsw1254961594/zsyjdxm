@@ -20,10 +20,26 @@
             <result property="agroup" column="agroup"/>
         </association>
     </resultMap>
-
+    <!--查询资产表和资产类别表-->
     <select id="selectAssetAll" resultMap="IAsset">
         select * from asset a
         left join assets ass on a.aid=ass.aid
     </select>
 
+    <!--高级查询资产表和资产类别表-->
+    <select id="selectsAsset" resultMap="IAsset">
+        select * from asset a
+        left join assets ass on a.aid=ass.aid
+        <where>
+            <if test="atname!=null">
+                and atname like concat('%',#{atname},'%')
+            </if>
+            <if test="atmodel!=null">
+                and atmodel like concat('%',#{atmodel},'%')
+            </if>
+            <if test="price!=null">
+                and price like concat('%',#{price},'%')
+            </if>
+        </where>
+    </select>
 </mapper>
