@@ -44,6 +44,17 @@ public class Emp {
     private List<Xiangqing> xqs;
     private List<Huiyirenyuan> ry;
 
+    //前台数据接收
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "empno", nullable = false)

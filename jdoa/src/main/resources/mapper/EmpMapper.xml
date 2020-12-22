@@ -100,4 +100,9 @@
             and e.ofday &lt; #{time2}
         </if>
     </select>
+
+    <select id="leavesGetEmp" resultMap="empresult">
+        SELECT * FROM emp
+        WHERE empno = #{empno}
+    </select>
 </mapper>

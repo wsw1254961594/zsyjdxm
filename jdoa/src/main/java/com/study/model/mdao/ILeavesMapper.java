@@ -14,5 +14,5 @@ import java.util.List;
 public interface ILeavesMapper {
     int addLeaves(Leaves leaves);
     Leaves getLeaves(Integer lid);
-    List<Leaves> listLeaves();
+    List<Leaves> listLeaves(Leaves leaves);
 }

@@ -10,7 +10,8 @@ export const empHttp = {
     let params = {
       url: '/login',
       data:{
-        'ename':emp.ename
+        'ename':emp.ename,
+        'password':emp.password
       }
     }
     return postJson(params)

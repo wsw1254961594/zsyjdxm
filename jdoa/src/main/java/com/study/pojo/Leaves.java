@@ -18,6 +18,34 @@ public class Leaves {
     private String ltitle;
     private String itype;
     private Emp myemp;
+    private Integer reqEmpno;
+
+    public Integer getReqEmpno() {
+        return reqEmpno;
+    }
+
+    public void setReqEmpno(Integer reqEmpno) {
+        this.reqEmpno = reqEmpno;
+    }
+
+    private String starDate;
+    private String endDate;
+
+    public String getStarDate() {
+        return starDate;
+    }
+
+    public void setStarDate(String starDate) {
+        this.starDate = starDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
     @Id
     @Column(name = "lid", nullable = false)

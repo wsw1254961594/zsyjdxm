@@ -81,6 +81,16 @@ const routes = [
 	    component: () => import('../components/view/ContractCgPost'),
 	    meta: {title: '采购合同申请'}
 	  },
+        {
+            path: '/leaves',
+            component: () => import('../components/view/Leaves'),
+            meta: {title: '请假'}
+        },
+        {
+            path: '/workovertime',
+            component: () => import('../components/view/WorkOverTime'),
+            meta: {title: '加班'}
+        }
     ]
   },
   {

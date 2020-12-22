@@ -1,7 +1,7 @@
 package com.study.pojo;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 /**

@@ -2,7 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.study.model.mdao.ILeavesMapper">
-    <insert id="addLeaves" parameterType="com.study.pojo.Leaves">
+    <insert id="addLeaves" parameterType="Leaves">
+        <selectKey keyColumn="lid" keyProperty="lid" resultType="Integer" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
         INSERT INTO leaves
         <trim prefix="(" suffixOverrides="," suffix=")">
             <if test="lbegin != null">
@@ -39,4 +42,27 @@
             </if>
         </trim>
     </insert>
+
+    <select id="getLeaves" resultType="Leaves">
+        SELECT * FROM leaves WHERE lid = #{lid}
+    </select>
+
+    <select id="listLeaves" resultType="Leaves" parameterType="Leaves">
+        SELECT * FROM leaves
+        <where>
+            <if test="ltitle != null and ltitle != ''">
+                AND ltitle LIKE CONCAT('%',#{ltitle},'%')
+            </if>
+            <if test="itype != null and itype != ''">
+                AND itype = #{itype}
+            </if>
+            <if test="starDate != null and starDate != ''"><!-- 开始时间检索 -->
+                AND date_format(lbegin,'%y%m%d') &gt;= date_format(#{starDate},'%y%m%d')
+            </if>
+            <if test="endDate != null and endDate != ''"><!-- 结束时间检索 -->
+                AND date_format(lbegin,'%y%m%d') &lt;= date_format(#{endDate},'%y%m%d')
+            </if>
+        </where>
+        ORDER BY lbegin DESC
+    </select>
 </mapper>
