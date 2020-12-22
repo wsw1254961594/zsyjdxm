@@ -56,8 +56,23 @@ const routes = [
 	  {
 	    path: '/dizhi',
 	    component: () => import('../components/view/Dizhi'),
-	    meta: {title: '会议室使用详情'}
-	  }
+	    meta: {title: '会议室详情'}
+	  },
+	  {
+	    path: '/chaxunhy',
+	    component: () => import('../components/view/Chaxunhy'),
+	    meta: {title: '查询会议'}
+	  },
+	  {
+	    path: '/huiyitianjia',
+	    component: () => import('../components/view/Huiyitianjia'),
+	    meta: {title: '会议使用情况'}
+	  },
+	  {
+	    path: '/tianjiahuiyi',
+	    component: () => import('../components/view/Tianjiahuiyi'),
+	    meta: {title: '添加会议'}
+	  },
     ]
   },
   {

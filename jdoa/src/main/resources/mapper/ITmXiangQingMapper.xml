@@ -9,6 +9,7 @@
         <result property="kaishitimedate" column="kaishitimedate"/>
         <result column="jieshutime" property="jieshutime"/>
         <result property="neirong" column="neirong"/>
+        <result property="hyleixi" column="hyleixi"/>
         <association property="mydizhi" javaType="com.study.pojo.Dizhi">
             <id property="dzid" column="dzid"/>
             <result column="leixingname" property="leixingname"/>
@@ -25,6 +26,11 @@
 
     </resultMap>
     <select id="selecxq"  resultMap="dz">
-        select * from xiangqing x left join dizhi d on x.dzid=d.dzid left join shiyong s on s.hydzid=x.hydzid left join emp e on e.empno=x.empid
+        SELECT * FROM xiangqing x  left join dizhi d on x.dzid=d.dzid left join shiyong s on s.hydzid=x.hydzid left join emp e on e.empno=x.empid
     </select>
+
+    <insert id="tjdz">
+        INSERT INTO dizhi VALUES(null,#{i.leixingname},#{i.hyzt})
+    </insert>
+
 </mapper>

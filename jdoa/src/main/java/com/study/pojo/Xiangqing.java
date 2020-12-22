@@ -19,9 +19,11 @@ public class Xiangqing {
     private String neirong;
 
     private Shiyong myshiyong;
-    private List<Emp> emps;
+
     private Dizhi mydizhi;
     private Emp ese;
+    private List<Huiyirenyuan> rrr;
+    private String hyleixi;
 
     @Id
     @Column(name = "hydzid", nullable = false)
@@ -73,10 +75,6 @@ public class Xiangqing {
         this.neirong = neirong;
     }
 
-
-
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -104,16 +102,6 @@ public class Xiangqing {
         this.myshiyong = myshiyong;
     }
 
-    @ManyToMany
-    @JoinTable(name = "huiyirenyuan", catalog = "", schema = "jdoa", joinColumns = @JoinColumn(name = "hydzid", referencedColumnName = "hydzid", nullable = false), inverseJoinColumns = @JoinColumn(name = "empno", referencedColumnName = "empno", nullable = false))
-    public List<Emp> getEmps() {
-        return emps;
-    }
-
-    public void setEmps(List<Emp> emps) {
-        this.emps = emps;
-    }
-
     @ManyToOne
     @JoinColumn(name = "dzid", referencedColumnName = "dzid")
     public Dizhi getMydizhi() {
@@ -132,5 +120,24 @@ public class Xiangqing {
 
     public void setEse(Emp ese) {
         this.ese = ese;
+    }
+
+    @OneToMany(mappedBy = "xian")
+    public List<Huiyirenyuan> getRrr() {
+        return rrr;
+    }
+
+    public void setRrr(List<Huiyirenyuan> rrr) {
+        this.rrr = rrr;
+    }
+
+    @Basic
+    @Column(name = "hyleixi", nullable = true, length = 255)
+    public String getHyleixi() {
+        return hyleixi;
+    }
+
+    public void setHyleixi(String hyleixi) {
+        this.hyleixi = hyleixi;
     }
 }

@@ -183,10 +183,10 @@
               },
               {
                 index: 'huiyitianjia',
-                title: '会议添加',
+                title: '会议室使用详情',
               },
               {
-                index: '查询会议',
+                index: 'chaxunhy',
                 title: '查询会议'
               },
               {

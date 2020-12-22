@@ -38,6 +38,7 @@ public class Emp {
     private List<Prreturn> prreturns;
     private List<Xiangqing> xiangqings;
     private List<Xiangqing> xqs;
+    private List<Huiyirenyuan> ry;
 
     @Id
     @Column(name = "empno", nullable = false)
@@ -267,14 +268,7 @@ public class Emp {
         this.prreturns = prreturns;
     }
 
-    @ManyToMany(mappedBy = "emps")
-    public List<Xiangqing> getXiangqings() {
-        return xiangqings;
-    }
 
-    public void setXiangqings(List<Xiangqing> xiangqings) {
-        this.xiangqings = xiangqings;
-    }
 
     @OneToMany(mappedBy = "ese")
     public List<Xiangqing> getXqs() {
@@ -283,5 +277,14 @@ public class Emp {
 
     public void setXqs(List<Xiangqing> xqs) {
         this.xqs = xqs;
+    }
+
+    @OneToMany(mappedBy = "empsss")
+    public List<Huiyirenyuan> getRy() {
+        return ry;
+    }
+
+    public void setRy(List<Huiyirenyuan> ry) {
+        this.ry = ry;
     }
 }

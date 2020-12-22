@@ -18,6 +18,7 @@ public class Dizhi {
 
     @Id
     @Column(name = "dzid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getDzid() {
         return dzid;
     }
