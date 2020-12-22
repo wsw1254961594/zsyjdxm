@@ -236,7 +236,7 @@
                 title: '新建项目'
               },
               {
-                index: 'xiangmuzhixing',
+                index: '/project',
                 title: '项目执行',
               },
               {

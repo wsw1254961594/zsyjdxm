@@ -91,6 +91,12 @@ const routes = [
             component: () => import('../components/view/WorkOverTime'),
             meta: {title: '加班'}
         }
+	  },
+	  {
+	    path: '/project',
+	    component: () => import('../components/view/project'),
+	    meta: {title: '项目执行'}
+	  }
     ]
   },
   {
