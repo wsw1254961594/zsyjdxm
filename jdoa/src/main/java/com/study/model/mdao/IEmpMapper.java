@@ -10,4 +10,8 @@ import java.util.List;
 @Repository
 public interface IEmpMapper {
     List<Emp> selectall();
+
+    //tianming 查询下拉框所有员工
+    List<Emp> selectm();
+
 }
