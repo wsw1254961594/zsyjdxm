@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.PersonalMapper">
+    <resultMap id="personalResult" type="com.study.pojo.Personal">
+        <id property="pid" column="pid"/>
+        <result property="pimg" column="pimg"/>
+        <result property="speciality" column="speciality"/>
+        <result property="plike" column="plike"/>
+        <result property="mail" column="mail"/>
+        <result property="birthday" column="birthday"/>
+        <result property="patent" column="patent"/>
+        <result property="natives" column="natives"/>
+        <result property="idcard" column="idcard"/>
+        <result property="marital" column="marital"/>
+        <result property="politics" column="politics"/>
+        <result property="education" column="education"/>
+        <result property="password" column="password"/>
+        <result property="cardimg" column="cardimg"/>
+        <association property="myemp" javaType="com.study.pojo.Emp">
+            <id property="empno" column="empno"/>
+            <result property="ename" column="ename"/>
+            <result property="ephone" column="ephone"/>
+            <result property="sex" column="sex"/>
+            <result property="mgr" column="mgr"/>
+            <result property="sal" column="sal"/>
+            <result property="state" column="state"/>
+            <result property="ofday" column="ofday"/>
+        </association>
+    </resultMap>
+
+</mapper>
