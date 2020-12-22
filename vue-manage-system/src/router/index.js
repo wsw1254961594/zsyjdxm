@@ -54,11 +54,6 @@ const routes = [
 	    meta: {title: '员工入职'}
 	  },
 	  {
-	    path: '/card',
-	    component: () => import('../components/view/MyCard'),
-	    meta: {title: '我的卡片'}
-	  },
-	  {
 	    path: '/property',
 	    component: () => import('../components/view/Property'),
 	    meta: {title: '我的资产'}
@@ -76,22 +71,7 @@ const routes = [
 	  {
 	    path: '/dizhi',
 	    component: () => import('../components/view/Dizhi'),
-	    meta: {title: '会议室详情'}
-	  },
-	  {
-	    path: '/chaxunhy',
-	    component: () => import('../components/view/Chaxunhy'),
-	    meta: {title: '查询会议'}
-	  },
-	  {
-	    path: '/huiyitianjia',
-	    component: () => import('../components/view/Huiyitianjia'),
-	    meta: {title: '会议使用情况'}
-	  },
-	  {
-	    path: '/tianjiahuiyi',
-	    component: () => import('../components/view/Tianjiahuiyi'),
-	    meta: {title: '添加会议'}
+	    meta: {title: '会议室使用详情'}
 	  } ,{
 	    path: '/contractadd',
 	    component: () => import('../components/view/ContractAdd'),
