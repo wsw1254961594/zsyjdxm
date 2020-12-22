@@ -66,12 +66,12 @@
                 title: '常用流程',
                 subs: [
                   {
-                    index: 'editor',
-                    title: '富文本编辑器'
+                    index: '/leaves',
+                    title: '请假'
                   },
                   {
-                    index: 'markdown',
-                    title: 'markdown编辑器'
+                    index: '/workovertime',
+                    title: '加班'
                   }
                 ]
               },

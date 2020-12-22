@@ -37,27 +37,37 @@ const routes = [
         path: '/editor',
         component: () => import('../components/page/Test'),
         meta: {title: '编辑'}
-      },  
-	  {
+      },
+	    {
         path: '/contractmenu',
         component: () => import('../components/view/ContractMenu'),
         meta: {title: '合同首页'}
       },
-	  {
-	    path: '/mycontract',
-	    component: () => import('../components/view/MyContract'),
-	    meta: {title: '我的合同'}
-	  },
-	  {
-	    path: '/emps',
-	    component: () => import('../components/view/emps'),
-	    meta: {title: '员工入职'}
-	  },
-	  {
-	    path: '/dizhi',
-	    component: () => import('../components/view/Dizhi'),
-	    meta: {title: '会议室使用详情'}
-	  }
+      {
+        path: '/mycontract',
+        component: () => import('../components/view/MyContract'),
+        meta: {title: '我的合同'}
+      },
+      {
+        path: '/emps',
+        component: () => import('../components/view/emps'),
+        meta: {title: '员工入职'}
+      },
+      {
+        path: '/dizhi',
+        component: () => import('../components/view/Dizhi'),
+        meta: {title: '会议室使用详情'}
+      },
+      {
+        path: '/leaves',
+        component: () => import('../components/view/Leaves'),
+        meta: {title: '请假'}
+      },
+      {
+        path: '/workovertime',
+        component: () => import('../components/view/WorkOverTime'),
+        meta: {title: '加班'}
+      }
     ]
   },
   {

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.IBackLogMapper">
+    <insert id="addBackLog" parameterType="com.study.pojo.Backlog">
+        INSERT INTO backlog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="btetle != null and btetle != ''">
+                btetle,
+            </if>
+            <if test="bianhao != null">
+                bianhao,
+            </if>
+            <if test="bcondition != null">
+                bcondition,
+            </if>
+            <if test="baccept != null">
+                baccept,
+            </if>
+            <if test="empid != null">
+                empid,
+            </if>
+        </trim>
+        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+            <if test="btetle != null and btetle != ''">
+                #{btetle},
+            </if>
+            <if test="bianhao != null">
+                #{bianhao},
+            </if>
+            <if test="bcondition != null">
+                #{bcondition},
+            </if>
+            <if test="baccept != null">
+                #{baccept},
+            </if>
+            <if test="empid != null">
+                #{empid},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="editBackLog" parameterType="Leaves">
+        UPDATE backlog
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="btetle != null and btetle != ''">
+                btetle = #{btetle},
+            </if>
+            <if test="bianhao != null">
+                bianhao = #{bianhao},
+            </if>
+            <if test="bcondition != null">
+                bcondition = #{bcondition},
+            </if>
+            <if test="baccept != null">
+                baccept = #{baccept},
+            </if>
+            <if test="empid != null">
+                empid = #{empid},
+            </if>
+        </trim>
+        WHERE blid = #{blid}
+    </update>
+    
+    <select id="getBackLog" resultType="Leaves">
+        SELECT * FROM leaves WHERE blid = #{blid}
+    </select>
+    
+    <select id="listBackLog" resultType="Leaves" parameterType="Leaves">
+        SELECT * FROM leaves
+        <where>
+            <if test="btetle != null and btetle != ''">
+                AND btetle LIKE CONCAT('%',#{btetle},'%')
+            </if>
+            <if test="bianhao != null">
+                AND bianhao = #{bianhao}
+            </if>
+            <if test="bcondition != null">
+                AND bcondition = #{bcondition}
+            </if>
+            <if test="baccept != null">
+                AND baccept = #{baccept}
+            </if>
+            <if test="empid != null">
+                AND empid = #{empid}
+            </if>
+        </where>
+        ORDER BY baccept DESC
+    </select>
+</mapper>

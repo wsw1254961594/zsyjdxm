@@ -39,6 +39,17 @@ public class Emp {
     private List<Xiangqing> xiangqings;
     private List<Xiangqing> xqs;
 
+    //前台数据接收
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Id
     @Column(name = "empno", nullable = false)
     public Integer getEmpno() {

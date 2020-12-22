@@ -62,4 +62,9 @@
         INNER JOIN personal s ON s.empno=e.empno
         INNER JOIN empconract p on p.empno=e.empno order by e.empno desc
     </select>
+
+    <select id="leavesGetEmp" resultMap="empresult">
+        SELECT * FROM emp
+        WHERE empno = #{empno}
+    </select>
 </mapper>
