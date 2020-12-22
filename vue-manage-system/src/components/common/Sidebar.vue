@@ -91,7 +91,7 @@
                 title: '合同首页'
               },
               {
-                index: 'qicao',
+                index: 'contractadd',
                 title: '合同起草'
               },
               {
@@ -371,6 +371,8 @@
 </script>
 
 <style scoped>
+
+	
   .sidebar {
     display: block;
     position: absolute;

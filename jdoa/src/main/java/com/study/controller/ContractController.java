@@ -3,6 +3,7 @@ package com.study.controller;
 import com.github.pagehelper.PageInfo;
 import com.study.config.MyResult;
 import com.study.pojo.Contract;
+import com.study.pojo.Productcg;
 import com.study.services.ContractServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,11 +40,32 @@ public class ContractController {
         return cs.selectCgMoneyEnd(empno);
     }
 
-    @RequestMapping("all")
-    //查询我的所有合同
+    @RequestMapping("cgall")
+    //查询我的所有采购合同
     public MyResult selectCgAll(Integer pageNo,Integer pageSize,Integer empno){
         PageInfo<Contract> info=cs.selectCgAll(pageNo, pageSize, empno);
         MyResult mr=MyResult.returnObj(info);
         return mr;
+    }
+
+    @RequestMapping("cgbylike")
+    //查询我的所有合同
+    public MyResult selectCgBylike(String ctitle,
+                                   String cnumber,
+                                   Integer cstate,
+                                   Integer empno,
+                                   Integer pageNo,
+                                   Integer pageSize
+                                   ){
+
+        PageInfo<Contract> info=cs.selectCgBylike(ctitle, cnumber, cstate, empno, pageNo, pageSize);
+        MyResult mr=MyResult.returnObj(info);
+        return mr;
+    }
+
+    @RequestMapping("allpr")
+    //所有采购产品
+    public List<Productcg> selectAllPr(){
+        return cs.selectAllPr();
     }
 }

@@ -40,4 +40,25 @@
     <select id="selectFkmoney" resultType="java.lang.Integer">
        select sum(pmmoney) as money from payment where cid=#{cid}
     </select>
+
+    <!--多条件模糊查询-->
+    <select id="selectCgBylike" resultMap="contract">
+        select * from contract
+        <where>
+            <if test="ctitle!=null">
+                and ctitle like concat('%', #{ctitle}, '%')
+            </if>
+            <if test="cnumber!=null">
+                and cnumber like concat('%', #{cnumber}, '%')
+            </if>
+            <if test="cstate!=null">
+                and cstate = #{cstate}
+            </if>
+            and empno=#{empno} and ctype=1 and cstate!=0
+        </where>
+    </select>
+
+    <select id="selectAllPr" resultType="Productcg">
+        select * from productcg
+    </select>
 </mapper>

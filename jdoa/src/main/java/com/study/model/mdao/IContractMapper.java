@@ -2,7 +2,9 @@ package com.study.model.mdao;
 
 import com.study.pojo.Contract;
 import com.study.pojo.Payment;
+import com.study.pojo.Productcg;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -29,4 +31,13 @@ public interface IContractMapper {
 
     //查询合同已付款金额
     List<Payment> selectFkMoney();
+
+    //多条件查询
+    List<Contract> selectCgBylike(@Param("ctitle") String ctitle,
+                               @Param("cnumber") String cnumber,
+                               @Param("cstate") Integer cstate,
+                               @Param("empno")Integer empno);
+
+    //查询采购需要的产品
+    List<Productcg> selectAllPr();
 }
