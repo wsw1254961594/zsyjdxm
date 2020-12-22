@@ -3,6 +3,7 @@ package com.study.controller;
 import com.github.pagehelper.PageInfo;
 import com.study.config.MyResult;
 import com.study.pojo.Property;
+import com.study.pojo.Prreturn;
 import com.study.services.PropertyServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,12 +38,12 @@ public class PropertyController {
 
     /*高级查询我的资产根据 名称 领取日期 价格来查询*/
     @RequestMapping("/pages")
-    public MyResult selectsProperty(@RequestParam(value = "pname",required = false)String pname,
-                                    @RequestParam(value = "pget",required = false)String pget,
-                                    @RequestParam(value = "pvalue",required = false)String pvalue,
+    public MyResult selectsProperty(@RequestParam(value = "pname", required = false) String pname,
+                                    @RequestParam(value = "pget", required = false) String pget,
+                                    @RequestParam(value = "pvalue", required = false) String pvalue,
                                     @RequestParam("pageNo") Integer pageNo,
-                                    @RequestParam("pageSize") Integer pageSize){
-        PageInfo<Property> pageInfo=propertyServices.selectsProperty(pageNo,pageSize,pname,pget,pvalue);
+                                    @RequestParam("pageSize") Integer pageSize) {
+        PageInfo<Property> pageInfo = propertyServices.selectsProperty(pageNo, pageSize, pname, pget, pvalue);
         return MyResult.returnObj(pageInfo);
     }
 }

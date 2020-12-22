@@ -49,11 +49,11 @@
             <if test="rname!=null">
                 and rname like concat('%',#{rname},'%')
             </if>
-            <if test="rget!=nunll">
-                and rget like concat('%',#{rget}'%')
+            <if test="rget!=null">
+                and rget like concat('%',#{rget},'%')
             </if>
             <if test="rvalue!=null">
-                and rvalue like concat('%',#{rvalue}'%')
+                and rvalue like concat('%',#{rvalue},'%')
             </if>
         </where>
     </select>
