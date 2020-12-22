@@ -57,6 +57,11 @@ const routes = [
 	    path: '/dizhi',
 	    component: () => import('../components/view/Dizhi'),
 	    meta: {title: '会议室使用详情'}
+	  },
+	  {
+	    path: '/project',
+	    component: () => import('../components/view/project'),
+	    meta: {title: '项目执行'}
 	  }
     ]
   },

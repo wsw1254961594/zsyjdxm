@@ -14,9 +14,8 @@
         <result property="planenddate" column="planenddate"/>
         <result property="actualstartdate" column="actualstartdate"/>
         <result property="actualenddate" column="actualenddate"/>
-        <result property="empid" column="empid"/>
 
-        <association property="Emps" javaType="com.study.pojo.Emp">
+        <association property="emps" javaType="com.study.pojo.Emp">
             <id property="empno" column="empno"/>
             <result property="ename" column="ename"/>
             <result property="ephone" column="ephone"/>
@@ -28,21 +27,28 @@
         </association>
     </resultMap>
 
+    <insert id="doInsert">
+        insert into itemlist values(null,#{pname},#{types},#{status},
+        #{jobtype},#{progress},#{stageof},#{planstartdate},
+        #{planenddate},#{actualstartdate},#{actualenddate},#{empid})
+    </insert>
+
     <select id="selectAll" resultMap="ItemlistResult">
-            select * from itemlist i left join emp e on i.empno=e.empno
+            select i.* from itemlist i left join emp e on i.empid=e.empno
     </select>
 
     <select id="selectPname" resultMap="ItemlistResult">
-            select * from itemlist i left join emp e on i.empno=e.empno where pname=#{pname}
+            select * from itemlist i left join emp e on i.emps.empno=e.empno where pname=#{pname}
     </select>
 
     <select id="selectTypes" resultMap="ItemlistResult">
-            select * from itemlist i left join emp e on i.empno=e.empno where types=#{types}
+            select * from itemlist i left join emp e on i.emps.empno=e.empno where types=#{types}
     </select>
 
     <update id="updateStatus" parameterType="com.study.pojo.Itemlist">
                 UPDATE itemlist SET status=#{status} WHERE iid=#{iid}
     </update>
+
 
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.study.model.mdao;
 
 import com.study.pojo.Itemlist;
+import com.study.vo.Itemlists;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -22,4 +23,6 @@ public interface IItemlistMapper {
     List<Itemlist> selectTypes(String types);
 
     Integer updateStatus(String status,Integer iid);
+
+    Integer doInsert(Itemlists it);
 }
