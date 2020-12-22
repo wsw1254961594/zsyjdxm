@@ -8,7 +8,7 @@ import {postJson} from "../network";
 export const empHttp = {
   login:function (emp) {
     let params = {
-      url: '/emp/login',
+      url: '/login',
       data:{
         'ename':emp.ename
       }
