@@ -18,7 +18,7 @@
 		   <el-row>
 			   <el-col :span="24">
 				   <el-form-item label="合同名称" label-width="100px">				  
-				     <el-input ></el-input>			    
+				     <el-input v-model="contract.ctitle"></el-input>			    
 				   </el-form-item>
 				</el-col>
 		   </el-row>
@@ -26,13 +26,13 @@
 		   <el-row>
 			   <el-col :span="11">
 			   <el-form-item label="签约主体" label-width="100px">			      
-			      <el-input></el-input>			      
+			      <el-input v-model="contract.cbody"></el-input>			      
 			    </el-form-item>
 				</el-col>
 				
 				<el-col :span="11" style="margin-left: 80px;">			
 			   <el-form-item label="合同编号" label-width="100px">			     
-			      <el-input></el-input>			    
+			      <el-input v-model="contract.cnumber"></el-input>			    
 			    </el-form-item>
 				  </el-col>
 		   </el-row>
@@ -46,21 +46,26 @@
 		   				
 		   				<el-col :span="11" style="margin-left: 80px;" label-width="100px">			
 		   			   <el-form-item label="经办人" label-width="100px">			     
-		   			      <el-input></el-input>			    
+		   			      <el-input v-model="this.$store.state.ename"></el-input>			    
 		   			    </el-form-item>
 		   				  </el-col>
 		   </el-row>
 		   
 		   <el-row>
 		   			   <el-col :span="11">
-		   			   <el-form-item label="开始时间" label-width="100px">			      
-		   			      <el-input></el-input>			      
+		   			   <el-form-item label="开始时间" label-width="100px">			      		   			      
+		   			          <el-date-picker
+		   			            v-model="contract.cday"
+		   			            type="date"
+		   			            placeholder="选择日期"
+								style="width: 100%;">
+		   			          </el-date-picker>			      
 		   			    </el-form-item>
 		   				</el-col>
 		   				
 		   				<el-col :span="11" style="margin-left: 80px;" label-width="100px">			
 		   			   <el-form-item label="供应商名称" label-width="100px">			     
-		   			      <el-input></el-input>			    
+		   			      <el-input v-model="contract.mysupplier.sname"></el-input>			    
 		   			    </el-form-item>
 		   				  </el-col>
 		   </el-row>
@@ -68,13 +73,20 @@
 		   <el-row>
 		   			   <el-col :span="11">
 		   			   <el-form-item label="供应商级别" label-width="100px">			      
-		   			      <el-input></el-input>			      
+		   			       <el-select v-model="contract.mysupplier.rank" placeholder="请选择" style="width: 100%;">
+		   			          <el-option
+		   			            v-for="item in options"
+		   			            :key="item.value"
+		   			            :label="item.label"
+		   			            :value="item.value">
+		   			          </el-option>
+		   			        </el-select>		      
 		   			    </el-form-item>
 		   				</el-col>
 		   				
 		   				<el-col :span="11" style="margin-left: 80px;">			
 		   			   <el-form-item label="开户账号" label-width="100px">			     
-		   			      <el-input></el-input>			    
+		   			      <el-input v-model="contract.mysupplier.opening"></el-input>			    
 		   			    </el-form-item>
 		   				  </el-col>
 		   </el-row>
@@ -82,13 +94,13 @@
 		   <el-row>
 		   			   <el-col :span="11">
 		   			   <el-form-item label="签约负责人" label-width="100px">			      
-		   			      <el-input></el-input>			      
+		   			      <el-input v-model="contract.mysupplier.sman"></el-input>			      
 		   			    </el-form-item>
 		   				</el-col>
 		   				
 		   				<el-col :span="11" style="margin-left: 80px;">			
 		   			   <el-form-item label="联系方式" label-width="100px">			     
-		   			      <el-input></el-input>			    
+		   			      <el-input v-model="contract.mysupplier.sphone"></el-input>			    
 		   			    </el-form-item>
 		   				  </el-col>
 		   </el-row>
@@ -158,7 +170,7 @@
 				</span>
 				</el-row>
              <el-form-item style="padding-bottom: 40px;">
-                <el-button type="primary" style="color: white;" @click="addupd()">发布</el-button>
+                <el-button type="primary" style="color: white;" @click="addContract()">发布</el-button>
                  <router-link to="/job"><el-button >返回</el-button></router-link>
               </el-form-item>
            </div>
@@ -190,6 +202,14 @@
 			  </el-table-column>
 			  
 			  <el-table-column
+			  label="数量"
+			  >	
+				<template slot-scope="scope">
+					<el-input v-model="scope.row.num"></el-input>
+				</template>				
+			  </el-table-column>
+			  
+			  <el-table-column
 			  label="价格"
 			  prop="pcname">			  
 			  </el-table-column>
@@ -211,15 +231,67 @@
 </template>
 
 <script>
+	var moment = require('moment');
   export default{
       data(){
         return {
+			
 		dialogVisible: false,
-		contract:[],
-         tableData: [],
-		 productcg:[]
+		contract:{
+			cbody:'泛微有限公司',
+		cnumber:"cg"+this.tt(new Date()),
+		myemp:{
+			
+		},
+		mysupplier:{},
+		purchaseinfos:[]
+		
+			
+		},
+         tableData:[],
+		 productcg:[],
+		 options: [{
+		           value: 'A',
+		           label: 'A'
+		         }, {
+		           value: 'B',
+		           label: 'B'
+		         }, {
+		           value: 'C',
+		           label: 'C'
+		         }, {
+		           value: 'D',
+		           label: 'D'
+		         }, {
+		           value: 'E',
+		           label: 'E'
+		         }]
         }
         },methods:{
+			//添加合同信息
+			addContract(){
+				this.contract.cmoney=this.sumMoney;
+				this.contract.myemp.empno=this.$store.state.empno;
+				this.tableData.forEach(i=>{
+					console.log("21",i)
+					console.log("22",i.num);
+					this.contract.purchaseinfos.push({	
+						pnum:i.num,
+						myproductcg:i
+					})		
+				})
+					
+			
+				let url="http://localhost:8888/contract/addcg";
+				this.$axios.post(url,this.contract).then(r=>{
+					alert("叼你妈的成功了");
+				}).catch(e=>{
+					alert(e)
+				})
+			},
+			
+			
+			
 			//查询产品信息
 			getPrlist(){
 				let url="http://localhost:8888/contract/allpr";
@@ -235,18 +307,21 @@
 				this.dialogVisible=true;
 			},
 			 // 添加点击按钮
-			      handleAdd(r) {
-					  r.num=1;
+			      handleAdd(r) {					 
 			        this.tableData.push(r);
 					this.dialogVisible=false;
 			      },
 			      handleDelete(index) {
 			          this.tableData.splice(index, 1)
 			         
-			      }
+			      },tt(time){
+				time = moment(time).unix();
+				       return time;
+			},
          
         }, created() {
 			this.sumMoney()
+			
           },
 		  computed:{
 			  sumMoney(){

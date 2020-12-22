@@ -291,7 +291,7 @@
 		  getCgTotal(){
 			  let url="http://localhost:8888/contract/cgmoney";
 			  let param={
-				  empno:5
+				  empno:this.$store.state.empno
 			  }
 			  param = this.$Qs.stringify(param);
 			  this.$axios.post(url,param).then(r=>{
@@ -303,7 +303,7 @@
 		  getCgTotalNow(){
 			  let url="http://localhost:8888/contract/cgmoneynow";
 			  let param={
-				  empno:5
+				  empno:this.$store.state.empno
 			  }
 			  param = this.$Qs.stringify(param);
 			  this.$axios.post(url,param).then(r=>{
@@ -315,7 +315,7 @@
 		  getCgTotalEnd(){
 			  let url="http://localhost:8888/contract/cgmoneyend";
 			  let param={
-				  empno:5
+				  empno:this.$store.state.empno
 			  }
 			  param = this.$Qs.stringify(param);
 			  this.$axios.post(url,param).then(r=>{
@@ -329,7 +329,7 @@
 			  let param={
 				  pageNo:this.current,
 				  pageSize:this.size,
-				  empno:5
+				  empno:this.$store.state.empno
 			  }
 			  param = this.$Qs.stringify(param);
 			  this.$axios.post(url,param).then(r=>{
@@ -350,7 +350,7 @@
 				 				  cstate:this.cstate,
 				 				  pageNo:this.current,
 				 				  pageSize:this.size,
-				 				  empno:5
+				 				  empno:this.$store.state.empno
 				 }
 				 param = this.$Qs.stringify(param);
 				 this.$axios.post(url,param).then(r=>{

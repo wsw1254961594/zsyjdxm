@@ -15,8 +15,19 @@ public class Purchaseinfo {
     private Contract mycontract;
     private Productcg myproductcg;
 
+    public Purchaseinfo() {
+    }
+
+    public Purchaseinfo(Integer prid, Integer pnum, Contract mycontract, Productcg myproductcg) {
+        this.prid = prid;
+        this.pnum = pnum;
+        this.mycontract = mycontract;
+        this.myproductcg = myproductcg;
+    }
+
     @Id
     @Column(name = "prid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getPrid() {
         return prid;
     }

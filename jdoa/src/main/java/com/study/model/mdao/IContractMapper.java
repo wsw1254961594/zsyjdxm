@@ -1,8 +1,6 @@
 package com.study.model.mdao;
 
-import com.study.pojo.Contract;
-import com.study.pojo.Payment;
-import com.study.pojo.Productcg;
+import com.study.pojo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -40,4 +38,16 @@ public interface IContractMapper {
 
     //查询采购需要的产品
     List<Productcg> selectAllPr();
+
+    //新增合同表
+    void insertContract(@Param("con") Contract contract);
+
+    //查询新增主键
+     Contract selectCid();
+
+    //新增客户表
+    void insertSupplier(@Param("s")Supplier supplier);
+
+    //新增详情表
+    void insertPurchaseinfo(@Param("p")Purchaseinfo purchaseinfo);
 }

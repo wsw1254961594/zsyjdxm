@@ -3,10 +3,7 @@ package com.study.services;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.study.model.mdao.IContractMapper;
-import com.study.pojo.Contract;
-import com.study.pojo.Emp;
-import com.study.pojo.Payment;
-import com.study.pojo.Productcg;
+import com.study.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,4 +62,38 @@ public class ContractServices {
         return mapper.selectAllPr();
     }
 
+    //采购合同发起
+    public void addcg(Contract contract){
+        /*新增主表*/
+        Contract con=new Contract(null,
+                contract.getCtitle(),
+                contract.getCbody(),
+                contract.getCnumber(),
+                contract.getCmoney(),1,contract.getCday(),0,
+                contract.getMyemp());
+        mapper.insertContract(con);
+
+        /*查询新增主键*/
+        Contract cid=mapper.selectCid();
+
+        /*新增客户表*/
+        Supplier sup=new Supplier(null,
+                contract.getMysupplier().getSname(),
+                contract.getMysupplier().getRank(),
+                contract.getMysupplier().getOpening(),
+                contract.getMysupplier().getSman(),
+                contract.getMysupplier().getSphone(),
+                cid);
+            mapper.insertSupplier(sup);
+        System.out.println(con.getPurchaseinfos());
+      /*  新增详情表*/
+        for (Purchaseinfo p : contract.getPurchaseinfos()) {
+            System.out.println("值"+p.getPnum());
+            Purchaseinfo pur=new Purchaseinfo(null,
+                    p.getPnum(),
+                    cid,
+                    p.getMyproductcg());
+            mapper.insertPurchaseinfo(pur);
+        }
+    }
 }

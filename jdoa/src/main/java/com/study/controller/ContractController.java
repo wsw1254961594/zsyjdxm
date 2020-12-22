@@ -6,6 +6,7 @@ import com.study.pojo.Contract;
 import com.study.pojo.Productcg;
 import com.study.services.ContractServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -67,5 +68,11 @@ public class ContractController {
     //所有采购产品
     public List<Productcg> selectAllPr(){
         return cs.selectAllPr();
+    }
+
+    @RequestMapping("addcg")
+    //新增采购
+    public void addCg(@RequestBody Contract contract){
+       cs.addcg(contract);
     }
 }

@@ -27,9 +27,47 @@ public class Contract {
     private List<Marketinfo> marketinfos;
     private List<Payment> payments;
     private List<Purchaseinfo> purchaseinfos;
+    private Supplier mysupplier;
+
+    public Contract() {
+    }
+
+    public Contract(Integer cid, String ctitle, String cbody, String cnumber, BigDecimal cmoney, Integer ctype, Date cday, Integer cstate, Emp myemp) {
+        this.cid = cid;
+        this.ctitle = ctitle;
+        this.cbody = cbody;
+        this.cnumber = cnumber;
+        this.cmoney = cmoney;
+        this.ctype = ctype;
+        this.cday = cday;
+        this.cstate = cstate;
+        this.myemp = myemp;
+    }
+
+    @Override
+    public String toString() {
+        return "Contract{" +
+                "cid=" + cid +
+                ", ctitle='" + ctitle + '\'' +
+                ", cbody='" + cbody + '\'' +
+                ", cnumber='" + cnumber + '\'' +
+                ", cmoney=" + cmoney +
+                ", ctype=" + ctype +
+                ", cday=" + cday +
+                ", cstate=" + cstate +
+                ", myemp=" + myemp +
+                ", mycustomer=" + mycustomer +
+                ", gatherings=" + gatherings +
+                ", marketinfos=" + marketinfos +
+                ", payments=" + payments +
+                ", purchaseinfos=" + purchaseinfos +
+                ", mysupplier=" + mysupplier +
+                '}';
+    }
 
     @Id
     @Column(name = "cid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getCid() {
         return cid;
     }
@@ -181,5 +219,14 @@ public class Contract {
 
     public void setPurchaseinfos(List<Purchaseinfo> purchaseinfos) {
         this.purchaseinfos = purchaseinfos;
+    }
+
+    @OneToOne(mappedBy = "mycontract")
+    public Supplier getMysupplier() {
+        return mysupplier;
+    }
+
+    public void setMysupplier(Supplier mysupplier) {
+        this.mysupplier = mysupplier;
     }
 }
