@@ -132,7 +132,7 @@
             title: '人事关系',
             subs: [
               {
-                index: 'ruzhi',
+                index: '/emps',
                 title: '员工入职'
               },
               {
@@ -192,7 +192,11 @@
               {
                 index: 'huiyirenwu',
                 title: '会议任务'
-              }
+              },
+			  {
+			    index: 'dizhi',
+			    title: '会议室详情'
+			  }
             ]
           },
           {

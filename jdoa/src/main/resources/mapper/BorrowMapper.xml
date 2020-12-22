@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.IBorrowMapper">
+    <!--资产借用表-->
+    <resultMap id="IBorrow" type="Borrow">
+        <id property="bid" column="bid"/>
+        <result property="bserial" column="bserial"/>
+        <result property="bname" column="bname"/>
+        <result property="bstate" column="bstate"/>
+        <result property="bquantity" column="bquantity"/>
+        <result property="bunits" column="bunits"/>
+        <result property="bstorage" column="bstorage"/>
+        <result property="bget" column="bget"/>
+        <result property="bvalue" column="bvalue"/>
+        <result property="bremark" column="bremark"/>
+        <!--员工表-->
+        <association property="myemp" javaType="Emp">
+            <id property="empno" column="empno"/>
+            <result property="ename" column="ename"/>
+            <result property="ephone" column="ephone"/>
+            <result property="sex" column="sex"/>
+            <result property="mgr" column="mgr"/>
+            <result property="sal" column="sal"/>
+            <result property="state" column="state"/>
+            <result property="ofday" column="ofday"/>
+            <!--部门表-->
+            <collection property="mydept" ofType="Dept">
+                <id column="deptno" property="deptno"/>
+                <result column="dname" property="dname"/>
+                <result column="loc" property="loc"/>
+            </collection>
+        </association>
+        <!--资产表-->
+        <association property="myasset" javaType="Asset">
+            <id property="atid" column="atid"/>
+            <result property="atname" column="atname"/>
+            <result property="atmodel" column="atmodel"/>
+            <result property="atnum" column="atnum"/>
+            <result property="atstate" column="atstate"/>
+            <result property="aunits" column="aunits"/>
+            <result property="astorage" column="astorage"/>
+            <result property="price" column="price"/>
+            <!--资产类别表-->
+            <collection property="myassets" ofType="Assets">
+                <id column="aid" property="aid"/>
+                <result column="aserial" property="aserial"/>
+                <result column="aname" property="aname"/>
+                <result column="amodel" property="amodel"/>
+                <result column="agroup" property="agroup"/>
+            </collection>
+        </association>
+    </resultMap>
+    <!--查询资产借用表的数据-->
+    <select id="selectBorrowAll" resultMap="IBorrow">
+        select * from borrow bo
+        left join emp e on bo.empno=e.empno
+        left join dept d on e.deptno=d.deptno
+        left join asset a on bo.atid=a.atid
+        left join assets ass on a.aid=ass.aid
+    </select>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.IContractMapper">
+    <!--查询采购总金额-->
+    <select id="selectCgMoney" resultType="java.lang.Integer">
+        select sum(cmoney) from contract where empno=#{empno} and ctype=1 and cstate!=0
+    </select>
+
+    <!--查询进行中采购总金额-->
+    <select id="selectCgMoneyNow" resultType="java.lang.Integer">
+        select sum(cmoney) from contract where empno=#{empno} and ctype=1 and cstate=1
+    </select>
+
+    <!--查询已完成采购总金额-->
+    <select id="selectCgMoneyEnd" resultType="java.lang.Integer">
+        select sum(cmoney) from contract where empno=#{empno} and ctype=1 and cstate=2
+    </select>
+
+    <resultMap id="contract" type="com.study.vo.contractlist">
+        <id column="cid" property="cid"/>
+        <result column="ctitle" property="ctitle"/>
+        <result column="cbody" property="cbody"/>
+        <result column="cnumber" property="cnumber"/>
+        <result column="cmoney" property="cmoney"/>
+        <result column="ctype" property="ctype"/>
+        <result column="cday" property="cday"/>
+        <result column="cstate" property="cstate"/>
+        <association property="money" javaType="java.lang.Integer" column="{cid=cid}" select="selectFkmoney">
+        </association>
+    </resultMap>
+    
+    <!--查询我的所有合同-->
+    <select id="selectCgAll" resultMap="contract">
+       select * from contract where empno=#{empno} and ctype=1 and cstate!=0
+    </select>
+
+    <!--查询合同已付款金额-->
+    <select id="selectFkmoney" resultType="java.lang.Integer">
+       select sum(pmmoney) as money from payment where cid=#{cid}
+    </select>
+</mapper>

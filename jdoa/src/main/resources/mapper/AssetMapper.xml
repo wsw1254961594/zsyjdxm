@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.IAssetMapper">
+    <resultMap id="IAsset" type="Asset">
+        <id property="atid" column="atid"/>
+        <result property="atname" column="atname"/>
+        <result property="atmodel" column="atmodel"/>
+        <result property="atnum" column="atnum"/>
+        <result property="atstate" column="atstate"/>
+        <result property="aunits" column="aunits"/>
+        <result property="astorage" column="astorage"/>
+        <result property="price" column="price"/>
+        <association property="myassets" javaType="Assets">
+            <id property="aid" column="aid"/>
+            <result property="aserial" column="aserial"/>
+            <result property="aname" column="aname"/>
+            <result property="amodel" column="amodel"/>
+            <result property="agroup" column="agroup"/>
+        </association>
+    </resultMap>
+
+    <select id="selectAssetAll" resultMap="IAsset">
+        select * from asset a
+        left join assets ass on a.aid=ass.aid
+    </select>
+
+</mapper>

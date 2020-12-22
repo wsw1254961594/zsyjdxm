@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.ITmHuiYiMapper">
+
+    <resultMap id="dz" type="com.study.pojo.Xiangqing">
+        <id property="hydzid" column="hydzid"/>
+        <result column="hyrw" property="hyrw"/>
+        <result property="kaishitimedate" column="kaishitimedate"/>
+        <result column="jieshutime" property="jieshutime"/>
+        <result property="neirong" column="neirong"/>
+        <association property="mydizhi" javaType="com.study.pojo.Dizhi">
+            <id property="dzid" column="dzid"/>
+            <result column="leixingname" property="leixingname"/>
+            <result property="hyzt" column="hyzt"/>
+        </association>
+        <association property="myshiyong" javaType="com.study.pojo.Shiyong">
+            <id property="xqid" column="xqid"/>
+            <result column="zt" property="zt"/>
+        </association>
+        <association property="ese" javaType="com.study.pojo.Emp">
+            <id property="empno" column="empno"/>
+            <result column="ename" property="ename"/>
+        </association>
+
+    </resultMap>
+    <select id="selecxq"  resultMap="dz">
+        select * from xiangqing x left join dizhi d on x.dzid=d.dzid left join shiyong s on s.hydzid=x.hydzid left join emp e on e.empno=x.empid
+    </select>
+</mapper>
