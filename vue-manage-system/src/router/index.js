@@ -54,6 +54,11 @@ const routes = [
 	    meta: {title: '员工入职'}
 	  },
 	  {
+	    path: '/card',
+	    component: () => import('../components/view/MyCard'),
+	    meta: {title: '我的卡片'}
+	  },
+	  {
 	    path: '/dizhi',
 	    component: () => import('../components/view/Dizhi'),
 	    meta: {title: '会议室使用详情'}

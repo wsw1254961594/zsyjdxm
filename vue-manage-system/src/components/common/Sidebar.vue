@@ -163,7 +163,7 @@
             title: '人事档案',
             subs: [
               {
-                index: 'wodekapian',
+                index: '/card',
                 title: '我的卡片'
               },
               {
