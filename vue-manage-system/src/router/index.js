@@ -37,11 +37,17 @@ const routes = [
         path: '/editor',
         component: () => import('../components/page/Test'),
         meta: {title: '编辑'}
-      },  {
-        path: '/test',
-        component: () => import('../components/view/test'),
+      },  
+	  {
+        path: '/contractmenu',
+        component: () => import('../components/view/ContractMenu'),
         meta: {title: '合同首页'}
-      }
+      },
+	  {
+	    path: '/mycontract',
+	    component: () => import('../components/view/MyContract'),
+	    meta: {title: '我的合同'}
+	  }
     ]
   },
   {

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<el-input></el-input>
+		1
 	</div>
 </template>
 
