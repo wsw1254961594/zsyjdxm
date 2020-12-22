@@ -31,7 +31,10 @@ public class TmHuiYiServices {
         //返回
         return info;
     }
-
+    //添加新的会议地址
+    public Integer tidzs(Dizhi i){
+        return  hy.tjdz(i);
+    }
 
 
 }
