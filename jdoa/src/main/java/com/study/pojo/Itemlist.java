@@ -14,7 +14,7 @@ import java.util.Objects;
 public class Itemlist {
     private Integer iid;
     private String pname;
-    private String type;
+    private String types;
     private String status;
     private String jobtype;
     private String progress;
@@ -49,13 +49,13 @@ public class Itemlist {
     }
 
     @Basic
-    @Column(name = "type", nullable = true, length = 200)
-    public String getType() {
-        return type;
+    @Column(name = "types", nullable = true, length = 200)
+    public String getTypes() {
+        return types;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypes(String types) {
+        this.types = types;
     }
 
     @Basic
@@ -155,7 +155,7 @@ public class Itemlist {
         Itemlist itemlist = (Itemlist) o;
         return Objects.equals(iid, itemlist.iid) &&
                 Objects.equals(pname, itemlist.pname) &&
-                Objects.equals(type, itemlist.type) &&
+                Objects.equals(types, itemlist.types) &&
                 Objects.equals(status, itemlist.status) &&
                 Objects.equals(jobtype, itemlist.jobtype) &&
                 Objects.equals(progress, itemlist.progress) &&
@@ -169,7 +169,7 @@ public class Itemlist {
 
     @Override
     public int hashCode() {
-        return Objects.hash(iid, pname, type, status, jobtype, progress, stageof, planstartdate, planenddate, actualstartdate, actualenddate, empid);
+        return Objects.hash(iid, pname, types, status, jobtype, progress, stageof, planstartdate, planenddate, actualstartdate, actualenddate, empid);
     }
 
     @OneToOne(mappedBy = "myitemlist")

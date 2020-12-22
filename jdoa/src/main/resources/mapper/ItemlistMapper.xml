@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.IItemlistMapper">
+
+    <resultMap id="ItemlistResult" type="com.study.pojo.Itemlist">
+        <id property="iid" column="iid"/>
+        <result property="pname" column="pname"/>
+        <result property="types" column="types"/>
+        <result property="status" column="status"/>
+        <result property="jobtype" column="jobtype"/>
+        <result property="progress" column="progress"/>
+        <result property="stageof" column="stageof"/>
+        <result property="planstartdate" column="planstartdate"/>
+        <result property="planenddate" column="planenddate"/>
+        <result property="actualstartdate" column="actualstartdate"/>
+        <result property="actualenddate" column="actualenddate"/>
+        <result property="empid" column="empid"/>
+
+        <association property="Emps" javaType="com.study.pojo.Emp">
+            <id property="empno" column="empno"/>
+            <result property="ename" column="ename"/>
+            <result property="ephone" column="ephone"/>
+            <result property="sex" column="sex"/>
+            <result property="mgr" column="mgr"/>
+            <result property="sal" column="sal"/>
+            <result property="state" column="state"/>
+            <result property="ofday" column="ofday"/>
+        </association>
+    </resultMap>
+
+    <select id="selectAll" resultMap="ItemlistResult">
+            select * from itemlist i left join emp e on i.empno=e.empno
+    </select>
+
+    <select id="selectPname" resultMap="ItemlistResult">
+            select * from itemlist i left join emp e on i.empno=e.empno where pname=#{pname}
+    </select>
+
+    <select id="selectTypes" resultMap="ItemlistResult">
+            select * from itemlist i left join emp e on i.empno=e.empno where types=#{types}
+    </select>
+
+    <update id="updateStatus" parameterType="com.study.pojo.Itemlist">
+                UPDATE itemlist SET status=#{status} WHERE iid=#{iid}
+    </update>
+
+
+</mapper>
