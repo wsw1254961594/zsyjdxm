@@ -19,6 +19,25 @@ public class Jiaban {
     private String jtitle;
     private Emp myemp;
 
+    private String starDate;
+    private String endDate;
+
+    public String getStarDate() {
+        return starDate;
+    }
+
+    public void setStarDate(String starDate) {
+        this.starDate = starDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
     @Id
     @Column(name = "jnid", nullable = false)
     public Integer getJnid() {
