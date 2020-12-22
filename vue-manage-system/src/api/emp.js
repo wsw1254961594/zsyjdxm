@@ -3,7 +3,7 @@
 @date: 2020/12/21
 @description:
 */
-import {postJson} from "../network";
+import {get,postJson} from "../network";
 
 export const empHttp = {
   login:function (emp) {

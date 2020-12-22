@@ -205,7 +205,7 @@
             title: '资产管理',
             subs: [
               {
-                index: 'wodezichan',
+                index: 'property',
                 title: '我的资产'
               },
               {
@@ -217,11 +217,11 @@
                 title: '入库申请'
               },
               {
-                index: 'zichanjieyong',
+                index: 'asset',
                 title: '资产借用'
               },
               {
-                index: 'zichanguihuan',
+                index: 'prreturn',
                 title: '资产归还'
               }
             ]

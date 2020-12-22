@@ -3,6 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.study.model.mdao.IPropertyMapper">
+    <!--我的资产表-->
     <resultMap id="IProperty" type="Property">
         <id property="cpid" column="cpid"/>
         <result property="pserial" column="pserial"/>
@@ -14,8 +15,69 @@
         <result property="pget" column="pget"/>
         <result property="pvalue" column="pvalue"/>
         <result property="premark" column="premark"/>
+        <!--员工表-->
+        <association property="myemp" javaType="Emp">
+            <id property="empno" column="empno"/>
+            <result property="ename" column="ename"/>
+            <result property="ephone" column="ephone"/>
+            <result property="sex" column="sex"/>
+            <result property="mgr" column="mgr"/>
+            <result property="sal" column="sal"/>
+            <result property="state" column="state"/>
+            <result property="ofday" column="ofday"/>
+            <!--部门表-->
+            <collection property="mydept" ofType="Dept">
+                <id column="deptno" property="deptno"/>
+                <result column="dname" property="dname"/>
+                <result column="loc" property="loc"/>
+            </collection>
+        </association>
+        <!--资产表-->
+        <association property="myasset" javaType="Asset">
+            <result property="atname" column="atname"/>
+            <result property="atmodel" column="atmodel"/>
+            <result property="atnum" column="atnum"/>
+            <result property="atstate" column="atstate"/>
+            <result property="aunits" column="aunits"/>
+            <result property="astorage" column="astorage"/>
+            <result property="price" column="price"/>
+            <!--资产类别表-->
+            <collection property="myassets" ofType="Assets">
+                <id property="aid" column="aid"/>
+                <result property="aserial" column="aserial"/>
+                <result property="aname" column="aname"/>
+                <result property="amodel" column="amodel"/>
+                <result property="agroup" column="agroup"/>
+            </collection>
+        </association>
     </resultMap>
+    <!--查询我的资产全部信息-->
     <select id="selectPropertyAll" resultMap="IProperty">
-        select * from property
+        select * from borrow bo
+        left join emp e on bo.empno=e.empno
+        left join dept d on e.deptno=d.deptno
+        left join property pr on bo.atid=pr.atid
+        left join asset a on bo.atid=a.atid
+        left join assets ass on a.aid=ass.aid
+    </select>
+    <!--高级查询我的资产根据 名称 领取日期 价格来查询-->
+    <select id="selectsProperty" resultMap="IProperty">
+        select * from borrow bo
+        left join emp e on bo.empno=e.empno
+        left join dept d on e.deptno=d.deptno
+        left join property pr on bo.atid=pr.atid
+        left join asset a on bo.atid=a.atid
+        left join assets ass on a.aid=ass.aid
+        <where>
+            <if test="pname!=null">
+                and pname like concat('%',#{pname},'%')
+            </if>
+            <if test="pget!=nunll">
+                and pget like concat('%',#{pget}'%')
+            </if>
+            <if test="pvalue!=null">
+                and pvalue like concat('%',#{pvalue}'%')
+            </if>
+        </where>
     </select>
 </mapper>
