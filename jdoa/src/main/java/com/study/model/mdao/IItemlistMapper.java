@@ -16,13 +16,15 @@ import java.util.List;
 @Repository
 public interface IItemlistMapper {
 
-    List<Itemlist> selectAll();
+    List<Itemlist> SelectAll();
 
-    Itemlist selectPname(String pname);
+    List<Itemlist> SelectPname(String pname);
 
-    List<Itemlist> selectTypes(String types);
+    List<Itemlist> SelectTypes(String types);
 
-    Integer updateStatus(String status,Integer iid);
+    List<Itemlist> SelectStatus(String status);
 
-    Integer doInsert(Itemlists it);
+    Integer UpdateStatus(String status,Integer iid);
+
+    Integer DoInsert(Itemlists it);
 }
