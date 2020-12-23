@@ -9,4 +9,11 @@
     <select id="selectm" resultType="com.study.pojo.Emp">
         select * from  emp
     </select>
+    <select id="kx" resultType="com.study.pojo.Dizhi">
+        select * from  dizhi where hyzt=0
+    </select>
+    <update id="jieshu">
+        update dizhi set  hyzt=0 where dzid=#{ids}
+    </update>
+
 </mapper>

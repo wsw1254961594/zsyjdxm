@@ -3,6 +3,22 @@
 		
 		<div>
 			  <el-button type="primary" @click="cc()" >召集会议</el-button>
+			  <el-select v-model="cxdz" clearable placeholder="根据会议室查询" @change="duocx()">
+			      <el-option
+			        v-for="item in dz"
+			       :key="item.dzid"
+			       :label="item.leixingname"
+			       :value="item.leixingname">
+			      </el-option>
+			    </el-select>
+				<el-select v-model="cxdz1" clearable placeholder="根据名字查询" @change="duocx()">
+				    <el-option
+				      v-for="item in yg"
+				      :key="item.empno"
+				      :label="item.ename"
+				      :value="item.ename">
+				    </el-option>
+				  </el-select>
 		</div>
 		<el-table :data="tableData.list" style="width: 100%" :default-sort="{prop: 'date', order: 'descending'}">
 			<el-table-column prop="hyrw" label="会议标题" sortable>
@@ -34,18 +50,28 @@
 				<span v-if="tt(scope.row.jieshutime)<tt(new Date()) && scope.row.myshiyong.zt==1">
 					已结束
 				</span>
-				<span v-if="scope.row.myshiyong.zt==2">
+				<span v-if="scope.row.mydizhi.hyzt==2">
 					待审批
 				</span>	
 							
 		
 				</template>
 			</el-table-column>
+			<el-table-column label="操作" prop="name" width="160px;">
+				<template slot-scope="scope">
+					
+					<span v-if="tt(scope.row.jieshutime)<tt(new Date()) && scope.row.myshiyong.zt==1 && scope.row.mydizhi.hyzt==1">
+						<el-button size="mini" @click="jie(scope.row)">结束会议</el-button>
+					</span>
+					
+				</template>
+			
+			</el-table-column>
 			</el-table-column>
 		</el-table>
 
 		<el-pagination background @size-change="handleSizeChange" :page-size="tableData.pageSize" @current-change="handleCurrentChange"
-		 :current-page="tableData.PageNum" layout="prev, pager, next" :total="tableData.total">
+		 :current-page="tableData.pageNum" layout="prev, pager, next" :total="tableData.total">
 		</el-pagination>
 	</div>
 </template>
@@ -59,7 +85,10 @@
 				pageNum: 1,
 				pageSize: 5,
 				total: 0,
-				
+				cxdz:'',
+				dz:[],
+				yg:[],
+				cxdz1:'',
 			}
 		},
 		methods: {
@@ -67,7 +96,7 @@
 				return row.address;
 			},
 			dizhi() {
-			let url = "http://localhost:8888/huiyi/xiangqing";
+			let url = "http://localhost:8888/huiyi/xiangqing?pageSize=" + this.pageSize + "&pageNum=" + this.pageNum;
 			this.$axios.get(url).then(r => {
 				this.tableData = r.data
 			}).catch(e => {
@@ -75,6 +104,19 @@
 			
 			});
 
+			},
+			xiala(){
+				this.$axios.post("http://localhost:8888/huiyi/xla").then(r => {
+					this.dz = r.data;
+					console.log("11" ,r)
+				}).catch(e => {
+				
+				});
+				this.$axios.post("http://localhost:8888/huiyi/yuangong").then(r => {
+					this.yg = r.data;
+				}).catch(e => {
+				
+				});
 			},
 
 			handleSizeChange(p) {
@@ -91,15 +133,47 @@
 				time = moment(time).unix();
 				       return time;
 			},
+			jie(row){
+				
+				console.log("id",row.mydizhi.dzid)
+				this.dzid=row.mydizhi.dzid;
+				this.$axios.post("http://localhost:8888/huiyi/jieshu?ids="+this.dzid)
+						.then(r => {
+						this.dizhi();
+						}).catch(e => {
+				
+						});
+			},
 			cc(r){
 				this.$router.push({path:'/Tianjiahuiyi',query:{params:r}})
 			},
+			duocx(){
+				console.log("cxdz",this.cxdz)
+				this.dzid=this.cxdz;
+				if(this.cxdz=="" & this.cxdz1==""){
+				this.dizhi();
+				}else{
+				let url="http://localhost:8888/huiyi/mohuhy";
+				let param={
+				hyname:this.cxdz,
+				empname:this.cxdz1,
+				pageNo:this.pageNum,
+				pageSize:this.pageSize
+			}
+			 param=this.$Qs.stringify(param);  
+			 this.$axios.post(url,param).then(r=>{
+				   this.tableData=r.data;
+					 }).catch(e=>{
+					  alert(e) 
+				 });
+								 
+					}
+				  },
 		},
 		
 		created() {
-			
 			this.dizhi();
-			
+			this.xiala();
 		}
 	}
 </script>

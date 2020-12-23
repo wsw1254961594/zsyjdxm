@@ -13,7 +13,7 @@
 		</el-table>
 
 		<el-pagination background @size-change="handleSizeChange" :page-size="tableData.pageSize" @current-change="handleCurrentChange"
-		 :current-page="tableData.PageNum" layout="prev, pager, next" :total="tableData.total">
+		 :current-page="tableData.pageNum" layout="prev, pager, next" :total="tableData.total">
 		</el-pagination>
 		<div>
 			
@@ -58,7 +58,7 @@
 				return row.address;
 			},
 			dizhi() {
-			let url = "http://localhost:8888/huiyi/dizhi";
+			let url = "http://localhost:8888/huiyi/dizhi?pageSize=" + this.pageSize + "&pageNum=" + this.pageNum;
 			this.$axios.get(url).then(r => {
 				this.tableData = r.data
 			}).catch(e => {
