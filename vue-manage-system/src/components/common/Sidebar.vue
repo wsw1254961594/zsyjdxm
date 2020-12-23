@@ -197,7 +197,7 @@
                 title: '我的资产'
               },
               {
-                index: 'chaxunzichan',
+                index: 'cxzc',
                 title: '查询资产',
               },
               {

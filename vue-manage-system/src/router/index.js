@@ -73,6 +73,11 @@ const routes = [
 	    meta: {title: '资产借用'}
 	  },
 	  {
+	    path: '/cxzc',
+	    component: () => import('../components/view/Cxzc'),
+	    meta: {title: '资产借用'}
+	  },
+	  {
 	    path: '/dizhi',
 	    component: () => import('../components/view/Dizhi'),
 	    meta: {title: '会议室使用详情'}
