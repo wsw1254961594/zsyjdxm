@@ -25,6 +25,8 @@ public class AssetServices {
         return assetMapper.selectAssetAll();
     }
 
+
+
     /*查询资产表和资产别表分页*/
     public PageInfo<Asset> selectByAsset(Integer pageNO, Integer pageSize){
         //1配置分页信息

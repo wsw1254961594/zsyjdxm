@@ -60,6 +60,21 @@
         left join assets ass on a.aid=ass.aid
         where pr.empno=#{empno}
     </select>
+
+
+    <!--新增我的资产表-->
+    <insert id="insertProperty" parameterType="com.study.vo.PropertyVo" useGeneratedKeys="true" keyProperty="cpid" keyColumn="cpid">
+        insert into property
+        values(#{pserial},#{pname},#{pstate},
+        #{pquantity},#{punits},#{pstorage},#{pget},
+        #{pvalue},#{premark})
+    </insert>
+
+
+    <!--查询主键新增id-->
+    <select id="selectCpid" resultType="com.study.pojo.Property">
+        select * from property where cpid=(select max(cpid) from property)
+    </select>
     <!--高级查询我的资产根据 名称 领取日期 价格来查询-->
     <select id="selectsProperty" resultMap="IProperty">
         select * from property pr

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author Li-xing Chen
  * @version 1.8
@@ -23,8 +25,8 @@ public class AssetController {
 
     @RequestMapping("/all")
     /*查询资产表信息*/
-    public MyResult selectAssetAll(){
-        return MyResult.returnObjs(assetServices.selectAssetAll());
+    public List<Asset> selectAssetAll(){
+        return assetServices.selectAssetAll();
     }
     /*查询资产表和资产类别表分页*/
     @RequestMapping("/page")

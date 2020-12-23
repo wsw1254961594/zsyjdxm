@@ -18,6 +18,8 @@ public interface IAssetMapper {
     /*查询资产表信息*/
    List<Asset> selectAssetAll();
 
+
+
     /*高级查询*/
     List<Asset> selectsAsset(@Param("atname") String atname, @Param("atmodel") String atmodel, @Param("price") String aunits);
 }

@@ -2,10 +2,13 @@ package com.study.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.study.config.MyResult;
+import com.study.pojo.Borrow;
 import com.study.pojo.Property;
 import com.study.pojo.Prreturn;
 import com.study.services.PropertyServices;
+import com.study.vo.PropertyVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +38,12 @@ public class PropertyController {
         int pSize = (pageSize != null && pageSize > 0) ? pageSize : 3;
         return MyResult.returnObj(propertyServices.selectByProperty(pNo, pSize,empon));
     }
+    /*新增我的资产表*/
+    @RequestMapping("/insert")
+    public void propxz(@RequestBody PropertyVo property){
+    propertyServices.propxz(property);
 
+    }
     /*高级查询我的资产根据 名称 领取日期 价格来查询*/
     @RequestMapping("/pages")
     public MyResult selectsProperty(@RequestParam(value = "pname", required = false) String pname,
