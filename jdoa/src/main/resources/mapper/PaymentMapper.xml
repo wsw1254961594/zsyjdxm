@@ -38,4 +38,11 @@
     <select id="selectNewPmid" resultType="java.lang.Integer">
         select max(pmid) from payment
     </select>
+
+
+<select id="getByPmIdToLeaves" resultType="Emp">
+    SELECT e.* FROM payment pm
+    INNER JOIN emp e ON e.empno = pm.empno
+    WHERE pm.pmid = #{pmid}
+</select>
 </mapper>

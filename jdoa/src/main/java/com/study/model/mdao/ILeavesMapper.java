@@ -1,5 +1,6 @@
 package com.study.model.mdao;
 
+import com.study.pojo.Emp;
 import com.study.pojo.Leaves;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +16,5 @@ public interface ILeavesMapper {
     int addLeaves(Leaves leaves);
     Leaves getLeaves(Integer lid);
     List<Leaves> listLeaves(Leaves leaves);
+    Emp getByLidToLeaves(Integer lid);
 }

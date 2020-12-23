@@ -53,7 +53,7 @@
             title: '系统首页'
           },
           {
-            icon: 'el-icon-s-order',
+            icon: 'el-icon-s-check',
             index: '4',
             title: '流程管理',
             subs: [
@@ -82,7 +82,7 @@
             ]
           },
           {
-            icon: 'el-icon-s-order',
+            icon: 'el-icon-tickets',
             index: '5',
             title: '合同管理',
             subs: [          
@@ -119,7 +119,7 @@
             ]
           },
           {
-            icon: 'el-icon-s-order',
+            icon: 'el-icon-user-solid',
             index: '6',
             title: '人事关系',
             subs: [
@@ -146,7 +146,7 @@
             ]
           },
           {
-            icon: 'el-icon-s-order',
+            icon: 'el-icon-collection',
             index: '7',
             title: '人事档案',
             subs: [
@@ -161,7 +161,7 @@
             ]
           },
           {
-            icon: 'el-icon-s-order',
+            icon: 'el-icon-s-management',
             index: '8',
             title: '会议管理',
             subs: [
@@ -188,7 +188,7 @@
             ]
           },
           {
-            icon: 'el-icon-s-order',
+            icon: 'el-icon-share',
             index: '9',
             title: '资产管理',
             subs: [
@@ -215,7 +215,7 @@
             ]
           },
           {
-            icon: 'el-icon-s-order',
+            icon: 'el-icon-coordinate',
             index: '10',
             title: '项目管理',
             subs: [
@@ -245,8 +245,6 @@
               }
             ]
           },
-
-
           /*{
             icon: 'el-icon-phone',
             index: 'table',
@@ -356,7 +354,7 @@
 
 <style scoped>
 
-	
+
   .sidebar {
     display: block;
     position: absolute;

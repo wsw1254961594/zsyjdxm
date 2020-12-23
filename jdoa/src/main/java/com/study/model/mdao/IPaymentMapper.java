@@ -1,6 +1,7 @@
 package com.study.model.mdao;
 
 import com.study.pojo.Contract;
+import com.study.pojo.Emp;
 import com.study.pojo.Payment;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -27,4 +28,11 @@ public interface IPaymentMapper {
 
     //查询最新的付款编号
     Integer selectNewPmid();
+
+    /**
+     * 根据付款申请获取员工详情
+     * @param pmid
+     * @return
+     */
+    Emp getByPmIdToLeaves(Integer pmid);
 }

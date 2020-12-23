@@ -63,4 +63,11 @@ public interface IContractMapper {
     //合同解除
     void conDel(Integer cid);
 
+
+    /**
+     * 根据编号获取详情 pj
+     * @param cid
+     * @return
+     */
+    Emp getByCidToLeaves(Integer cid);
 }

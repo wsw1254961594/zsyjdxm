@@ -49,4 +49,11 @@ public interface IEmpMapper {
 
     Integer updatestate(Integer empno);
 
+
+    /**
+     * 获取员工详情：pj
+     * @param empno
+     * @return
+     */
+    Emp getEmpDetail(Integer empno);
 }

@@ -2,6 +2,7 @@ package com.study.services;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.study.config.MyResult;
 import com.study.model.mdao.IEmpMapper;
 import com.study.pojo.Emp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,11 @@ public class EmpServices {
         List<Emp> list = mapper.selectstate();
         PageInfo<Emp> info = new PageInfo<>(list);
         return info;
+    }
+
+    public MyResult getEmpDetail(Integer empno) {
+        Emp empDetail = mapper.getEmpDetail(empno);
+        return MyResult.returnObj(empDetail);
     }
 
 }
