@@ -17,16 +17,46 @@ public class Xiangqing {
     private Timestamp kaishitimedate;
     private Timestamp jieshutime;
     private String neirong;
-
-    private Shiyong myshiyong;
-
     private Dizhi mydizhi;
     private Emp ese;
     private List<Huiyirenyuan> rrr;
     private String hyleixi;
+    private Shiyong myshiyong;
+    public Xiangqing() {
+    }
+
+
+
+    public Xiangqing(Integer hydzid, String hyrw, Timestamp kaishitimedate, Timestamp jieshutime, String neirong,String hyleixi, Dizhi mydizhi, Emp ese) {
+        this.hydzid = hydzid;
+        this.hyrw = hyrw;
+        this.kaishitimedate = kaishitimedate;
+        this.jieshutime = jieshutime;
+        this.neirong = neirong;
+        this.hyleixi = hyleixi;
+        this.mydizhi = mydizhi;
+        this.ese = ese;
+    }
+
+    @Override
+    public String toString() {
+        return "Xiangqing{" +
+                "hydzid=" + hydzid +
+                ", hyrw='" + hyrw + '\'' +
+                ", kaishitimedate=" + kaishitimedate +
+                ", jieshutime=" + jieshutime +
+                ", neirong='" + neirong + '\'' +
+                ", mydizhi=" + mydizhi +
+                ", ese=" + ese +
+                ", rrr=" + rrr +
+                ", hyleixi='" + hyleixi + '\'' +
+                ", myshiyong=" + myshiyong +
+                '}';
+    }
 
     @Id
     @Column(name = "hydzid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getHydzid() {
         return hydzid;
     }

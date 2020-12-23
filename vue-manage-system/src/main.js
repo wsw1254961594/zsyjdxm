@@ -13,6 +13,9 @@ import 'element-ui/lib/theme-chalk/index.css' //默认主题
 import echarts from 'echarts'
 Vue.prototype.$echarts = echarts
 
+import {dateFormat} from "./components/common/shijian.js"
+Vue.filter('dateFormat',dateFormat)
+
 
 import './assets/css/icon.css'
 import i18n from './i18n'

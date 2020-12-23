@@ -76,7 +76,10 @@ public class ContractServices {
                 contract.getCtitle(),
                 contract.getCbody(),
                 contract.getCnumber(),
-                contract.getCmoney(),1,contract.getCday(),0,
+                contract.getCmoney(),
+                1,
+                contract.getCday(),
+                0,
                 contract.getMyemp());
         mapper.insertContract(con);
 

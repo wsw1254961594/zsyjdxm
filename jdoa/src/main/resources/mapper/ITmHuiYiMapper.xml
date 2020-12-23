@@ -6,5 +6,7 @@
     <select id="cxdz" resultType="com.study.pojo.Dizhi">
         select * from  dizhi
     </select>
-
+    <select id="selectm" resultType="com.study.pojo.Emp">
+        select * from  emp
+    </select>
 </mapper>
