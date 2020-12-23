@@ -75,14 +75,14 @@ public class ItemlistController {
 
     /*新增项目*/
     @RequestMapping("doInsert")
-    public Integer doInsert(String pname,String types,String status,
-                            String j,String stageof,String p1,String p2,Integer empid) {
+    public Integer doInsert(String pname,String types,String j,String p1,String p2,String empid) {
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         try {
+            Integer e= Integer.valueOf(empid);
             Date pla = sf.parse(p1);
             Date plan = sf.parse(p2);
             Itemlists it = new Itemlists(null, pname, types, null, j, null,
-                    null, pla, plan, null, null, empid);
+                    null, pla, plan, null, null, e);
             return se.DoInsert(it);
         } catch (ParseException e) {
             e.printStackTrace();
