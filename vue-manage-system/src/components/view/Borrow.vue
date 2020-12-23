@@ -19,16 +19,16 @@
 			</el-form-item>
 		</el-form>
 		<el-table :data="deptData" style="width: 100%">
-			<el-table-column label="编号id" prop="rtid"></el-table-column>
-			<el-table-column label="编号" prop="rserial" ></el-table-column>
-			<el-table-column label="名称" prop="rname"></el-table-column>
-			<el-table-column label="状态" prop="rstate"></el-table-column>
-			<el-table-column label="数量" prop="rquantity"></el-table-column>
+			<el-table-column label="编号id" prop="bid"></el-table-column>
+			<el-table-column label="编号" prop="bserial" ></el-table-column>
+			<el-table-column label="名称" prop="bname"></el-table-column>
+			<el-table-column label="状态" prop="bstate"></el-table-column>
+			<el-table-column label="数量" prop="bquantity"></el-table-column>
 			<el-table-column label="计算单位" prop="bunits"></el-table-column>
-			<el-table-column label="入库日期" prop="rstorage"></el-table-column>
-			<el-table-column label="归还日期" prop="rget"></el-table-column>
-			<el-table-column label="价格" prop="rvalue"></el-table-column>
-			<el-table-column label="备注" prop="rremark"></el-table-column>
+			<el-table-column label="入库日期" prop="bstorage"></el-table-column>
+			<el-table-column label="归还日期" prop="bget"></el-table-column>
+			<el-table-column label="价格" prop="bvalue"></el-table-column>
+			<el-table-column label="备注" prop="bremark"></el-table-column>
 			<el-table-column label="操作">
 				<template slot-scope="scope">
 					<el-button type="primary" v-on:click="readyUpdate(scope.row)">修改</el-button>
@@ -139,7 +139,9 @@
 			loadData() {
 				let param = {
 					pageNo: this.current,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					
+					empno:this.$store.state.empno
 				};
 				myhttp.getObj("borrow/page", param, (res) => {
 					console.log("查询的所有部门：", res);

@@ -54,11 +54,12 @@
     </resultMap>
     <!--查询资产借用表的数据-->
     <select id="selectBorrowAll" resultMap="IBorrow">
-        select * from borrow bo
+        select bo.* from borrow bo
         left join emp e on bo.empno=e.empno
         left join dept d on e.deptno=d.deptno
         left join asset a on bo.atid=a.atid
         left join assets ass on a.aid=ass.aid
+        where bo.empno=#{empno}
     </select>
 
     <!--高级查询根据 名称 归还日期 价格来进行查询-->
@@ -78,4 +79,22 @@
             </if>
         </where>
     </select>
+    <insert id="insertBorrow" parameterType="Borrow">
+        insert into borrow(bid,bserial,bname,bstate,bquantity,bunits,bstate,bget,bvalue,bremark)
+        values(#{borrow.bserial},#{borrow.bname},#{borrow.bstate},#{borrow.bquantity},#{borrow.bunits},#{borrow.bstate},#{borrow.bget},#{borrow.bvalue},#{borrow.bremark})
+    </insert>
+    <update id="updateBorrow" parameterType="Borrow">
+        update borrow set bquantity=#{borrow.bremark}
+        where bid=#{borrow.bid}
+    </update>
+    <!--新增离职信息-->
+<!--    <insert id="insertDimission" parameterType="Dimission">
+        insert into dimission (e_id,di_title,di_content,di_date,di_position,di_opinion,di_startdate,di_now)
+        values(#{dimission.emp.eId},#{dimission.diTitle},#{dimission.diContent},#{dimission.diDate},#{dimission.diPosition},#{dimission.diOpinion},#{dimission.diStartdate},#{dimission.diNow})
+    </insert>-->
+    <!--修改离职信息-->
+<!--    <update id="updateDimission" parameterType="Dimission">
+        update dimission set di_title=#{dimission.diTitle},di_content=#{dimission.diContent},di_date=#{dimission.diDate},di_position=#{dimission.diPosition},di_opinion=#{dimission.diOpinion},
+        di_startdate=#{dimission.diStartdate},di_now=#{dimission.diNow} where di_id=#{dimission.diId}
+    </update>-->
 </mapper>

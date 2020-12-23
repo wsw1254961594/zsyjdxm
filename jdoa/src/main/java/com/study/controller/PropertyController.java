@@ -23,17 +23,17 @@ public class PropertyController {
     PropertyServices propertyServices;
     /*查询我的资产全部信息*/
     @RequestMapping("/all")
-    public MyResult selectPropertyAll(){
-        return MyResult.returnObjs(propertyServices.selectPropertyAll());
+    public MyResult selectPropertyAll(Integer empno){
+        return MyResult.returnObjs(propertyServices.selectPropertyAll(empno));
     }
     /*分页查询全部信息*/
     @RequestMapping("/page")
     public MyResult selectByProperty(@RequestParam("pageNo") Integer pageNo,
-                                     @RequestParam("pageSize") Integer pageSize) {
+                                     @RequestParam("pageSize") Integer pageSize,
+                                     @RequestParam("empno") Integer empon) {
         int pNo = (pageNo != null && pageNo > 0) ? pageNo : 1;
         int pSize = (pageSize != null && pageSize > 0) ? pageSize : 3;
-        return MyResult.returnObj(propertyServices.selectByProperty(pNo, pSize));
-
+        return MyResult.returnObj(propertyServices.selectByProperty(pNo, pSize,empon));
     }
 
     /*高级查询我的资产根据 名称 领取日期 价格来查询*/
