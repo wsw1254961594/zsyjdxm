@@ -303,4 +303,36 @@ public class Emp {
     public void setRy(List<Huiyirenyuan> ry) {
         this.ry = ry;
     }
+
+    @Override
+    public String toString() {
+        return "Emp{" +
+                "empno=" + empno +
+                ", ename='" + ename + '\'' +
+                ", ephone='" + ephone + '\'' +
+                ", sex='" + sex + '\'' +
+                ", mgr=" + mgr +
+                ", sal=" + sal +
+                ", state=" + state +
+                ", ofday=" + ofday +
+                ", borrow=" + borrow +
+                ", contracts=" + contracts +
+                ", dimissions=" + dimissions +
+                ", myjobmsg=" + myjobmsg +
+                ", mydept=" + mydept +
+                ", myempconract=" + myempconract +
+                ", itemlists=" + itemlists +
+                ", jiabans=" + jiabans +
+                ", leaves=" + leaves +
+                ", mypersonal=" + mypersonal +
+                ", positives=" + positives +
+                ", posts=" + posts +
+                ", propertys=" + propertys +
+                ", prreturns=" + prreturns +
+                ", xiangqings=" + xiangqings +
+                ", xqs=" + xqs +
+                ", ry=" + ry +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

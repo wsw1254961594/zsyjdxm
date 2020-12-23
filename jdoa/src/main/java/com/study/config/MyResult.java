@@ -43,7 +43,10 @@ public class MyResult implements Serializable {
         return new MyResult(list);
     }
 
-
+    //成功
+    public static MyResult ok(String msg){
+        return new MyResult(1,msg);
+    }
    //当代码发生错误时调用
    public static MyResult ERROR(String msg){
        return new MyResult(-1,msg);

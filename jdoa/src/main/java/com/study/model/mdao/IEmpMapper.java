@@ -38,4 +38,7 @@ public interface IEmpMapper {
      * @return
      */
     Emp leavesGetEmp(Integer empno);
+
+    //查询所有转正员工
+   List<Emp> selectstate();
 }

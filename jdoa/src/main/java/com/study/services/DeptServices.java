@@ -17,6 +17,9 @@ public class DeptServices {
         return list;
     }
 
-
+    public Dept selectBydeptno(Integer deptno){
+        Dept dept=mapper.selectBydeptno(deptno);
+        return dept;
+    }
 
 }
