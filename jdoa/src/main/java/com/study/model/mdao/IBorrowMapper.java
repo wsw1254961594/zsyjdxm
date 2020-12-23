@@ -15,8 +15,14 @@ import java.util.List;
 @Mapper
 @Repository
 public interface IBorrowMapper {
-    /*查询资产借用表*/
-    List<Borrow> selectBorrowAll();
+    /*查询当前登录者资产借用表*/
+    List<Borrow> selectBorrowAll(Integer empno);
+
+    /*新增资产借用表*/
+    List<Borrow> insertBorrow(@Param("borrow") Borrow borrow);
+
+    /*修改资产借用表*/
+    List<Borrow> updateBorrow(@Param("borrow") Borrow borrow);
 
     /*高级查询根据 名称 归还日期 价格来进行查询*/
     List<Borrow> selectsBorrow(@Param("bname") String bname,@Param("bget")String bget,@Param("bvalue")String bvalue);

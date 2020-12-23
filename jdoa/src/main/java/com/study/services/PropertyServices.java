@@ -23,15 +23,15 @@ public class PropertyServices {
     @Autowired
     IPropertyMapper propertyMapper;
     /*查询我的资产全部信息*/
-    public List<Property> selectPropertyAll(){
-        return propertyMapper.selectPropertyAll();
+    public List<Property> selectPropertyAll(Integer enpno){
+        return propertyMapper.selectPropertyAll(enpno);
     }
     /*查询我的资产表分页*/
-    public PageInfo<Property> selectByProperty(Integer pageNO, Integer pageSize){
+    public PageInfo<Property> selectByProperty(Integer pageNO, Integer pageSize ,Integer empno){
         //1配置分页信息
         PageHelper.startPage(pageNO,pageSize);
         //2执行分页
-        List<Property> list=propertyMapper.selectPropertyAll();
+        List<Property> list=propertyMapper.selectPropertyAll(empno);
         //将分页数据封装到PageInfo中
         PageInfo<Property> info=new PageInfo<>(list);
         return info;

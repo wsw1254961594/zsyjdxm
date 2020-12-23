@@ -35,9 +35,10 @@
 
     <!--查询资产归还-->
     <select id="selectPrreturnAll" resultMap="IPrreturn">
-        select * from prreturn prr
+        select prr.* from prreturn prr
         left join emp e on prr.empno=e.empno
         left join dept d on e.deptno=d.deptno
+        where prr.empno=#{empno}
     </select>
 
     <!--高级查询资产归还表根据 名称 归还日期 价格查询-->

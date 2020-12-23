@@ -24,16 +24,17 @@ public class PrreturnController {
     PrreturnServices prreturnServices;
     /*查询资产归还表*/
     @RequestMapping("/all")
-    public MyResult selectPrreturnAll(){
-        return MyResult.returnObjs(prreturnServices.selectPrreturnAll());
+    public MyResult selectPrreturnAll(Integer empno){
+        return MyResult.returnObjs(prreturnServices.selectPrreturnAll(empno));
     }
     /*分页查询资产归还表*/
     @RequestMapping("/page")
     public MyResult selectByPrreturn(@RequestParam("pageNo") Integer pageNo,
-                                     @RequestParam("pageSize") Integer pageSize) {
+                                     @RequestParam("pageSize") Integer pageSize,
+                                     @RequestParam("empno")Integer empno) {
         int pNo = (pageNo != null && pageNo > 0) ? pageNo : 1;
         int pSize = (pageSize != null && pageSize > 0) ? pageSize : 3;
-        return MyResult.returnObj(prreturnServices.selectByPrreturn(pNo, pSize));
+        return MyResult.returnObj(prreturnServices.selectByPrreturn(pNo, pSize,empno));
 
     }
 

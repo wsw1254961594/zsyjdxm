@@ -53,21 +53,21 @@
     </resultMap>
     <!--查询我的资产全部信息-->
     <select id="selectPropertyAll" resultMap="IProperty">
-        select * from borrow bo
-        left join emp e on bo.empno=e.empno
+        select pr.* from property pr
+        left join emp e on pr.empno=e.empno
         left join dept d on e.deptno=d.deptno
-        left join property pr on bo.atid=pr.atid
-        left join asset a on bo.atid=a.atid
+        left join asset a on pr.atid=a.atid
         left join assets ass on a.aid=ass.aid
+        where pr.empno=#{empno}
     </select>
     <!--高级查询我的资产根据 名称 领取日期 价格来查询-->
     <select id="selectsProperty" resultMap="IProperty">
-        select * from borrow bo
-        left join emp e on bo.empno=e.empno
+        select * from property pr
+        left join emp e on pr.empno=e.empno
         left join dept d on e.deptno=d.deptno
-        left join property pr on bo.atid=pr.atid
-        left join asset a on bo.atid=a.atid
+        left join asset a on pr.atid=a.atid
         left join assets ass on a.aid=ass.aid
+
         <where>
             <if test="pname!=null">
                 and pname like concat('%',#{pname},'%')

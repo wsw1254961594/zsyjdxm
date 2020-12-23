@@ -141,7 +141,8 @@
 			loadData() {
 				let param = {
 					pageNo: this.current,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					empno:this.$store.state.empno
 				};
 				myhttp.getObj("prreturn/page", param, (res) => {
 					console.log("查询的所有部门：", res);
