@@ -41,4 +41,11 @@ public interface IEmpMapper {
 
     //查询所有转正员工
     List<Emp> selectstate();
+
+    /**
+     * 获取员工详情：pj
+     * @param empno
+     * @return
+     */
+    Emp getEmpDetail(Integer empno);
 }

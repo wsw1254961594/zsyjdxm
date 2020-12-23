@@ -37,102 +37,107 @@ const routes = [
         path: '/editor',
         component: () => import('../components/page/Test'),
         meta: {title: '编辑'}
-      },  
-	  {
+      },
+	  	{
         path: '/contractmenu',
         component: () => import('../components/view/ContractMenu'),
         meta: {title: '合同首页'}
       },
-	  {
-	    path: '/mycontract',
-	    component: () => import('../components/view/MyContract'),
-	    meta: {title: '我的合同'}
-	  },{
-	    path: '/empregular',
-	    component: () => import('../components/view/Empregular'),
-	    meta: {title: '员工转正'}
-	  },
-	  {
-	    path: '/emps',
-	    component: () => import('../components/view/emps'),
-	    meta: {title: '员工入职'}
-	  },
-	  {
-	    path: '/property',
-	    component: () => import('../components/view/Property'),
-	    meta: {title: '我的资产'}
-	  },
-	  {
-	    path: '/asset',
-	    component: () => import('../components/view/Asset'),
-	    meta: {title: '资产类别'}
-	  },
-	  {
-	    path: '/prreturn',
-	    component: () => import('../components/view/Prreturn'),
-	    meta: {title: '资产归还'}
-	  },
-	  {
-	    path: '/borrow',
-	    component: () => import('../components/view/Borrow'),
-	    meta: {title: '资产借用'}
-	  },
-	  {
-	    path: '/dizhi',
-	    component: () => import('../components/view/Dizhi'),
-	    meta: {title: '会议室使用详情'}
-	  } ,{
-	    path: '/contractadd',
-	    component: () => import('../components/view/ContractAdd'),
-	    meta: {title: '合同起草'}
-	  },{
-	    path: '/contractbacklog',
-	    component: () => import('../components/view/ContractBacklog'),
-	    meta: {title: '我的申请'}
-	  },{
-	    path: '/contractpayment',
-	    component: () => import('../components/view/ContractPayment'),
-	    meta: {title: '付款管理'}
-	  },{
-	    path: '/cgpost',
-	    component: () => import('../components/view/ContractCgPost'),
-	    meta: {title: '采购合同申请'}
-	  },
-        {
-            path: '/leaves',
-            component: () => import('../components/view/Leaves'),
-            meta: {title: '请假'}
-        },
-        {
-            path: '/workovertime',
-            component: () => import('../components/view/WorkOverTime'),
-            meta: {title: '加班'}
-        }
-	  ,
-	  {
-	    path: '/project',
-	    component: () => import('../components/view/project'),
-	    meta: {title: '项目执行'}
-	  },{
-	    path: '/chaxunhy',
-	    component: () => import('../components/view/Chaxunhy'),
-	    meta: {title: '查询会议'}
-	  },
-	  {
-	    path: '/huiyitianjia',
-	    component: () => import('../components/view/Huiyitianjia'),
-	    meta: {title: '会议使用情况'}
-	  },
-	  {
-	    path: '/tianjiahuiyi',
-	    component: () => import('../components/view/Tianjiahuiyi'),
-	    meta: {title: '添加会议'}
-	  },
-	  {
-	    path: '/newitem',
-	    component: () => import('../components/view/Newitem'),
-	    meta: {title: '新建项目'}
-	  }	,
+	  	{
+				path: '/mycontract',
+				component: () => import('../components/view/MyContract'),
+				meta: {title: '我的合同'}
+	  	},
+			{
+				path: '/empregular',
+				component: () => import('../components/view/Empregular'),
+				meta: {title: '员工转正'}
+	  	},
+			{
+				path: '/emps',
+				component: () => import('../components/view/emps'),
+				meta: {title: '员工入职'}
+			},
+			{
+				path: '/property',
+				component: () => import('../components/view/Property'),
+				meta: {title: '我的资产'}
+			},
+			{
+				path: '/asset',
+				component: () => import('../components/view/Asset'),
+				meta: {title: '资产类别'}
+			},
+			{
+				path: '/prreturn',
+				component: () => import('../components/view/Prreturn'),
+				meta: {title: '资产归还'}
+			},
+			{
+				path: '/borrow',
+				component: () => import('../components/view/Borrow'),
+				meta: {title: '资产借用'}
+			},
+			{
+				path: '/dizhi',
+				component: () => import('../components/view/Dizhi'),
+				meta: {title: '会议室使用详情'}
+			},
+			{
+				path: '/contractadd',
+				component: () => import('../components/view/ContractAdd'),
+				meta: {title: '合同起草'}
+			},
+			{
+				path: '/contractbacklog',
+				component: () => import('../components/view/ContractBacklog'),
+				meta: {title: '我的申请'}
+			},
+			{
+				path: '/contractpayment',
+				component: () => import('../components/view/ContractPayment'),
+				meta: {title: '付款管理'}
+			},
+			{
+				path: '/cgpost',
+				component: () => import('../components/view/ContractCgPost'),
+				meta: {title: '采购合同申请'}
+			},
+			{
+					path: '/leaves',
+					component: () => import('../components/view/Leaves'),
+					meta: {title: '请假'}
+			},
+			{
+					path: '/workovertime',
+					component: () => import('../components/view/WorkOverTime'),
+					meta: {title: '加班'}
+			},
+			{
+				path: '/project',
+				component: () => import('../components/view/project'),
+				meta: {title: '项目执行'}
+			},
+			{
+				path: '/chaxunhy',
+				component: () => import('../components/view/Chaxunhy'),
+				meta: {title: '查询会议'}
+			},
+			{
+				path: '/huiyitianjia',
+				component: () => import('../components/view/Huiyitianjia'),
+				meta: {title: '会议使用情况'}
+			},
+			{
+				path: '/tianjiahuiyi',
+				component: () => import('../components/view/Tianjiahuiyi'),
+				meta: {title: '添加会议'}
+			},
+			{
+				path: '/newitem',
+				component: () => import('../components/view/Newitem'),
+				meta: {title: '新建项目'}
+			},
       {
         path: '/daiban',
         component: () => import('../components/view/BackLog'),

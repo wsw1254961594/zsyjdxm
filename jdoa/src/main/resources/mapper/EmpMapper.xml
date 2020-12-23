@@ -116,4 +116,11 @@
           left JOIN personal s ON s.empno=e.empno
           where e.state=2
     </select>
+
+    <select id="getEmpDetail" resultMap="empresult">
+        SELECT e.*,d.*
+        FROM emp e
+        INNER JOIN dept d ON d.deptno = e.deptno
+        WHERE e.empno = #{empno}
+    </select>
 </mapper>

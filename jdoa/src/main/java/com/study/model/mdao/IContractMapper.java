@@ -56,4 +56,11 @@ public interface IContractMapper {
 
     //查询申请中的信息
     List<Contract> selectLogContract(Integer empno);
+
+    /**
+     * 根据编号获取详情 pj
+     * @param cid
+     * @return
+     */
+    Emp getByCidToLeaves(Integer cid);
 }

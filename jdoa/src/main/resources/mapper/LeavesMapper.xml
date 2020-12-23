@@ -71,4 +71,10 @@
         </where>
         ORDER BY lbegin DESC
     </select>
+
+    <select id="getByLidToLeaves" resultType="Emp">
+        SELECT e.* FROM `leaves` le
+        INNER JOIN emp e ON e.empno = le.empno
+        WHERE le.lid = #{lid}
+    </select>
 </mapper>

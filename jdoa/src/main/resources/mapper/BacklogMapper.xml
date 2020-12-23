@@ -87,4 +87,15 @@
         </where>
         ORDER BY baccept DESC
     </select>
+
+    <select id="getByTitleAndId" resultType="Contract">
+        SELECT con.* FROM contract con
+        INNER JOIN backlog bl ON con.cid = bl.bianhao
+        WHERE bl.bianhao = #{bianhao}
+    </select>
+
+    <update id="editContractState">
+        UPDATE contract SET cstate = 1 WHERE cid = #{cid}
+    </update>
+
 </mapper>

@@ -1,6 +1,7 @@
 package com.study.model.mdao;
 
 import com.study.pojo.Contract;
+import com.study.pojo.Emp;
 import com.study.pojo.Payment;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -20,4 +21,11 @@ public interface IPaymentMapper {
 
     //查询所有付款记录
     List<Payment> selectAll();
+
+    /**
+     * 根据付款申请获取员工详情
+     * @param pmid
+     * @return
+     */
+    Emp getByPmIdToLeaves(Integer pmid);
 }

@@ -19,6 +19,15 @@ public class Backlog {
     private Integer empid;
     private Approval myapproval;
     private String mgrResp;
+    private String applicantResp;
+
+    public String getApplicantResp() {
+        return applicantResp;
+    }
+
+    public void setApplicantResp(String applicantResp) {
+        this.applicantResp = applicantResp;
+    }
 
     public String getMgrResp() {
         return mgrResp;

@@ -118,4 +118,10 @@
         left join dept d on d.deptno=e.deptno
         where c.empno=#{empno} and c.cstate=0
     </select>
+
+    <select id="getByCidToLeaves" resultType="Emp">
+        SELECT e.* FROM contract con
+        INNER JOIN emp e ON e.empno = con.empno
+        WHERE con.cid = #{cid}
+    </select>
 </mapper>

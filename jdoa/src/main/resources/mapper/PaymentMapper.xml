@@ -26,5 +26,9 @@
         left join contract c on c.cid=p.cid
 </select>
 
-
+<select id="getByPmIdToLeaves" resultType="Emp">
+    SELECT e.* FROM payment pm
+    INNER JOIN emp e ON e.empno = pm.empno
+    WHERE pm.pmid = #{pmid}
+</select>
 </mapper>
