@@ -2,7 +2,7 @@
 	<div>
 		
 		<div>
-			  <el-button type="primary">召集会议</el-button>
+			  <el-button type="primary" @click="cc()" >召集会议</el-button>
 		</div>
 		<el-table :data="tableData.list" style="width: 100%" :default-sort="{prop: 'date', order: 'descending'}">
 			<el-table-column prop="hyrw" label="会议标题" sortable>
@@ -91,7 +91,9 @@
 				time = moment(time).unix();
 				       return time;
 			},
-			
+			cc(r){
+				this.$router.push({path:'/Tianjiahuiyi',query:{params:r}})
+			},
 		},
 		
 		created() {
