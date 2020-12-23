@@ -1,7 +1,10 @@
 <template>
 	<div>
-		<div style="width: 500px; margin-top: 15px; margin-left: 700px;">
-		  <el-input placeholder="请输入要查找的项目" v-model="input" class="">
+		<div >
+			<el-button style=" margin-left: 40px;"
+			 type="primary" @click="loadData()" >返回</el-button>
+		  <el-input style="width: 500px;  margin-left: 700px;"
+		   placeholder="请输入要查找的项目" v-model="input" class="">
 		    <el-select style="width: 100px;"  v-model="select" slot="prepend" placeholder="请选择">
 		      <el-option label="名称" value="1"></el-option>
 		      <el-option label="类型" value="2"></el-option>

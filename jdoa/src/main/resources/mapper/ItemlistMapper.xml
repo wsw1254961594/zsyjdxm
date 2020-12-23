@@ -38,15 +38,15 @@
     </select>
 
     <select id="SelectPname" resultMap="ItemlistResult">
-            select i.* from itemlist i left join emp e on i.empid=e.empno where pname=#{pname}
+            select i.* from itemlist i left join emp e on i.empid=e.empno where pname LIKE #{pname}
     </select>
 
     <select id="SelectTypes" resultMap="ItemlistResult">
-           select i.* from itemlist i left join emp e on i.empid=e.empno where types=#{types}
+           select i.* from itemlist i left join emp e on i.empid=e.empno where types LIKE #{types}
     </select>
 
     <select id="SelectStatus" resultMap="ItemlistResult">
-           select i.* from itemlist i left join emp e on i.empid=e.empno where status=#{status}
+           select i.* from itemlist i left join emp e on i.empid=e.empno where status LIKE #{status}
     </select>
 
     <update id="UpdateStatus" parameterType="com.study.pojo.Itemlist">

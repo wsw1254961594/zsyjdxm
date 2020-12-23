@@ -248,10 +248,6 @@
                 title: '任务执行'
               },
               {
-                index: 'shenpirenwu',
-                title: '审批任务'
-              },
-              {
                 index: 'chaxunrenwu',
                 title: '查询任务'
               },

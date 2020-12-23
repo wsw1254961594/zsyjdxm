@@ -35,7 +35,8 @@ public class ItemlistServices {
     public PageInfo<Itemlist> SelectPname(Integer pageNo, Integer pageSize,String pname){
         System.out.println("分页业务类："+pageNo+"---"+pageSize);
         PageHelper.startPage(pageNo,pageSize);
-        List<Itemlist> list = mapper.SelectPname(pname);
+        String p="%"+pname+"%";
+        List<Itemlist> list = mapper.SelectPname(p);
         return new PageInfo<>(list);
     }
 
@@ -43,7 +44,8 @@ public class ItemlistServices {
     public  PageInfo<Itemlist> SelectTypes(Integer pageNo, Integer pageSize,String types){
         System.out.println("分页业务类："+pageNo+"---"+pageSize);
         PageHelper.startPage(pageNo,pageSize);
-        List<Itemlist> list = mapper.SelectTypes(types);
+        String typ ="%"+types+"%";
+        List<Itemlist> list = mapper.SelectTypes(typ);
         return new PageInfo<>(list);
     }
 
@@ -51,7 +53,8 @@ public class ItemlistServices {
     public  PageInfo<Itemlist> SelectStatus(Integer pageNo, Integer pageSize,String status){
         System.out.println("分页业务类："+pageNo+"---"+pageSize);
         PageHelper.startPage(pageNo,pageSize);
-        List<Itemlist> list = mapper.SelectStatus(status);
+        String s ="%"+status+"%";
+        List<Itemlist> list = mapper.SelectStatus(s);
         return new PageInfo<>(list);
     }
 
