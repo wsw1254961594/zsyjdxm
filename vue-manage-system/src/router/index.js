@@ -131,13 +131,23 @@ const routes = [
 	  {
 	    path: '/newitem',
 	    component: () => import('../components/view/Newitem'),
-	    meta: {title: '新建项目'}
+	    meta: {title: '新建'}
 	  }	,
       {
         path: '/daiban',
         component: () => import('../components/view/BackLog'),
         meta: {title: '我的待办'}
-      }
+      },
+	  {
+	    path: '/taskexecution',
+	    component: () => import('../components/view/taskexecution'),
+	    meta: {title: '任务执行'}
+	  },
+	  {
+	    path: '/acceptance',
+	    component: () => import('../components/view/Acceptance'),
+	    meta: {title: '项目验收'}
+	  }
     ]
   },
   {
