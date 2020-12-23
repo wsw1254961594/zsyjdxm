@@ -16,7 +16,7 @@ public class Tasklist {
     private String mname;
     private String stage;
     private Date startingtime;
-    private Timestamp endtime;
+    private Date endtime;
     private Date actualstarttime;
     private Date actualendtime;
     private String schedule;
@@ -65,11 +65,11 @@ public class Tasklist {
 
     @Basic
     @Column(name = "endtime", nullable = true)
-    public Timestamp getEndtime() {
+    public Date getEndtime() {
         return endtime;
     }
 
-    public void setEndtime(Timestamp endtime) {
+    public void setEndtime(Date endtime) {
         this.endtime = endtime;
     }
 

@@ -1,5 +1,7 @@
 package com.study.model.mdao;
 
+import com.study.vo.ItemTask;
+import com.study.vo.Tasklists;
 import com.study.pojo.Tasklist;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -15,5 +17,15 @@ import java.util.List;
 @Repository
 public interface ITasklistMapper {
 
-    List<Tasklist> selectAll();
+    List<ItemTask> selectAll();
+
+    List<ItemTask> selectMname(String mname);
+
+    List<ItemTask> selectStage(String stage);
+
+    List<ItemTask> selectPname(String pname);
+
+    Integer DoInsert(Tasklists t);
+
+    Integer doDelete(Integer iid);
 }

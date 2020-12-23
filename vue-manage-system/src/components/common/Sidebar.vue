@@ -221,7 +221,7 @@
             subs: [
               {
                 index: '/newitem',
-                title: '新建项目'
+                title: '新建'
               },
               {
                 index: '/project',
@@ -232,7 +232,7 @@
                 title: '查询项目'
               },
               {
-                index: 'renwuzhixing',
+                index: '/taskexecution',
                 title: '任务执行'
               },
               {
@@ -240,7 +240,7 @@
                 title: '查询任务'
               },
               {
-                index: 'xiangmuyanshou',
+                index: '/acceptance',
                 title: '项目验收'
               }
             ]

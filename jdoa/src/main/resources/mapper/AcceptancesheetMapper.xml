@@ -7,7 +7,7 @@
         <result property="pname" column="pname"/>
         <result property="approvalstatus" column="approvalstatus"/>
 
-        <association property="Itemlist" javaType="com.study.pojo.Itemlist">
+        <association property="myitemlist" javaType="com.study.pojo.Itemlist">
             <id property="iid" column="iid"/>
             <result property="pname" column="pname"/>
             <result property="type" column="type"/>
@@ -24,7 +24,7 @@
     </resultMap>
 
     <select id="selectAll" resultMap="AcceptancesheetResult">
-            select * from acceptancesheet a left join itemlist i on i.iid=a.iid
+            select a.* from acceptancesheet a left join itemlist i on i.iid=a.iid
     </select>
 
 </mapper>
