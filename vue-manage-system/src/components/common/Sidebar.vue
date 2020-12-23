@@ -213,11 +213,11 @@
                 title: '查询资产',
               },
               {
-                index: 'rukushenqing',
-                title: '入库申请'
+                index: 'asset',
+                title: '资产类别'
               },
               {
-                index: 'asset',
+                index: 'borrow',
                 title: '资产借用'
               },
               {
@@ -232,7 +232,7 @@
             title: '项目管理',
             subs: [
               {
-                index: 'xinjianxiangmu',
+                index: '/newitem',
                 title: '新建项目'
               },
               {

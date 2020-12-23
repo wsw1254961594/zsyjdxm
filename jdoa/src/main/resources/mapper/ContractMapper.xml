@@ -58,7 +58,28 @@
         </where>
     </select>
 
+    <!--查询产品信息-->
     <select id="selectAllPr" resultType="Productcg">
         select * from productcg
     </select>
+
+    <!--新增合同表-->
+    <insert id="insertContract" parameterType="com.study.pojo.Contract" useGeneratedKeys="true" keyProperty="cid"  keyColumn="cid">
+        insert into contract values(#{con.cid},#{con.myemp.empno},#{con.ctitle},#{con.cbody},#{con.cnumber},#{con.cmoney},#{con.ctype},#{con.cday},#{con.cstate})
+    </insert>
+
+    <!--查询新增的主键-->
+    <select id="selectCid" resultType="com.study.pojo.Contract">
+        select * from contract where cid=(select max(cid) from contract)
+    </select>
+
+    <!--新增客户表-->
+    <insert id="insertSupplier">
+        insert into supplier values (#{s.sid},#{s.sname},#{s.rank},#{s.opening},#{s.sman},#{s.sphone},#{s.mycontract.cid})
+    </insert>
+
+    <!--新增详情表-->
+    <insert id="insertPurchaseinfo">
+        insert into purchaseinfo values(#{p.prid},#{p.mycontract.cid},#{p.myproductcg.pcid},#{p.pnum})
+    </insert>
 </mapper>

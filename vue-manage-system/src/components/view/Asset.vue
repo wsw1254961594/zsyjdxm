@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<p style="float: left;">
-			
+			<el-button type="primary" v-on:click="readyInsert">借用资产</el-button>
 			<el-button type="primary" v-on:click="isAdquery=!isAdquery">高级查询</el-button>
 		</p>
 		<el-form :inline="true" class="demo-form-inline adquery" v-show="isAdquery">
@@ -73,6 +73,9 @@
 
 </template>
 <script>
+	/*单独引用http.js封装类*/
+	import http from '../../api/http.js';
+	import myhttp from '../../api/myhttp.js';
 	export default {
 		data() {
 			return {
@@ -137,7 +140,7 @@
 					pageNo: this.current,
 					pageSize: this.pageSize
 				};
-				this.$myhttp.getObj("asset/page", param, (res) => {
+				myhttp.getObj("asset/page", param, (res) => {
 					console.log("查询的所有部门：", res);
 					this.deptData = res.list;
 					this.total = res.total;
@@ -210,7 +213,7 @@
 					if(this.atname.length > 0) param.atname = this.atname;
 					if(this.atmodel.length > 0) param.atmodel = this.atmodel;
 					if(this.aunits.length > 0) param.aunits = this.aunits;
-					this.$myhttp.getObj("asset/pages", param, (res) => {
+					myhttp.getObj("asset/pages", param, (res) => {
 						this.deptData = res.list;
 						this.total = res.total;
 					})

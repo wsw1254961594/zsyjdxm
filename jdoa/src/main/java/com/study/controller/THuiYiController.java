@@ -61,10 +61,10 @@ public class THuiYiController{
     public List<Dizhi> xialakuang(){
         return hys.xiala();
     }
-    //下拉查询所有员工
+   /* //下拉查询所有员工
     @RequestMapping("/yuangong")
     public  List<Emp> yyg(){
         return  hys.yg();
-    }
+    }*/
 
 }

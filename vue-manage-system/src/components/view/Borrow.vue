@@ -1,6 +1,5 @@
 <template>
 	<div>
-		
 		<p style="float: left;">
 			
 			<el-button type="primary" v-on:click="isAdquery=!isAdquery">高级查询</el-button>
@@ -19,8 +18,7 @@
 				<el-button type="primary" @click="selectsPrreturn">查询</el-button>
 			</el-form-item>
 		</el-form>
-		<!--自定义表头+表尾合计-->
-		<el-table :data="deptData" style="width: 100%" show-summary>
+		<el-table :data="deptData" style="width: 100%">
 			<el-table-column label="编号id" prop="rtid"></el-table-column>
 			<el-table-column label="编号" prop="rserial" ></el-table-column>
 			<el-table-column label="名称" prop="rname"></el-table-column>
@@ -143,7 +141,7 @@
 					pageNo: this.current,
 					pageSize: this.pageSize
 				};
-				myhttp.getObj("prreturn/page", param, (res) => {
+				myhttp.getObj("borrow/page", param, (res) => {
 					console.log("查询的所有部门：", res);
 					this.deptData = res.list;
 					this.total = res.total;

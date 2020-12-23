@@ -60,4 +60,22 @@
         left join asset a on bo.atid=a.atid
         left join assets ass on a.aid=ass.aid
     </select>
+
+    <!--高级查询根据 名称 归还日期 价格来进行查询-->
+    <select id="selectsBorrow" resultMap="IBorrow">
+        select * from prreturn prr
+        left join emp e on prr.empno=e.empno
+        left join dept d on e.deptno=d.deptno
+        <where>
+            <if test="bname!=null">
+                and bname like concat('%',#{bname},'%')
+            </if>
+            <if test="bget!=null">
+                and bget like concat('%',#{bget},'%')
+            </if>
+            <if test="bvalue!=null">
+                and bvalue like concat('%',#{bvalue},'%')
+            </if>
+        </where>
+    </select>
 </mapper>

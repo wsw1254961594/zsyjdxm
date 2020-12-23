@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.IJobmsgMapper">
+    <resultMap id="jobResult" type="com.study.pojo.Job">
+        <id property="jid" column="jid"/>
+        <result property="jname" column="jname"/>
+        <collection property="jobmsgs" javaType="com.study.pojo.Jobmsg">
+            <id property="jmid" column="jmid"/>
+            <result property="jmname" column="jmname"/>
+        </collection>
+    </resultMap>
+    
+    <select id="selectByjid" resultMap="jobResult">
+        select * from job j inner join jobmsg j2 on j.jid = j2.jid
+        where j.jid=#{jid}
+    </select>
+</mapper>

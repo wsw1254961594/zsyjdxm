@@ -77,7 +77,7 @@
           lreason:'',
           ltitle:'',
           itype:'',
-          
+
           reqEmpno:this.$store.state.empno
         },
         iTypeList:[

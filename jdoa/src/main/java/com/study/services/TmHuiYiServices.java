@@ -43,10 +43,10 @@ public class TmHuiYiServices {
     public List<Dizhi> xiala(){
         return hy.cxdz();
     }
-    //查询所有员工
+   /* //查询所有员工
     public List<Emp> yg()
     {
         return e.selectm();
     }
-
+*/
 }

@@ -23,36 +23,45 @@ public class ItemlistServices {
     @Autowired
     IItemlistMapper mapper;
 
-    /*查询所有项目*/
-    public List<Itemlist> selectAll(){
-        return mapper.selectAll();
-    }
-
     /*分页查询所有项目*/
-    public PageInfo<Itemlist> selectByPager(Integer pageNo, Integer pageSize){
+    public PageInfo<Itemlist> SelectByPager(Integer pageNo, Integer pageSize){
         System.out.println("分页业务类："+pageNo+"---"+pageSize);
         PageHelper.startPage(pageNo,pageSize);
-        List<Itemlist> list = mapper.selectAll();
+        List<Itemlist> list = mapper.SelectAll();
         return new PageInfo<>(list);
     }
 
-    /*根据项目名称查询项目*/
-    public Itemlist selectPname(String pname){
-        return mapper.selectPname(pname);
+    /*根据项目名称分页查询项目*/
+    public PageInfo<Itemlist> SelectPname(Integer pageNo, Integer pageSize,String pname){
+        System.out.println("分页业务类："+pageNo+"---"+pageSize);
+        PageHelper.startPage(pageNo,pageSize);
+        List<Itemlist> list = mapper.SelectPname(pname);
+        return new PageInfo<>(list);
     }
 
-    /*根据项目类型查询项目*/
-    public  List<Itemlist> selectTypes(String types){
-        return mapper.selectTypes(types);
+    /*根据项目类型分页查询项目*/
+    public  PageInfo<Itemlist> SelectTypes(Integer pageNo, Integer pageSize,String types){
+        System.out.println("分页业务类："+pageNo+"---"+pageSize);
+        PageHelper.startPage(pageNo,pageSize);
+        List<Itemlist> list = mapper.SelectTypes(types);
+        return new PageInfo<>(list);
+    }
+
+    /*根据项目状态分页查询项目*/
+    public  PageInfo<Itemlist> SelectStatus(Integer pageNo, Integer pageSize,String status){
+        System.out.println("分页业务类："+pageNo+"---"+pageSize);
+        PageHelper.startPage(pageNo,pageSize);
+        List<Itemlist> list = mapper.SelectStatus(status);
+        return new PageInfo<>(list);
     }
 
     /*根据id修改项目状态*/
-    public Integer updateStatus(String status,Integer iid){
-        return mapper.updateStatus(status,iid);
+    public Integer UpdateStatus(String status,Integer iid){
+        return mapper.UpdateStatus(status,iid);
     }
 
     /*新增项目*/
-    public Integer doInsert(Itemlists it){
-        return mapper.doInsert(it);
+    public Integer DoInsert(Itemlists it){
+        return mapper.DoInsert(it);
     }
 }
