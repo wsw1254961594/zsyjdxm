@@ -147,9 +147,9 @@ const routes = [
 	    path: '/paymentpost',
 	    component: () => import('../components/view/PaymentAdd'),
 	    meta: {title: '新建付款'}
-	  }
+	  
       },
-	  {
+	  /* {
 	    path: '/taskexecution',
 	    component: () => import('../components/view/taskexecution'),
 	    meta: {title: '任务执行'}
@@ -158,7 +158,7 @@ const routes = [
 	    path: '/acceptance',
 	    component: () => import('../components/view/Acceptance'),
 	    meta: {title: '项目验收'}
-	  }
+	  } */
     ]
   },
   {
