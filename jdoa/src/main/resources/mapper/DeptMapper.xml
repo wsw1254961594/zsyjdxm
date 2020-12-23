@@ -12,5 +12,8 @@
         select * from dept
     </select>
 
+    <select id="selectBydeptno" resultMap="deptResult">
+        select * from dept d where d.deptno=#{deptno}
+    </select>
 
 </mapper>
