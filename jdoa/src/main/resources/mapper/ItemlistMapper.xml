@@ -27,25 +27,29 @@
         </association>
     </resultMap>
 
-    <insert id="doInsert">
-        insert into itemlist values(null,#{pname},#{types},#{status},
-        #{jobtype},#{progress},#{stageof},#{planstartdate},
-        #{planenddate},#{actualstartdate},#{actualenddate},#{empid})
+    <insert id="DoInsert">
+        insert into itemlist values(null,#{pname},#{types},'正常',
+        #{jobtype},'0%','项目准备',#{planstartdate},
+        #{planenddate},null,null,#{empid})
     </insert>
 
-    <select id="selectAll" resultMap="ItemlistResult">
+    <select id="SelectAll" resultMap="ItemlistResult">
             select i.* from itemlist i left join emp e on i.empid=e.empno
     </select>
 
-    <select id="selectPname" resultMap="ItemlistResult">
-            select * from itemlist i left join emp e on i.emps.empno=e.empno where pname=#{pname}
+    <select id="SelectPname" resultMap="ItemlistResult">
+            select i.* from itemlist i left join emp e on i.empid=e.empno where pname=#{pname}
     </select>
 
-    <select id="selectTypes" resultMap="ItemlistResult">
-            select * from itemlist i left join emp e on i.emps.empno=e.empno where types=#{types}
+    <select id="SelectTypes" resultMap="ItemlistResult">
+           select i.* from itemlist i left join emp e on i.empid=e.empno where types=#{types}
     </select>
 
-    <update id="updateStatus" parameterType="com.study.pojo.Itemlist">
+    <select id="SelectStatus" resultMap="ItemlistResult">
+           select i.* from itemlist i left join emp e on i.empid=e.empno where status=#{status}
+    </select>
+
+    <update id="UpdateStatus" parameterType="com.study.pojo.Itemlist">
                 UPDATE itemlist SET status=#{status} WHERE iid=#{iid}
     </update>
 

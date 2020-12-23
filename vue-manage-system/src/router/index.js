@@ -111,6 +111,11 @@ const routes = [
 	    component: () => import('../components/view/Tianjiahuiyi'),
 	    meta: {title: '添加会议'}
 	  },
+	  {
+	    path: '/newitem',
+	    component: () => import('../components/view/Newitem'),
+	    meta: {title: '新建项目'}
+	  }
     ]
   },
   {
