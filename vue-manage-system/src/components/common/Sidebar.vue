@@ -76,7 +76,7 @@
                 ]
               },
               {
-                index: 'daiban',
+                index: '/daiban',
                 title: '待办事宜'
               }
             ]

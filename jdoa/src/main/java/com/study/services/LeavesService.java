@@ -34,11 +34,12 @@ public class LeavesService {
     private IEmpMapper empMapper;
 
     public MyResult insertLeaves(Leaves leaves) {
+        Emp emp = empMapper.leavesGetEmp(leaves.getReqEmpno());
+        leaves.setMyemp(emp);
         int addLeaves = leavesMapper.addLeaves(leaves);
         if (addLeaves != 1) {
             return MyResult.ERROR("请假失败，稍后重试");
         }
-        Emp emp = empMapper.leavesGetEmp(leaves.getReqEmpno());
         Backlog backlog = new Backlog();
         backlog.setBtetle("请假");
         backlog.setBianhao(leaves.getLid());

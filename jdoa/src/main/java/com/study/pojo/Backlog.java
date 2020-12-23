@@ -18,6 +18,15 @@ public class Backlog {
     private Date baccept;
     private Integer empid;
     private Approval myapproval;
+    private String mgrResp;
+
+    public String getMgrResp() {
+        return mgrResp;
+    }
+
+    public void setMgrResp(String mgrResp) {
+        this.mgrResp = mgrResp;
+    }
 
     @Id
     @Column(name = "blid", nullable = false)

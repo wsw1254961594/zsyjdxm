@@ -67,6 +67,11 @@ const routes = [
         path: '/workovertime',
         component: () => import('../components/view/WorkOverTime'),
         meta: {title: '加班'}
+      },
+      {
+        path: '/daiban',
+        component: () => import('../components/view/BackLog'),
+        meta: {title: '我的待办'}
       }
     ]
   },

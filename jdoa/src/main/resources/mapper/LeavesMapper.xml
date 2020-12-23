@@ -11,6 +11,9 @@
             <if test="lbegin != null">
                 lbegin,
             </if>
+            <if test="reqEmpno != null">
+                empno,
+            </if>
             <if test="ifinish != null">
                 ifinish,
             </if>
@@ -27,6 +30,9 @@
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
             <if test="lbegin != null">
                 #{lbegin},
+            </if>
+            <if test="reqEmpno != null">
+                #{reqEmpno},
             </if>
             <if test="ifinish != null">
                 #{ifinish},
