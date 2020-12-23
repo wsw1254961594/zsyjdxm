@@ -72,11 +72,11 @@
             <if test="pname!=null">
                 and pname like concat('%',#{pname},'%')
             </if>
-            <if test="pget!=nunll">
-                and pget like concat('%',#{pget}'%')
+            <if test="pget!=null">
+                and pget like concat('%',#{pget},'%')
             </if>
             <if test="pvalue!=null">
-                and pvalue like concat('%',#{pvalue}'%')
+                and pvalue like concat('%',#{pvalue},'%')
             </if>
         </where>
     </select>

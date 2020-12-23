@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.study.model.mdao.IPropertyMapper;
 import com.study.pojo.Property;
+import com.study.pojo.Prreturn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,13 +38,13 @@ public class PropertyServices {
     }
 
     /*高级查询我的资产根据 名称 领取日期 价格来查询*/
-    public PageInfo<Property> selectsProperty(Integer pageNo, Integer pageSize, String pname, String pget, String pvalue){
+    public PageInfo<Property> selectsProperty(Integer pageNo, Integer pageSize, String pname, String pget, String pvalue) {
         //配置分页信息
-        PageHelper.startPage(pageNo,pageSize);
+        PageHelper.startPage(pageNo, pageSize);
         //调用Mapper方法
-        List<Property> list=propertyMapper.selectsProperty(pname,pget,pvalue);
-        //把查询的结果封装到分页对象
-        PageInfo<Property> pageInfo=new PageInfo<>(list);
+        List<Property> list = propertyMapper.selectsProperty(pname, pget, pvalue);
+        //把查询结果封装到分页对象
+        PageInfo<Property> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
 

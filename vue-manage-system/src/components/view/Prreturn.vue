@@ -6,29 +6,29 @@
 		</p>
 		<el-form :inline="true" class="demo-form-inline adquery" v-show="isAdquery">
 			<el-form-item label="名称">
-				<el-input v-model="atname" placeholder="名称" />
+				<el-input v-model="rname" placeholder="名称" />
 			</el-form-item>
 			<el-form-item label="型号">
-				<el-input v-model="atmodel" placeholder="型号" />
+				<el-input v-model="rget" placeholder="型号" />
 			</el-form-item>
 			<el-form-item label="价格">
-				<el-input v-model="aunits" placeholder="价格" />
+				<el-input v-model="rvalue" placeholder="价格" />
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" @click="selectsAsset">查询</el-button>
+				<el-button type="primary" @click="selectsPrreturn">查询</el-button>
 			</el-form-item>
 		</el-form>
 		<el-table :data="deptData" style="width: 100%">
-			<el-table-column label="编号id" prop="atid"></el-table-column>
-			<el-table-column label="名称" prop="atname" ></el-table-column>
-			<el-table-column label="型号" prop="atmodel"></el-table-column>
-			<el-table-column label="数量" prop="atnum"></el-table-column>
-			<el-table-column label="状态" prop="atstate"></el-table-column>
-			<el-table-column label="计算单位" prop="aunits"></el-table-column>
-			<el-table-column label="入库日期" prop="astorage"></el-table-column>
-			<el-table-column label="价格" prop="price"></el-table-column>
-			<el-table-column label="编号" prop="myassets.aserial"></el-table-column>
-			
+			<el-table-column label="编号id" prop="rtid"></el-table-column>
+			<el-table-column label="编号" prop="rserial" ></el-table-column>
+			<el-table-column label="名称" prop="rname"></el-table-column>
+			<el-table-column label="状态" prop="rstate"></el-table-column>
+			<el-table-column label="数量" prop="rquantity"></el-table-column>
+			<el-table-column label="计算单位" prop="bunits"></el-table-column>
+			<el-table-column label="入库日期" prop="rstorage"></el-table-column>
+			<el-table-column label="归还日期" prop="rget"></el-table-column>
+			<el-table-column label="价格" prop="rvalue"></el-table-column>
+			<el-table-column label="备注" prop="rremark"></el-table-column>
 			<el-table-column label="操作">
 				<template slot-scope="scope">
 					<el-button type="primary" v-on:click="readyUpdate(scope.row)">修改</el-button>
@@ -73,6 +73,10 @@
 
 </template>
 <script>
+	/*单独引用http.js封装类忘记*/
+	import http from '../../api/http.js';
+	import myhttp from '../../api/myhttp.js';
+	
 	export default {
 		data() {
 			return {
@@ -107,9 +111,9 @@
 
 				//高级查询
 				isAdquery: false,
-				atname: '',
-				atmodel: '',
-				aunits: '',
+				rname: '',
+				rget: '',
+				rvalue: '',
 
 				isPageAdquery: false, //是否是高级分页查询
 				isCFquery: 0 //高级查询次数，大于1则是重复高级查询
@@ -120,7 +124,7 @@
 			handleCurrentChange(current) {
 				this.current = current;
 				if(this.isPageAdquery)
-					this.selectsAsset();
+					this.selectsPrreturn();
 				else
 					this.loadData();
 			},
@@ -128,7 +132,7 @@
 			handleSizeChange(pageSize) {
 				this.pageSize = pageSize;
 				if(this.isPageAdquery)
-					this.selectsAsset();
+					this.selectsPrreturn();
 				else
 					this.loadData();
 			},
@@ -137,7 +141,7 @@
 					pageNo: this.current,
 					pageSize: this.pageSize
 				};
-				this.$myhttp.getObj("prreturn/page", param, (res) => {
+				myhttp.getObj("prreturn/page", param, (res) => {
 					console.log("查询的所有部门：", res);
 					this.deptData = res.list;
 					this.total = res.total;
@@ -188,10 +192,10 @@
 				})
 			},
 			//高级查询
-			selectsAsset() {
+			selectsPrreturn() {
 				//高级查询为true
 				this.isPageAdquery = true;
-				if(this.atname.length < 1 && this.atmodel.length < 1 && this.aunits.length < 1) {
+				if(this.rname.length < 1 && this.rget.length < 1 && this.rvalue.length < 1) {
 					this.$message({
 						message: "至少输入一个条件进行查询！",
 						type: 'warning'
@@ -207,10 +211,10 @@
 						pageNo: this.current,
 						pageSize: this.pageSize
 					};
-					if(this.atname.length > 0) param.atname = this.atname;
-					if(this.atmodel.length > 0) param.atmodel = this.atmodel;
-					if(this.aunits.length > 0) param.aunits = this.aunits;
-					this.$myhttp.getObj("prreturn/pages", param, (res) => {
+					if(this.rname.length > 0) param.rname = this.rname;
+					if(this.rget.length > 0) param.rget = this.rget;
+					if(this.rvalue.length > 0) param.rvalue = this.rvalue;
+					myhttp.getObj("prreturn/pages", param, (res) => {
 						this.deptData = res.list;
 						this.total = res.total;
 					})

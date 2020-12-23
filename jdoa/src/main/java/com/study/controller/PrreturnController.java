@@ -1,8 +1,9 @@
 package com.study.controller;
 
+
 import com.github.pagehelper.PageInfo;
 import com.study.config.MyResult;
-import com.study.pojo.Property;
+import com.study.pojo.Asset;
 import com.study.pojo.Prreturn;
 import com.study.services.PrreturnServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +39,12 @@ public class PrreturnController {
 
     /*高级查询资产归还表根据 名称 归还日期 价格查询*/
     @RequestMapping("/pages")
-    public MyResult selectsProperty(@RequestParam(value = "rname",required = false)String rname,
-                                    @RequestParam(value = "rget",required = false)String rget,
-                                    @RequestParam(value = "rvalue",required = false)String rvalue,
+    public MyResult selectsPrreturn(@RequestParam(value = "rname", required = false) String rname,
+                                    @RequestParam(value = "rget", required = false) String rget,
+                                    @RequestParam(value = "rvalue", required = false) String rvalue,
                                     @RequestParam("pageNo") Integer pageNo,
-                                    @RequestParam("pageSize") Integer pageSize){
-        PageInfo<Prreturn> pageInfo=prreturnServices.selectsPrreturn(pageNo,pageSize,rname,rget,rvalue);
+                                    @RequestParam("pageSize") Integer pageSize) {
+        PageInfo<Prreturn> pageInfo = prreturnServices.selectsPrreturn(pageNo, pageSize, rname, rget, rvalue);
         return MyResult.returnObj(pageInfo);
     }
 }
