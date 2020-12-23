@@ -33,4 +33,22 @@
         INSERT INTO dizhi VALUES(null,#{i.leixingname},#{i.hyzt})
     </insert>
 
+    <insert id="huiyitian">
+        insert INTO xiangqing VALUES(null,#{x.mydizhi.dzid},#{x.hyrw},#{x.kaishitimedate},#{x.jieshutime},#{x.neirong},#{x.ese.empno},#{x.hyleixi})
+    </insert>
+    <update id="xiugaidz">
+        update dizhi SET  hyzt=2 where dzid=#{dzid}
+    </update>
+    <insert id="yuangongtian">
+        insert  into huiyirenyuan values (#{y.empsss.empno},#{y.xian.hydzid},null)
+
+    </insert>
+    <select id="cxid" resultType="com.study.pojo.Xiangqing">
+        select * from xiangqing WHERE hydzid=(select max(hydzid) from xiangqing)
+    </select>
+
+    <insert id="shiyong">
+        insert into  shiyong values (null,#{v.myxiangqing.hydzid},#{v.zt})
+    </insert>
+
 </mapper>

@@ -15,8 +15,27 @@ public class Huiyirenyuan {
     private Emp empsss;
     private Xiangqing xian;
 
+    public Huiyirenyuan() {
+    }
+
+    public Huiyirenyuan(Integer ehid, Emp empsss, Xiangqing xian) {
+        this.ehid = ehid;
+        this.empsss = empsss;
+        this.xian = xian;
+    }
+
+    @Override
+    public String toString() {
+        return "Huiyirenyuan{" +
+                "ehid=" + ehid +
+                ", empsss=" + empsss +
+                ", xian=" + xian +
+                '}';
+    }
+
     @Id
     @Column(name = "ehid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getEhid() {
         return ehid;
     }

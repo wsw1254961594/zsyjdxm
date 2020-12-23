@@ -106,7 +106,5 @@
         WHERE empno = #{empno}
     </select>
 
-    <select id="selectm" resultMap="empresult">
-        select * from  emp
-    </select>
+
 </mapper>

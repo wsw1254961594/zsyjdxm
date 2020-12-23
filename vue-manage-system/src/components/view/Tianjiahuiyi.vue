@@ -18,7 +18,7 @@
 		   <el-row>
 			   <el-col :span="24">
 				   <el-form-item label="会议标题" label-width="100px">				  
-				     <el-input ></el-input>			    
+				    <el-input v-model="row.hyrw"></el-input>
 				   </el-form-item>
 				</el-col>
 		   </el-row>
@@ -26,13 +26,13 @@
 		   <el-row>
 			   <el-col :span="11">
 			   <el-form-item label="会议内容" label-width="100px">			      
-			      <el-input></el-input>			      
+			      <el-input v-model="row.neirong"></el-input>
 			    </el-form-item>
 				</el-col>
 				
 				<el-col :span="11" style="margin-left: 80px;">			
 			   <el-form-item label="发布人" label-width="100px">			     
-			      <el-input v-model="row.fbr"></el-input>
+			      <el-input v-model="row.fbz"></el-input>
 			    </el-form-item>
 				  </el-col>
 		   </el-row>
@@ -79,20 +79,15 @@
 		   				</el-col>
 		   				
 		   				<el-col :span="11" style="margin-left: 80px;">			
-		   			   <el-form-item label="会议室" label-width="100px">			     
-
-		   			   
+						<el-form-item label="会议室" label-width="100px">
 									 <el-select v-model="value3" placeholder="请选择">
 									     <el-option
 									       v-for="item in dz"
 									       :key="item.dzid"
 									       :label="item.leixingname"
-									       :value="item.leixingname">
+									       :value="item.dzid">
 									     </el-option>
 									   </el-select>
-
-		   			      <el-input></el-input>
-
 		   			    </el-form-item>
 		   				  </el-col>
 		   </el-row>
@@ -106,11 +101,10 @@
 		   			            v-for="item in yg"
 		   			            :key="item.empno"
 		   			            :label="item.ename"
-		   			            :value="item.ename">
+		   			            :value="item.empno">
 		   			          </el-option>
 		   			        </el-select>		      
 
-		   			      <el-input></el-input>
 
 		   			    </el-form-item>
 		   				</el-col>
@@ -134,21 +128,28 @@
   export default{
       data(){
         return {
-
 		value3:'',
-		value4:'',
-
-
+		value4:[],
 		contract:[],
          tableData: [],
 		 value1: '',
 		  value2: '',
 		  row:{},
 		  dz:[],
-
 		  huiyi:{},
 		  list:[],
 		  yg:[],
+			c:{
+	rrr:[],
+	ese:{},
+	mydizhi:{},
+	// hyrw:'',
+	// kaishitimedate:'',
+	// jieshutime:'',
+	// neirong:'',
+	// hyleixi:'',
+			},
+				
 
         }
         },methods:{
@@ -159,6 +160,8 @@
 				 huiyishi(){
 
 					 this.row.fbz=this.$store.state.ename;
+					 this.empid=this.$store.state.empno;
+					 console.log("12" ,this.$store.state.empno)
 					this.$axios.post("http://localhost:8888/huiyi/xla").then(r => {
 						this.dz = r.data;
 						console.log("11" ,r)
@@ -167,12 +170,68 @@
 					});
 					this.$axios.post("http://localhost:8888/huiyi/yuangong").then(r => {
 						this.yg = r.data;
-						console.log("11" ,r)
 					}).catch(e => {
 					
 					});
 
-				 } 
+				 } ,
+				 addupd(){
+					
+						
+						// let c={
+						// 	hyrw:this.row.hyrw,
+						// 	kaishitimedate:this.value1,
+						// 	jieshutime:this.value2,
+						// 	neirong:this.row.neirong,
+						// 	hyleixi:this.row.xueli,
+						// 	mydizhi:{
+						// 		dzid:this.dzid,
+						// 	},
+						// 	ese:{
+						// 		empno: this.empid
+						// 	},
+							
+						// }
+						this.c.hyrw=this.row.hyrw;
+						this.c.kaishitimedate=this.value1;
+						this.c.jieshutime=this.value2;
+						this.c.neirong=this.row.neirong;
+						this.c.hyleixi=this.row.xueli;
+						this.c.ese.empno=this.$store.state.empno;
+						console.log("empnos" , this.$store.state.empno)
+						console.log("empnoss" ,this.c.ese.empid)
+						this.c.mydizhi.dzid=this.value3;
+						console.log("value3" ,this.value3)
+						console.log("dzid" ,this.c.mydizhi.dzid)
+						this.value4.forEach(i=>{
+							console.log("value4" , this.value4)
+							console.log("value4" , i)
+							this.c.rrr.push({	
+								empsss:{
+									empno:i
+								}
+								
+							})		
+						})
+							let url="http://localhost:8888/huiyi/hy";
+							this.$axios.post(url,this.c).then(r=>{
+								
+							}).catch(e=>{
+								alert(e)
+							})
+							this.dzid=this.value3;
+						this.$axios.post("http://localhost:8888/huiyi/xgdzid?dzid="+this.dzid)
+								.then(r => {
+
+								}).catch(e => {
+
+								});
+
+									this.$message({
+									          message: '创建成功，等待审批',
+									          type: 'success'
+									        });
+				 },
          
         }, created() {
 			this.huiyishi();

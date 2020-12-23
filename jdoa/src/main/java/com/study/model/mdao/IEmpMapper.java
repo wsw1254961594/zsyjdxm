@@ -1,5 +1,6 @@
 package com.study.model.mdao;
 
+import com.study.pojo.Dept;
 import com.study.pojo.Emp;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
