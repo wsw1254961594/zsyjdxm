@@ -28,6 +28,7 @@ public class Personal {
     private Emp myemp;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pid", nullable = false)
     public Integer getPid() {
         return pid;

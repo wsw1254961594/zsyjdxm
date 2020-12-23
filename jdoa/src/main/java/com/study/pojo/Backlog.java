@@ -16,6 +16,7 @@ public class Backlog {
     private Integer bianhao;
     private Integer bcondition;
     private Date baccept;
+
     private Integer empid;
     private Approval myapproval;
     private String mgrResp;

@@ -23,10 +23,18 @@ public class EmpServices {
     }
 
     public Emp selectByeid(Integer eid){
-        Emp emp=mapper.selectByeid(7);
+        Emp emp=mapper.selectByeid(eid);
         return emp;
     }
 
+    public Integer update(Integer empno){
+        try {
+            return mapper.update(empno);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 
     //新增员工
     public Integer doinsert(Emp emp){
@@ -36,6 +44,11 @@ public class EmpServices {
             e.printStackTrace();
             return -1;
         }
+    }
+
+    public Integer selectid(){
+        Integer integer=mapper.selectid();
+        return integer;
     }
 
     public PageInfo<Emp> selectmou(String ename,String ephone,String sex,String time1,String time2,Integer no, Integer size) {

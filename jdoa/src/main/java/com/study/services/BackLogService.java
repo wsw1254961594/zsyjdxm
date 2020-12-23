@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.study.config.MyResult;
 import com.study.model.mdao.IBackLogMapper;
 import com.study.model.mdao.IEmpMapper;
+import com.study.pojo.Approval;
 import com.study.pojo.Backlog;
 import com.study.pojo.Emp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,5 +72,17 @@ public class BackLogService {
         PageHelper.startPage(pageNum,10);
         PageInfo<Backlog> list = new PageInfo<>(backlogs);
         return MyResult.okAndpage(list);
+    }
+
+
+
+    //新增转正信息
+    public Integer doinsert(Backlog backlog){
+        try {
+            return backLogMapper.insert(backlog);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }

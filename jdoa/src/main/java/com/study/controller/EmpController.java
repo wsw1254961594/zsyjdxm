@@ -85,11 +85,19 @@ public class EmpController {
         Integer i=es.doinsert(emp);
         System.out.println("新增之后的emp"+emp.toString());
         if (i>0){
-            Personal personal=new Personal();
+            System.out.println("我来啦");
+          /*  Personal personal=new Personal();
             personal.setPassword("123456");
-            personal.setMyemp(emp);
-            Integer in=ps.doInsert(personal);
-            return MyResult.ok("操作成功");
+            personal.setMyemp(emp);*/
+            Integer id=es.selectid();
+            Integer in=ps.doInsert("123456",id);
+            if(in>=1){
+                return MyResult.ERROR("操作成功");
+            }else {
+                System.out.println("shibai");
+                return MyResult.ERROR("操作失败");
+            }
+
         }else {
             return MyResult.ERROR("操作失败");
         }
@@ -104,4 +112,6 @@ public class EmpController {
         }
         return MyResult.okAndpage(es.selectstate(no, pagesize));
     }
+    
 }
+

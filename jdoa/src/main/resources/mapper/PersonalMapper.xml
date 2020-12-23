@@ -29,4 +29,9 @@
         </association>
     </resultMap>
 
+    <insert id="insert" parameterType="com.study.pojo.Personal">
+         insert into personal(password,empno)
+                    values (#{password},
+                            #{empno})
+    </insert>
 </mapper>

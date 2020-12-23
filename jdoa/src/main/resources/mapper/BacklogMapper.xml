@@ -87,4 +87,11 @@
         </where>
         ORDER BY baccept DESC
     </select>
+
+    <insert id="insert" parameterType="com.study.pojo.Backlog">
+         insert into backlog(btetle,bianhao,bcondition,baccept,empid)
+        values (#{btetle},#{bianhao},#{bcondition}, #{baccept},
+         #{empid}
+        )
+    </insert>
 </mapper>

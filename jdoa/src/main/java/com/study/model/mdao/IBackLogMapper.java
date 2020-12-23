@@ -1,5 +1,6 @@
 package com.study.model.mdao;
 
+import com.study.pojo.Approval;
 import com.study.pojo.Backlog;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,6 @@ public interface IBackLogMapper {
     int editBackLog(Backlog backlog);
     Backlog getBackLog(Integer blid);
     List<Backlog> listBackLog(Backlog backlog);
+
+    int insert(Backlog backlog);
 }
