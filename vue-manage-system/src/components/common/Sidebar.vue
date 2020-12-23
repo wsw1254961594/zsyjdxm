@@ -136,10 +136,6 @@
                 title: '员工转正'
               },
               {
-                index: 'diaogang',
-                title: '员工调岗'
-              },
-              {
                 index: 'lizhi',
                 title: '员工离职'
               },

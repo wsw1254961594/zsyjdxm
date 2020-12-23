@@ -2,6 +2,7 @@ package com.study.pojo;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 /**
@@ -14,7 +15,7 @@ public class Approval {
     private Integer apid;
     private Integer result;
     private String opinion;
-    private Date sdate;
+    private Timestamp sdate;
     private Backlog mybacklog;
 
     @Id
@@ -49,11 +50,11 @@ public class Approval {
 
     @Basic
     @Column(name = "sdate", nullable = true)
-    public Date getSdate() {
+    public Timestamp getSdate() {
         return sdate;
     }
 
-    public void setSdate(Date sdate) {
+    public void setSdate(Timestamp sdate) {
         this.sdate = sdate;
     }
 

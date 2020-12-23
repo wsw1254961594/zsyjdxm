@@ -7,9 +7,31 @@
       <el-table-column label="员工姓名" prop="ename"></el-table-column>
       <el-table-column label="员工性别" prop="sex"></el-table-column>
       <el-table-column label="员工电话" prop="ephone"></el-table-column>
+	  <el-table-column label="员工状态">
+		  <template slot-scope="x">
+			  {{x.state}}
+			  <span v-if="x.row.state==1">试用期员工</span>
+			  <span v-else-if="x.row.state==2">正式员工</span>
+			    <span v-else>转正待审批</span>
+		  </template>
+	  </el-table-column>
       <el-table-column label="所属部门" prop="mydept.dname"></el-table-column>
 	  <el-table-column label="所属岗位" prop="myjobmsg.jmname"></el-table-column>
       <el-table-column label="入职时间" prop="ofday"></el-table-column>
+	  <el-table-column label="操作">
+	    <template slot-scope="x">
+	  			 <el-tooltip class="item" effect="dark" content="员工申请调岗" placement="top">
+	  				<el-button size="mini" style="background-color: dodgerblue;">
+	  				  <i class="el-icon-thumb" style="color: white;"></i>
+	  				</el-button>
+	  			 </el-tooltip>
+				 <el-tooltip class="item" effect="dark" content="员工申请离职" placement="top">
+					<el-button size="mini" style="background-color: dodgerblue;">
+					  <i class="el-icon-circle-close" style="color: white;"></i>
+					</el-button>
+				 </el-tooltip>
+	    </template>
+	  </el-table-column>
     </el-table>
 
     <el-pagination
@@ -25,13 +47,15 @@
 	<el-dialog title="新增入职员工" :visible.sync="dialogFormVisible">
 	  <el-form>
 	    <el-form-item label="员工名称">
-	      <el-input autocomplete="off" class="input2"></el-input>
+	      <el-input autocomplete="off" class="input2" v-model="name"></el-input>
 	    </el-form-item>
 	    <el-form-item label="员工性别">
-	        <el-input autocomplete="off" class="input2"></el-input>
+	       <!-- <el-input autocomplete="off" class="input2" v-model="esex"></el-input> -->
+		   <el-radio v-model="esex" label="男">男</el-radio>
+		     <el-radio v-model="esex" label="女">女</el-radio>
 	    </el-form-item>
 	   <el-form-item label="员工电话">
-	        <el-input autocomplete="off" class="input2"></el-input>
+	        <el-input autocomplete="off" class="input2" v-model="phone"></el-input>
 	    </el-form-item>
 		<el-form-item label="所属部门">
 		    <el-select v-model="bumen" placeholder="请选择" @change="selectdeptno">
@@ -43,8 +67,7 @@
 		        </el-option>
 		      </el-select>
 		 </el-form-item>
-		<el-form-item label="所属岗位">
-			  <!-- <el-input autocomplete="off" class="input2"></el-input> -->
+		<el-form-item label="所属岗位" class="gw">
 			<el-select v-model="gangwei" placeholder="请选择">
 			    <el-option
 			      v-for="item in jobmsg"
@@ -54,27 +77,11 @@
 			    </el-option>
 			  </el-select>
 		</el-form-item>
-		<el-form-item label="入职日期">
-			 <el-date-picker
-			       v-model="value1"
-				   class="rzrq"
-			       type="date"
-			       placeholder="选择日期">
-			     </el-date-picker>
-		</el-form-item>
-		<el-form-item label="出生日期">
-			 <el-date-picker
-			       v-model="value3"
-				   class="rzrq"
-			       type="date"
-			       placeholder="选择日期">
-			     </el-date-picker>
-		</el-form-item>
 	
 	  </el-form>
 	  <div slot="footer" class="dialog-footer">
 	    <el-button @click="dialogFormVisible = false">取 消</el-button>
-	    <el-button type="primary">确 定</el-button>
+	    <el-button type="primary" @click="doInsert()">确 定</el-button>
 	  </div>
 	</el-dialog>
 	
@@ -133,7 +140,10 @@
 		gangwei:'',
 		jobmsg:[],
 		deptno:'',
-		value3:''
+		value3:'',
+		name:'',
+		esex:'',
+		phone:''
       }
     },
     methods:{
@@ -198,6 +208,33 @@
 		    alert("查询失败！！")
 		  })
 	  },
+	  doInsert(){
+		  var e={
+		    ename:this.name,
+		    sex:this.esex,
+		    ephone:this.phone,
+		    deptno:this.bumen,
+		    jmid:this.gangwei
+		  };
+		   console.log(e,'e')
+		   var qq=this.$Qs.stringify(e);
+		   this.$axios.post("http://localhost:8888/emps/add",qq)
+		   .then(r=>{
+		     if(r.data.code){
+		       this.dialogFormVisible=false;
+		       this.getList();
+		       this.name="";
+		       this.esex="";
+		       this.phone="";
+		       this.bumen="";
+			   this.gangwei="";
+		     }else{
+		       alert("操作失败")
+		     }
+		   }).catch(e=>{
+		       console.log(e)
+		   })
+	  },
       handleSizeChange(pagesize){
            this.pageSize=pagesize;
            this.getList();
@@ -216,6 +253,11 @@
 </script>
 
 <style>
+	.empsstyle .gw {
+	    position: relative;
+	    left: 320px;
+	    bottom: 50px;
+	}
 	.empsstyle .el-table .cell {
 	    box-sizing: border-box;
 	    overflow: hidden;

@@ -93,6 +93,7 @@ const routes = [
 	    component: () => import('../components/view/ContractCgPost'),
 	    meta: {title: '采购合同申请'}
 	  },
+	 
         {
             path: '/leaves',
             component: () => import('../components/view/Leaves'),

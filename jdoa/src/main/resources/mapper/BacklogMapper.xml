@@ -97,4 +97,11 @@
     <update id="editContractState">
         UPDATE contract SET cstate = 1 WHERE cid = #{cid}
     </update>
+
+    <insert id="insert" parameterType="com.study.pojo.Backlog">
+         insert into backlog(btetle,bianhao,bcondition,baccept,empid)
+        values (#{btetle},#{bianhao},#{bcondition}, #{baccept},
+         #{empid}
+        )
+    </insert>
 </mapper>
