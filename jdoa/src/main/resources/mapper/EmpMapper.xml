@@ -79,7 +79,7 @@
     </insert>
 
     <select id="selectmohu" resultMap="empresult">
-         SELECT * FROM emp e
+        SELECT * FROM emp e
         left JOIN jobmsg j on e.jmid=j.jmid
         left JOIN job b on j.jid=b.jid
         left JOIN dept d on b.deptno=d.deptno
