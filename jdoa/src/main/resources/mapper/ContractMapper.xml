@@ -29,6 +29,8 @@
         <result column="cstate" property="cstate"/>
         <association property="money" javaType="java.lang.Integer" column="{cid=cid}" select="selectFkmoney">
         </association>
+        <association property="sname" javaType="java.lang.String" column="{cid=cid}" select="selectSname">
+        </association>
     </resultMap>
     
     <!--查询我的所有合同-->
@@ -39,6 +41,11 @@
     <!--查询合同已付款金额-->
     <select id="selectFkmoney" resultType="java.lang.Integer">
        select sum(pmmoney) as money from payment where cid=#{cid}
+    </select>
+
+    <!--查询合同客户-->
+    <select id="selectSname" resultType="java.lang.String">
+        select sname from supplier where cid=#{cid}
     </select>
 
     <!--多条件模糊查询-->
@@ -82,4 +89,33 @@
     <insert id="insertPurchaseinfo">
         insert into purchaseinfo values(#{p.prid},#{p.mycontract.cid},#{p.myproductcg.pcid},#{p.pnum})
     </insert>
+    
+    
+    
+    <!--查询我申请中的信息-->
+    <resultMap id="logcon" type="com.study.pojo.Contract">
+        <id property="cid" column="cid"/>
+        <result column="ctitle" property="ctitle"/>
+        <result column="cbody" property="cbody"/>
+        <result column="cnumber" property="cnumber"/>
+        <result column="cmoney" property="cmoney"/>
+        <result column="ctype" property="ctype"/>
+        <result column="cday" property="cday"/>
+        <result column="cstate" property="cstate"/>
+        <association property="myemp" javaType="com.study.pojo.Emp">
+            <id property="empno" column="empno"/>
+            <result property="ename" column="ename"/>
+            <association property="mydept"  javaType="com.study.pojo.Dept">
+                <id property="deptno" column="deptno"/>
+                <result property="dname" column="dname"/>
+            </association>
+        </association>
+    </resultMap>
+    
+    <select id="selectLogContract" resultMap="logcon">
+        select * from contract c
+        left join emp e on c.empno=e.empno
+        left join dept d on d.deptno=e.deptno
+        where c.empno=#{empno} and c.cstate=0
+    </select>
 </mapper>

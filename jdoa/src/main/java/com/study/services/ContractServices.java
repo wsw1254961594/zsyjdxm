@@ -2,8 +2,11 @@ package com.study.services;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.study.model.mdao.IBackLogMapper;
 import com.study.model.mdao.IContractMapper;
+import com.study.model.mdao.IEmpMapper;
 import com.study.pojo.*;
+import com.study.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +23,10 @@ import java.util.List;
 public class ContractServices {
     @Autowired
     IContractMapper mapper;
+    @Autowired
+    private IEmpMapper empMapper;
+    @Autowired
+    private IBackLogMapper backLogMapper;
 
     //查询所有采购合同金额
     public Integer selectCgMoney(Integer empno){
@@ -95,5 +102,23 @@ public class ContractServices {
                     p.getMyproductcg());
             mapper.insertPurchaseinfo(pur);
         }
+
+        /*新增待办表*/
+        Emp emp = empMapper.leavesGetEmp(con.getMyemp().getEmpno());
+        Backlog backlog = new Backlog();
+        backlog.setBtetle("采购合同申请");
+        backlog.setBianhao(cid.getCid());
+        backlog.setBcondition(0);
+        backlog.setBaccept(DateUtils.getDate());
+        backlog.setEmpid(emp.getMgr());
+        int addBackLog = backLogMapper.addBackLog(backlog);
+    }
+
+    //查询我的合同申请
+    public PageInfo<Contract> selectLogContract(Integer empno,Integer pageNo,Integer pageSize){
+        PageHelper.startPage(pageNo,pageSize);
+        List<Contract> list=mapper.selectLogContract(empno);
+        PageInfo<Contract> info=new PageInfo<>(list);
+        return info;
     }
 }

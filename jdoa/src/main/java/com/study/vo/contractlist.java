@@ -18,6 +18,15 @@ public class contractlist {
     private Date cday;
     private Integer cstate;
     private Integer money;
+    private String sname;
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
 
     public Integer getCid() {
         return cid;

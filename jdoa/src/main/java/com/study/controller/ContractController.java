@@ -75,4 +75,12 @@ public class ContractController {
     public void addCg(@RequestBody Contract contract){
        cs.addcg(contract);
     }
+
+    @RequestMapping("logcontract")
+    //查询我的合同申请
+    public MyResult selectLogContract(Integer empno,Integer pageNo,Integer pageSize){
+        PageInfo<Contract> info=cs.selectLogContract(empno, pageNo, pageSize);
+        MyResult mr=MyResult.returnObj(info);
+        return mr;
+    }
 }
