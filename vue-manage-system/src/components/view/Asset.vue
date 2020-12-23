@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<p style="float: left;">
-			
+			<el-button type="primary" v-on:click="readyInsert">借用资产</el-button>
 			<el-button type="primary" v-on:click="isAdquery=!isAdquery">高级查询</el-button>
 		</p>
 		<el-form :inline="true" class="demo-form-inline adquery" v-show="isAdquery">
@@ -73,7 +73,7 @@
 
 </template>
 <script>
-	/*单独引用http.js封装类忘记*/
+	/*单独引用http.js封装类*/
 	import http from '../../api/http.js';
 	import myhttp from '../../api/myhttp.js';
 	export default {

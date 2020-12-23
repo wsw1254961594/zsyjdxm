@@ -61,12 +61,17 @@ const routes = [
 	  {
 	    path: '/asset',
 	    component: () => import('../components/view/Asset'),
-	    meta: {title: '资产和类别'}
+	    meta: {title: '资产类别'}
 	  },
 	  {
 	    path: '/prreturn',
 	    component: () => import('../components/view/Prreturn'),
 	    meta: {title: '资产归还'}
+	  },
+	  {
+	    path: '/borrow',
+	    component: () => import('../components/view/Borrow'),
+	    meta: {title: '资产借用'}
 	  },
 	  {
 	    path: '/dizhi',

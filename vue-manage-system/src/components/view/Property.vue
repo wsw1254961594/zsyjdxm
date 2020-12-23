@@ -33,7 +33,7 @@
 			<el-table-column label="备注" prop="premark"></el-table-column>
 			<el-table-column label="操作">
 				<template slot-scope="scope">
-					<el-button type="primary" v-on:click="readyUpdate(scope.row)">修改</el-button>
+					<el-button type="primary" v-on:click="readyUpdate(scope.row)">查看</el-button>
 					
 				</template>
 			</el-table-column>
@@ -41,38 +41,14 @@
 		<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current" :page-sizes="[1, 2, 3, 4]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
 		</el-pagination>
 
-		<el-dialog :title="deptisadd?'新增审批':'修改审批'" :visible.sync="deptdialog">
-			<el-form :model="idept" :rules="deptrules" ref="deptrefs">
-				<el-form-item label="标题" prop="diTitle" label-width="100px">
-					<el-input v-model="idept.diTitle" class="inputs" />
-				</el-form-item>
-				<el-form-item label="离职原因" prop="diContent" label-width="100px">
-					<el-input v-model="idept.diContent" class="inputs" />
-				</el-form-item>
-				<el-form-item label="离职日期" prop="diDate" label-width="100px">
-					<el-date-picker placeholder="选择日期" v-model="idept.diDate" class="inputs" style="width: 100%;" :disabled="true"></el-date-picker>
-				</el-form-item>
-				<el-form-item label="离职人岗位" prop="diPosition" label-width="100px">
-					<el-input v-model="idept.diPosition" class="inputs" :disabled="true"/>
-				</el-form-item>
-				<el-form-item label="意见" prop="diOpinion" label-width="100px">
-					<el-input v-model="idept.diOpinion" class="inputs" />
-				</el-form-item>
-				<el-form-item label="入职日期" prop="diStartdate" label-width="100px">
-					<el-date-picker placeholder="选择日期" v-model="idept.diStartdate" class="inputs" style="width: 100%;" :disabled="true"></el-date-picker>
-				</el-form-item>
-			</el-form>
-			<div slot="footer" class="dialog-footer">				 
-				<el-button @click="cancel">取 消</el-button>
-				<el-button type="primary" @click="ensure">确 定</el-button>
-			</div>
-		</el-dialog>
 	</div>
 
 </template>
 
 <script>
-	
+	/*单独引用http.js封装类*/
+	import http from '../../api/http.js';
+	import myhttp from '../../api/myhttp.js';
 	export default {
 		data() {
 			return {
@@ -82,8 +58,7 @@
 				total: 0,
 				//初始数据
 				deptDatadg: [],
-				deptdialog: false,
-				deptisadd: false,
+				
 				idept: {},
 				deptrules: {
 					exDate: [{
@@ -138,7 +113,7 @@
 					pageNo: this.current,
 					pageSize: this.pageSize
 				};
-				this.$myhttp.getObj("property/page", param, (res) => {
+				myhttp.getObj("property/page", param, (res) => {
 					console.log("查询我的资产：", res);
 					this.deptDatadg = res.list;
 					this.total = res.total;
@@ -147,49 +122,6 @@
 				/*propertyHttp.list(this.current,this.pageSize).then(res =>{
 					console.log(res)
 				})*/
-			},
-			readyInsert() {
-				this.deptisadd = true;
-				this.deptdialog = true;
-				this.idept = {};
-			},
-			readyUpdate(row) {
-				console.log("即将操作的行数据：", row);
-				this.idept = { ...row
-				};
-				this.deptdialog = true;
-				this.deptisadd = false;
-				this.startdept = this.idept.dName;
-			},
-
-			//取消
-			cancel() {
-				this.deptdialog = false;
-				this.idept = {};
-			},
-			//确定
-			ensure() {
-				this.$refs['deptrefs'].validate(v => {
-					if(v) {
-						if(this.deptisadd) {
-							let param = { ...this.idept
-							};
-							console.log("新建--参数：", param);
-							this.$myhttp.updatePost("dimission/insert", param, (res) => {
-								this.loadData();
-								this.deptdialog = false;
-							});
-						} else {
-							let param = { ...this.idept
-							};
-							console.log("修改--当前的参数为：", param);
-							this.$myhttp.updatePost("dimission/update", param, (res) => {
-								this.loadData();
-								this.deptdialog = false;
-							});
-						}
-					}
-				})
 			},
 			//高级查询
 			selecstProperty() {
@@ -214,7 +146,7 @@
 					if(this.pname.length > 0) param.pname = this.pname;
 					if(this.pget.length > 0) param.pget = this.pget;
 					if(this.pvalue.length > 0) param.pvalue = this.pvalue;
-					this.$myhttp.getObj("property/pages", param, (res) => {
+					myhttp.getObj("property/pages", param, (res) => {
 						this.deptDatadg = res.list;
 						this.total = res.total;
 					})
