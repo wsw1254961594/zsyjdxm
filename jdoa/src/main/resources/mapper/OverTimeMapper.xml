@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.IOverTimeMapper">
+    <select id="getJiaBan" resultType="Jiaban">
+        SELECT * FROM jiaban WHERE jnid = #{jnid}
+    </select>
+
+    <select id="listJiaBan" resultType="Jiaban" parameterType="Jiaban">
+        SELECT * FROM jiaban
+        <where>
+            <if test="jtitle != null and jtitle != ''">
+                AND jtitle LIKE CONCAT('%',#{jtitle},'%')
+            </if>
+            <if test="jtype != null and jtype != ''">
+                AND jtype = #{jtype}
+            </if>
+            <if test="starDate != null and starDate != ''"><!-- 开始时间检索 -->
+                AND date_format(starttime,'%y%m%d') &gt;= date_format(#{starDate},'%y%m%d')
+            </if>
+            <if test="endDate != null and endDate != ''"><!-- 结束时间检索 -->
+                AND date_format(starttime,'%y%m%d') &lt;= date_format(#{endDate},'%y%m%d')
+            </if>
+        </where>
+    </select>
+
+    <insert id="addOverTime" parameterType="Jiaban">
+        INSERT INTO jiaban
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="jtitle != null and jtitle != ''">
+                jtitle,
+            </if>
+            <if test="starttime != null">
+                starttime,
+            </if>
+            <if test="endtime != null">
+                endtime,
+            </if>
+            <if test="jtype != null and jtype != ''">
+                jtype,
+            </if>
+            <if test="jreason != null and jreason != ''">
+                jreason,
+            </if>
+        </trim>
+        <trim prefix="VALUES(" suffixOverrides="," suffix=")">
+            <if test="jtitle != null and jtitle != ''">
+                #{jtitle},
+            </if>
+            <if test="starttime != null">
+                #{starttime},
+            </if>
+            <if test="endtime != null">
+                #{endtime},
+            </if>
+            <if test="jtype != null and jtype != ''">
+                #{jtype},
+            </if>
+            <if test="jreason != null and jreason != ''">
+                #{jreason},
+            </if>
+        </trim>
+    </insert>
+</mapper>
