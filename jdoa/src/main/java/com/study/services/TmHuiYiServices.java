@@ -4,9 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.study.model.mdao.IEmpMapper;
 import com.study.model.mdao.ITmHuiYiMapper;
-import com.study.pojo.Dizhi;
-import com.study.pojo.Emp;
-import com.study.pojo.Xiangqing;
+import com.study.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,10 +41,47 @@ public class TmHuiYiServices {
     public List<Dizhi> xiala(){
         return hy.cxdz();
     }
-   /* //查询所有员工
+  //查询所有员工
     public List<Emp> yg()
     {
-        return e.selectm();
+        return hy.selectm();
     }
-*/
+
+    //添加会议
+    public void huiyi(Xiangqing c){
+        //添加会议
+         Xiangqing x = new Xiangqing(null,
+                 c.getHyrw(),
+                 c.getKaishitimedate(),
+                 c.getJieshutime(),
+                 c.getNeirong(),
+                 c.getHyleixi(),
+                 c.getMydizhi(),
+                 c.getEse()
+                 );
+         hy.huiyitian(x);
+    //查询转过来的id
+         Xiangqing hydzid=hy.cxid();
+        System.out.println("dd"+hydzid);
+        //循环添加参与员工表
+        for (Huiyirenyuan y : c.getRrr()) {
+            Huiyirenyuan p =new Huiyirenyuan(null,y.getEmpsss(),hydzid
+                    );
+            hy.yuangongtian(p);
+        }
+
+        Shiyong shiyong = new Shiyong(
+                null,
+                "2",hydzid
+        );
+        hy.shiyong(shiyong);
+
+    }
+
+    //会议添加成功执行修改地址状态
+    public  Integer dizhis(Integer dzid){
+        return hy.xiugaidz(dzid);
+    }
+
+
 }

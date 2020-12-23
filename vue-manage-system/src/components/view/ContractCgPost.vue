@@ -239,7 +239,7 @@
 		dialogVisible: false,
 		contract:{
 			cbody:'泛微有限公司',
-		cnumber:"cg"+this.tt(new Date()),
+		cnumber:"cg-"+this.tt(new Date()),
 		myemp:{
 			
 		},

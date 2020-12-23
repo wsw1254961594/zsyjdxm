@@ -40,7 +40,7 @@
         </trim>
     </insert>
 
-    <update id="editBackLog" parameterType="Leaves">
+    <update id="editBackLog" parameterType="Backlog">
         UPDATE backlog
         <trim prefix="SET" suffixOverrides=",">
             <if test="btetle != null and btetle != ''">
@@ -62,12 +62,12 @@
         WHERE blid = #{blid}
     </update>
     
-    <select id="getBackLog" resultType="Leaves">
-        SELECT * FROM leaves WHERE blid = #{blid}
+    <select id="getBackLog" resultType="Backlog">
+        SELECT * FROM backlog WHERE blid = #{blid}
     </select>
     
-    <select id="listBackLog" resultType="Leaves" parameterType="Leaves">
-        SELECT * FROM leaves
+    <select id="listBackLog" resultType="Backlog" parameterType="Backlog">
+        SELECT * FROM backlog
         <where>
             <if test="btetle != null and btetle != ''">
                 AND btetle LIKE CONCAT('%',#{btetle},'%')

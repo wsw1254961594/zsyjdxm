@@ -47,10 +47,10 @@ public class MyResult implements Serializable {
     public static MyResult ok(String msg){
         return new MyResult(1,msg);
     }
-   //当代码发生错误时调用
-   public static MyResult ERROR(String msg){
-       return new MyResult(-1,msg);
-   }
+    //当代码发生错误时调用
+    public static MyResult ERROR(String msg){
+        return new MyResult(-1,msg);
+    }
 
    //代码需要返回一个实体类对象时调用
    public static MyResult returnObj(Object obj){

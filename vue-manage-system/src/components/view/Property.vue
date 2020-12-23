@@ -111,7 +111,8 @@
 			loadData() {
 				let param = {
 					pageNo: this.current,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					empno:this.$store.state.empno
 				};
 				myhttp.getObj("property/page", param, (res) => {
 					console.log("查询我的资产：", res);

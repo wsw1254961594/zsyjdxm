@@ -47,6 +47,10 @@ const routes = [
 	    path: '/mycontract',
 	    component: () => import('../components/view/MyContract'),
 	    meta: {title: '我的合同'}
+	  },{
+	    path: '/empregular',
+	    component: () => import('../components/view/Empregular'),
+	    meta: {title: '员工转正'}
 	  },
 	  {
 	    path: '/emps',
@@ -81,6 +85,14 @@ const routes = [
 	    path: '/contractadd',
 	    component: () => import('../components/view/ContractAdd'),
 	    meta: {title: '合同起草'}
+	  },{
+	    path: '/contractbacklog',
+	    component: () => import('../components/view/ContractBacklog'),
+	    meta: {title: '我的申请'}
+	  },{
+	    path: '/contractpayment',
+	    component: () => import('../components/view/ContractPayment'),
+	    meta: {title: '付款管理'}
 	  },{
 	    path: '/cgpost',
 	    component: () => import('../components/view/ContractCgPost'),
@@ -120,7 +132,12 @@ const routes = [
 	    path: '/newitem',
 	    component: () => import('../components/view/Newitem'),
 	    meta: {title: '新建项目'}
-	  }
+	  }	,
+      {
+        path: '/daiban',
+        component: () => import('../components/view/BackLog'),
+        meta: {title: '我的待办'}
+      }
     ]
   },
   {

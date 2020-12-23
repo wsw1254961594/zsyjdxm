@@ -76,7 +76,7 @@
                 ]
               },
               {
-                index: 'daiban',
+                index: '/daiban',
                 title: '待办事宜'
               }
             ]
@@ -95,8 +95,8 @@
                 title: '合同起草'
               },
               {
-                index: 'shenhe',
-                title: '合同审批'
+                index: 'contractbacklog',
+                title: '我的申请'
               },
               {
                 index: '5-2',
@@ -107,7 +107,7 @@
                     title: '我的合同'
                   },
                   {
-                    index: 'fukuan',
+                    index: 'contractpayment',
                     title: '付款管理'
                   },
                   {
@@ -140,7 +140,7 @@
                 title: '劳动合同签署',
               },
               {
-                index: 'zhuanzheng',
+                index: 'empregular',
                 title: '员工转正'
               },
               {
@@ -193,10 +193,10 @@
                 index: 'huiyirenwu',
                 title: '会议任务'
               },
-			  {
-			    index: 'dizhi',
-			    title: '会议室详情'
-			  }
+              {
+                index: 'dizhi',
+                title: '会议室详情'
+              }
             ]
           },
           {

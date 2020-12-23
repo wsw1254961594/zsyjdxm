@@ -24,15 +24,15 @@ public class PrreturnServices {
     IPrreturnMapper prreturnMapper;
 
     /*查询资产归还信息*/
-    public List<Prreturn> selectPrreturnAll(){
-        return prreturnMapper.selectPrreturnAll();
+    public List<Prreturn> selectPrreturnAll(Integer empno){
+        return prreturnMapper.selectPrreturnAll(empno);
     }
     /*分页查询资产归还表*/
-    public PageInfo<Prreturn> selectByPrreturn(Integer pageNO, Integer pageSize){
+    public PageInfo<Prreturn> selectByPrreturn(Integer pageNO, Integer pageSize ,Integer empno){
         //1配置分页信息
         PageHelper.startPage(pageNO,pageSize);
         //2执行分页
-        List<Prreturn> list=prreturnMapper.selectPrreturnAll();
+        List<Prreturn> list=prreturnMapper.selectPrreturnAll(empno);
         //将分页数据封装到PageInfo中
         PageInfo<Prreturn> info=new PageInfo<>(list);
         return info;

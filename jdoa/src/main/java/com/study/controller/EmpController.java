@@ -52,7 +52,7 @@ public class EmpController {
                         @RequestParam(value = "ofday[0]",required = false) String time1,
                         @RequestParam(value = "ofday[1]",required = false) String time2,
                         @RequestParam("no") Integer no, @RequestParam(value = "size", required = false) Integer size
-                        ){
+    ){
         Integer pagesize = 5;
         if (size != null) {
             pagesize = size;

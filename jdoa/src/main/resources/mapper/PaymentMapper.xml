@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.IPaymentMapper">
+    
+  <!--实际付款金额-->
+    <select id="selectcalNum" resultType="java.lang.Integer">
+        select sum(pmmoney) from payment
+    </select>
+
+    <resultMap id="payment" type="com.study.pojo.Payment">
+        <id property="pmid" column="pmid"/>
+        <result property="pmdate" column="pmdate"/>
+        <result property="pmmoney" column="pmmoney"/>
+        <result property="pmpayee" column="pmpayee"/>
+        <association property="mycontract" javaType="com.study.pojo.Contract">
+            <id property="cid" column="cid"/>
+            <result property="ctitle" column="ctitle"/>
+            <result property="cnumber" column="cnumber"/>
+        </association>
+    </resultMap>
+
+<select id="selectAll" resultMap="payment">
+        select * from payment p
+        left join contract c on c.cid=p.cid
+</select>
+
+
+</mapper>

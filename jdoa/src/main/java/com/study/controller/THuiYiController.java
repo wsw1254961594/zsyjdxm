@@ -1,10 +1,7 @@
 package com.study.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.study.pojo.Dizhi;
-import com.study.pojo.Emp;
-import com.study.pojo.Huiyirenyuan;
-import com.study.pojo.Xiangqing;
+import com.study.pojo.*;
 import com.study.services.TmHuiYiServices;
 import com.study.services.TmXiangQingServices;
 import org.apache.ibatis.annotations.Mapper;
@@ -55,16 +52,30 @@ public class THuiYiController{
     public Integer tjdzss(@RequestBody Dizhi i){
         return hys.tidzs(i);
     }
+    //添加会议
+    @RequestMapping("/hy")
+    public void huiyis(@RequestBody Xiangqing c){
+        System.out.println("x"+c);
+          hys.huiyi(c);
+    }
+    //添加成功后修改地址状态
+    @RequestMapping("/xgdzid")
+    public  Integer dizhiss(@RequestParam(required = false,value = "dzid") Integer dzid){
+        System.out.println(dzid);
+        return hys.dizhis(dzid);
+    }
 
     //下拉框的地址
     @RequestMapping("/xla")
     public List<Dizhi> xialakuang(){
         return hys.xiala();
     }
-   /* //下拉查询所有员工
+  //下拉查询所有员工
     @RequestMapping("/yuangong")
     public  List<Emp> yyg(){
         return  hys.yg();
-    }*/
+    }
+
+
 
 }

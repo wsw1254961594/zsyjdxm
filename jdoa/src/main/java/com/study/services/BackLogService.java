@@ -4,7 +4,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.study.config.MyResult;
 import com.study.model.mdao.IBackLogMapper;
+import com.study.model.mdao.IEmpMapper;
 import com.study.pojo.Backlog;
+import com.study.pojo.Emp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,8 @@ import java.util.List;
 public class BackLogService {
     @Autowired
     private IBackLogMapper backLogMapper;
+    @Autowired
+    private IEmpMapper empMapper;
 
     public MyResult insertBackLog(Backlog backlog) {
         int addBackLog = backLogMapper.addBackLog(backlog);
@@ -48,9 +52,23 @@ public class BackLogService {
         return MyResult.returnObj(backLog);
     }
 
-    public MyResult listBackLog(Backlog backlog) {
+    /**
+     * 只能看到自己需处理的待办
+     * @param backlog
+     * @param pageNum
+     * @return
+     */
+    public MyResult listBackLog(Backlog backlog,Integer pageNum) {
         List<Backlog> backlogs = backLogMapper.listBackLog(backlog);
-        PageHelper.startPage(1,10);
+        for (int i = 0; i < backlogs.size(); i++) {
+            Emp emp = empMapper.leavesGetEmp(backlogs.get(i).getEmpid());
+            if (backlogs.get(i).getEmpid() == 0) {
+                backlogs.get(i).setMgrResp("admin");
+            } else {
+                backlogs.get(i).setMgrResp(emp.getEname());
+            }
+        }
+        PageHelper.startPage(pageNum,10);
         PageInfo<Backlog> list = new PageInfo<>(backlogs);
         return MyResult.okAndpage(list);
     }

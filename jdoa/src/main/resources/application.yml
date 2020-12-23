@@ -16,8 +16,8 @@ mybatis:
   type-aliases-package: com.study.pojo
   mapper-locations: classpath:mapper/*Mapper.xml
 
-  logging:
-    level:
-      com.study.model.mdao : debug
+logging:
+  level:
+    com.study.model.mdao: DEBUG
 
 

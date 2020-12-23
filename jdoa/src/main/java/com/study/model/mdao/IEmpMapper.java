@@ -23,7 +23,7 @@ public interface IEmpMapper {
                          @Param("sex") String sex,
                          @Param("time1")String time1,
                          @Param("time2") String time2
-                         );
+    );
 
     /**
      * 根据emp获取部门，pj
@@ -40,5 +40,5 @@ public interface IEmpMapper {
     Emp leavesGetEmp(Integer empno);
 
     //查询所有转正员工
-   List<Emp> selectstate();
+    List<Emp> selectstate();
 }

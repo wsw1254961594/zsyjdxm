@@ -14,8 +14,18 @@ public class Shiyong {
     private String zt;
     private Xiangqing myxiangqing;
 
+    public Shiyong() {
+    }
+
+    public Shiyong(Integer xqid, String zt, Xiangqing myxiangqing) {
+        this.xqid = xqid;
+        this.zt = zt;
+        this.myxiangqing = myxiangqing;
+    }
+
     @Id
     @Column(name = "xqid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getXqid() {
         return xqid;
     }
