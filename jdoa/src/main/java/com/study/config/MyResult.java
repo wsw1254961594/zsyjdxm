@@ -1,8 +1,8 @@
 package com.study.config;
 
 /*封装的统一响应对象
-* 1、Controller的返回类型,全部要变成MyResult
-*/
+ * 1、Controller的返回类型,全部要变成MyResult
+ */
 
 import com.github.pagehelper.PageInfo;
 
@@ -18,21 +18,21 @@ public class MyResult implements Serializable {
     public MyResult(){
         code=1;
     }
-   //有code值和信息需要返回
-   public MyResult(Integer code,String msg){
-       this.code=code;
-       this.msg=msg;
-   }
-   //有实体类需要返回的,code等于1
-   public MyResult(Object obj){
-       this.code=1;
-       this.obj=obj;
-   }
-   //有集合类型需要返回的,code等于1
-   public MyResult(List<?> objs){
-       this.code=1;
-       this.objs=objs;
-   }
+    //有code值和信息需要返回
+    public MyResult(Integer code,String msg){
+        this.code=code;
+        this.msg=msg;
+    }
+    //有实体类需要返回的,code等于1
+    public MyResult(Object obj){
+        this.code=1;
+        this.obj=obj;
+    }
+    //有集合类型需要返回的,code等于1
+    public MyResult(List<?> objs){
+        this.code=1;
+        this.objs=objs;
+    }
 
 
     /** 成功并携带分页集合数据
@@ -43,16 +43,19 @@ public class MyResult implements Serializable {
         return new MyResult(list);
     }
 
+    //成功
+    public static MyResult ok(String msg){
+        return new MyResult(1,msg);
+    }
+    //当代码发生错误时调用
+    public static MyResult ERROR(String msg){
+        return new MyResult(-1,msg);
+    }
 
-   //当代码发生错误时调用
-   public static MyResult ERROR(String msg){
-       return new MyResult(-1,msg);
-   }
-
-   //代码需要返回一个实体类对象时调用
-   public static MyResult returnObj(Object obj){
-       return new MyResult(obj);
-   }
+    //代码需要返回一个实体类对象时调用
+    public static MyResult returnObj(Object obj){
+        return new MyResult(obj);
+    }
 
     //代码需要返回一个集合对象时调用
     public static MyResult returnObjs(List<?> objs){

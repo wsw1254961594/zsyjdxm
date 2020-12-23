@@ -55,12 +55,12 @@
     </resultMap>
 
     <select id="selectall" resultMap="empresult">
-       SELECT * FROM emp e
-        INNER JOIN jobmsg j on e.jmid=j.jmid
-        INNER JOIN job b on j.jid=b.jid
-        INNER JOIN dept d on b.deptno=d.deptno
-        INNER JOIN personal s ON s.empno=e.empno
-        order by e.empno desc
+      SELECT * FROM emp e
+      left join jobmsg j on e.jmid=j.jmid
+      left JOIN job b on j.jid=b.jid
+      left JOIN dept d on b.deptno=d.deptno
+      left JOIN personal s ON s.empno=e.empno
+      order by e.empno desc
     </select>
 
     <select id="selectByeid" resultMap="empresult">
@@ -72,18 +72,18 @@
         where e.empno=7
     </select>
 
-    <insert id="add" parameterType="com.study.pojo.Emp">
+    <insert id="insert" parameterType="com.study.pojo.Emp">
         insert into emp(ename,ephone,sex,mgr,sal,state,ofday,deptno,jmid)
         values (#{ename},#{ephone},#{sex},#{mgr},#{sal},#{state},#{ofday},
         #{mydept.deptno,jdbcType=INTEGER},#{myjobmsg.jmid,jdbcType=INTEGER})
     </insert>
 
     <select id="selectmohu" resultMap="empresult">
-         SELECT * FROM emp e
-         INNER JOIN jobmsg j on e.jmid=j.jmid
-         INNER JOIN job b on j.jid=b.jid
-         INNER JOIN dept d on b.deptno=d.deptno
-         INNER JOIN personal s ON s.empno=e.empno where 1=1
+        SELECT * FROM emp e
+        left JOIN jobmsg j on e.jmid=j.jmid
+        left JOIN job b on j.jid=b.jid
+        left JOIN dept d on b.deptno=d.deptno
+        left JOIN personal s ON s.empno=e.empno where 1=1
         <if test="ename!=null">
             and e.ename like concat('%',#{ename,jdbcType=VARCHAR},'%')
         </if>
@@ -99,5 +99,23 @@
         <if test="time2 != null and time2 != '' ">
             and e.ofday &lt; #{time2}
         </if>
+    </select>
+
+    <select id="leavesGetEmp" resultMap="empresult">
+        SELECT * FROM emp
+        WHERE empno = #{empno}
+    </select>
+
+    <select id="selectm" resultMap="empresult">
+        select * from  emp
+    </select>
+
+    <select id="selectstate" resultMap="empresult">
+        SELECT * FROM emp e
+          left join jobmsg j on e.jmid=j.jmid
+          left JOIN job b on j.jid=b.jid
+          left JOIN dept d on b.deptno=d.deptno
+          left JOIN personal s ON s.empno=e.empno
+          where e.state=2
     </select>
 </mapper>

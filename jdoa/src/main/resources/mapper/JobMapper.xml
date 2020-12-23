@@ -10,7 +10,7 @@
             <result property="jmname" column="jmname"/>
         </collection>
     </resultMap>
-    
+
     <select id="selectByjid" resultMap="jobResult">
         select * from job j inner join jobmsg j2 on j.jid = j2.jid
         where j.jid=#{jid}

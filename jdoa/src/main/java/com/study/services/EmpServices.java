@@ -28,7 +28,7 @@ public class EmpServices {
     }
 
 
-    //    //新增工单
+    //新增员工
     public Integer doinsert(Emp emp){
         try {
             return mapper.insert(emp);
@@ -45,4 +45,13 @@ public class EmpServices {
         PageInfo<Emp> info = new PageInfo<>(list);
         return info;
     }
+
+    public PageInfo<Emp> selectstate(Integer no, Integer size) {
+        System.out.println("分页查询方法");
+        PageHelper.startPage(no, size);
+        List<Emp> list = mapper.selectstate();
+        PageInfo<Emp> info = new PageInfo<>(list);
+        return info;
+    }
+
 }

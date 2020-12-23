@@ -11,5 +11,5 @@ import java.util.List;
 public interface IDeptMapper {
     List<Dept> selectall();
 
-
+    Dept selectBydeptno(Integer deptno);
 }
