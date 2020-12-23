@@ -34,7 +34,7 @@
 	        <el-input autocomplete="off" class="input2"></el-input>
 	    </el-form-item>
 		<el-form-item label="所属部门">
-		    <el-select v-model="bumen" placeholder="请选择">
+		    <el-select v-model="bumen" placeholder="请选择" @change="selectdeptno">
 		        <el-option
 		          v-for="item in depts"
 		          :key="item.deptno"
@@ -45,18 +45,26 @@
 		 </el-form-item>
 		<el-form-item label="所属岗位">
 			  <!-- <el-input autocomplete="off" class="input2"></el-input> -->
-			<!-- <el-select v-model="value2" placeholder="请选择">
+			<el-select v-model="gangwei" placeholder="请选择">
 			    <el-option
-			      v-for="item in options"
-			      :key="item.value"
-			      :label="item.label"
-			      :value="item.value">
+			      v-for="item in jobmsg"
+			      :key="item.jmid"
+			      :label="item.jmname"
+			      :value="item.jmid">
 			    </el-option>
-			  </el-select> -->
+			  </el-select>
 		</el-form-item>
 		<el-form-item label="入职日期">
 			 <el-date-picker
 			       v-model="value1"
+				   class="rzrq"
+			       type="date"
+			       placeholder="选择日期">
+			     </el-date-picker>
+		</el-form-item>
+		<el-form-item label="出生日期">
+			 <el-date-picker
+			       v-model="value3"
 				   class="rzrq"
 			       type="date"
 			       placeholder="选择日期">
@@ -121,7 +129,11 @@
 		value2:'',
 		value:'',
 		depts: [],
-		bumen:''
+		bumen:'',
+		gangwei:'',
+		jobmsg:[],
+		deptno:'',
+		value3:''
       }
     },
     methods:{
@@ -132,7 +144,7 @@
             size:this.pageSize
           };
           let ppp = this.$Qs.stringify(param);
-         this.$axios.post("http://localhost:8089/emps/pages",ppp)
+         this.$axios.post("http://localhost:8888/emps/pages",ppp)
           .then(r=>{
             if(r.data.code){
               console.log(r.data);
@@ -143,11 +155,24 @@
       },
 	  /* 查询所有部门*/
 	  selectdept(){
-	     this.$axios.post("http://localhost:8089/depts/all")
+	     this.$axios.post("http://localhost:8888/depts/all")
 	     .then(r=>{
 	       if(r.data.code){
 			 console.log(r.data.objs,"数据")
 	         this.depts=r.data.objs;
+	       }
+	     })
+	  },
+	  selectdeptno(){
+		  let e={
+			  deptno:this.bumen
+		  };
+		  console.log('aaaa',e)
+	     this.$axios.post("http://localhost:8888/jobmsg/bydeptno",this.$Qs.stringify(e))
+	     .then(r=>{
+	       if(r.data.code){
+	  		 console.log(r.data.objs,"dddd数据")
+	         this.jobmsg=r.data.objs;
 	       }
 	     })
 	  },
@@ -163,7 +188,7 @@
 		  };
 		  console.log(this.sex);
 		  let ppp = this.$Qs.stringify(param);
-		  this.$axios.post("http://localhost:8089/emps/mohu",ppp)
+		  this.$axios.post("http://localhost:8888/emps/mohu",ppp)
 		  .then(r=>{
 		    console.log(r.data);
 			this.dialogForm=false;
@@ -185,6 +210,7 @@
     created() {
       this.getList();
 	  this.selectdept();
+	  this.selectdeptno();
     }
   }
 </script>
