@@ -19,6 +19,16 @@ public class Jiaban {
     private String jtitle;
     private Emp myemp;
 
+    private Integer reqEmpno;
+
+    public Integer getReqEmpno() {
+        return reqEmpno;
+    }
+
+    public void setReqEmpno(Integer reqEmpno) {
+        this.reqEmpno = reqEmpno;
+    }
+
     private String starDate;
     private String endDate;
 

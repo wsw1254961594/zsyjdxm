@@ -37,8 +37,8 @@ const routes = [
         path: '/editor',
         component: () => import('../components/page/Test'),
         meta: {title: '编辑'}
-      },  
-	  {
+      },
+	    {
         path: '/contractmenu',
         component: () => import('../components/view/ContractMenu'),
         meta: {title: '合同首页'}
@@ -130,7 +130,12 @@ const routes = [
 	    path: '/contractpayment',
 	    component: () => import('../components/view/ContractPayment'),
 	    meta: {title: '付款管理'}
-	  }
+	  },
+      {
+        path: '/daiban',
+        component: () => import('../components/view/BackLog'),
+        meta: {title: '我的待办'}
+      }
     ]
   },
   {

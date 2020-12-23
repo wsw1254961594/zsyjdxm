@@ -25,10 +25,16 @@
     </select>
 
     <insert id="addOverTime" parameterType="Jiaban">
+        <selectKey keyColumn="jnid" keyProperty="jnid" resultType="Integer" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
         INSERT INTO jiaban
         <trim prefix="(" suffixOverrides="," suffix=")">
             <if test="jtitle != null and jtitle != ''">
                 jtitle,
+            </if>
+            <if test="reqEmpno != null">
+                empno,
             </if>
             <if test="starttime != null">
                 starttime,
@@ -46,6 +52,9 @@
         <trim prefix="VALUES(" suffixOverrides="," suffix=")">
             <if test="jtitle != null and jtitle != ''">
                 #{jtitle},
+            </if>
+            <if test="reqEmpno != null">
+                #{reqEmpno},
             </if>
             <if test="starttime != null">
                 #{starttime},

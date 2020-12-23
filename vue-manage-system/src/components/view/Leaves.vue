@@ -31,6 +31,7 @@
             <el-col :span="10">
               <el-form-item label="开始时间" prop="lbegin">
                 <el-date-picker v-model="addForm.lbegin" type="datetime"
+                                :picker-options="pickerOptions"
                                 placeholder="选择日期时间" clearable>
                 </el-date-picker>
               </el-form-item>
@@ -38,6 +39,7 @@
             <el-col :span="10">
               <el-form-item label="结束时间" prop="ifinish">
                 <el-date-picker v-model="addForm.ifinish" type="datetime"
+                                :picker-options="pickerOptions"
                                 placeholder="选择日期时间" clearable>
                 </el-date-picker>
               </el-form-item>
@@ -71,13 +73,11 @@
     data() {
       return {
         addForm:{
-          empno:this.$store.state.empno,
           lbegin:'',
           ifinish:'',
           lreason:'',
           ltitle:'',
           itype:'',
-
           reqEmpno:this.$store.state.empno
         },
         iTypeList:[
@@ -102,7 +102,16 @@
             { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
           ]
         },
-        addButtonLoading:false
+        addButtonLoading:false,
+        pickerOptions: {
+          disabledDate(date){
+            let zero=new Date().setHours(0, 0, 0, 0);
+            if(date.getTime()<zero){
+              return true;
+            }
+            return false;
+          }
+        },
       }
     },
     methods:{
