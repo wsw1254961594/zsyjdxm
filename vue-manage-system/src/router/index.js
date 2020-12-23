@@ -120,6 +120,16 @@ const routes = [
 	    path: '/newitem',
 	    component: () => import('../components/view/Newitem'),
 	    meta: {title: '新建项目'}
+	  },
+	  {
+	    path: '/contractbacklog',
+	    component: () => import('../components/view/ContractBacklog'),
+	    meta: {title: '合同申请'}
+	  },
+	  {
+	    path: '/contractpayment',
+	    component: () => import('../components/view/ContractPayment'),
+	    meta: {title: '付款管理'}
 	  }
     ]
   },

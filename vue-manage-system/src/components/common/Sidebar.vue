@@ -95,8 +95,8 @@
                 title: '合同起草'
               },
               {
-                index: 'shenhe',
-                title: '合同审批'
+                index: 'contractbacklog',
+                title: '我的申请'
               },
               {
                 index: '5-2',
@@ -107,7 +107,7 @@
                     title: '我的合同'
                   },
                   {
-                    index: 'fukuan',
+                    index: 'contractpayment',
                     title: '付款管理'
                   },
                   {

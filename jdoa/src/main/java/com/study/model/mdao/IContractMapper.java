@@ -30,6 +30,9 @@ public interface IContractMapper {
     //查询合同已付款金额
     List<Payment> selectFkMoney();
 
+    //查询客户信息
+    String selectSname();
+
     //多条件查询
     List<Contract> selectCgBylike(@Param("ctitle") String ctitle,
                                @Param("cnumber") String cnumber,
@@ -50,4 +53,7 @@ public interface IContractMapper {
 
     //新增详情表
     void insertPurchaseinfo(@Param("p")Purchaseinfo purchaseinfo);
+
+    //查询申请中的信息
+    List<Contract> selectLogContract(Integer empno);
 }
