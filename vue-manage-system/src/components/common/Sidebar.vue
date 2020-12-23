@@ -140,7 +140,7 @@
                 title: '劳动合同签署',
               },
               {
-                index: 'zhuanzheng',
+                index: 'empregular',
                 title: '员工转正'
               },
               {

@@ -7,7 +7,7 @@
 	      </el-row>
 	    </div>
 		<div>
-			 <el-tabs v-model="activeName" @tab-click="handleClick">
+			 <el-tabs v-model="activeName" @tab-click="handleClick" stretch="true">
 			    <el-tab-pane label="合同付款" name="second">
 					<div id="rigth_select">
 					    <el-row>
