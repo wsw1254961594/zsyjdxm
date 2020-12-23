@@ -85,11 +85,7 @@
             icon: 'el-icon-s-order',
             index: '5',
             title: '合同管理',
-            subs: [
-              {
-                index: 'contractmenu',
-                title: '合同首页'
-              },
+            subs: [          
               {
                 index: 'contractadd',
                 title: '合同起草'
@@ -109,10 +105,6 @@
                   {
                     index: 'contractpayment',
                     title: '付款管理'
-                  },
-                  {
-                    index: 'shoukuan',
-                    title: '收款管理'
                   }
                 ]
               },

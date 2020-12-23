@@ -74,7 +74,7 @@
 					          >
 					         </el-table-column>
 					         <el-table-column
-					           prop="sname"
+					           prop="mysupplier.sname"
 					           label="供应商名称"
 							  >
 					         </el-table-column>
@@ -101,9 +101,19 @@
 							 
 							 <el-table-column
 							   label="付款进度"
-							   width="260">
+							   width="230">
 							   <template slot-scope="scope">								 
 									<el-progress :percentage="Math.floor(scope.row.money/scope.row.cmoney*100)" style="width: 80%;float: left;"></el-progress>			
+								</template>
+							 </el-table-column>
+							 
+							 <el-table-column
+							   label="状态"
+							  >
+							   <template slot-scope="scope">	
+								<span v-if="scope.row.cstate==1"> <el-button type="primary" plain>进行中</el-button></span>
+								  <span v-else-if="scope.row.cstate==2"> <el-button type="success" plain>已完成</el-button></span>
+								 <span v-else-if="scope.row.cstate==3"> <el-button type="danger" plain>已解除</el-button></span>															
 								</template>
 							 </el-table-column>
 							
@@ -111,9 +121,16 @@
 					           label="操作"
 							   >
 					           <template slot-scope="scope">
-								   <span v-if="scope.row.cmoney-scope.row.money>0">
-								   <el-button type="primary" plain>发起付款</el-button>
+								   <span v-if="scope.row.cstate==1">
+									   <span v-if="scope.row.cmoney-scope.row.money>0">
+									   <el-button type="primary" plain @click="paymentPost(scope.row)">发起付款</el-button>
+									   </span>
 								   </span>
+								   <span v-if="scope.row.cstate==3">
+									   <el-button type="warning" plain @click="paymentPost(scope.row)">请求回款</el-button>								   
+								   </span>
+								  
+								  
 									
 					           </template>
 					         </el-table-column>
@@ -190,7 +207,68 @@
 							</el-row>
 					  </div>
 					  <div class="right_body_table">
+					       <el-table
+					         :data="payments"
+					         stripe
+					         style="width: 102%">
+					         <el-table-column
+					         type="selection"
+					           width="60">
 					       
+					         </el-table-column>
+					         <el-table-column
+					           prop="mycontract.ctitle"
+					           label="合同名称"
+					           >
+					         </el-table-column>
+					         <el-table-column
+					           prop="pmdate"
+					           label="付款时间"
+					          >
+					         </el-table-column>
+					         <el-table-column
+					           prop="pmmoney"
+					           label="支付金额"
+							  >
+					         </el-table-column>
+					        
+					         <el-table-column
+								prop="pmpayee"
+					           label="收款单位"
+								  >					        
+					         </el-table-column>
+					       							 
+							 <el-table-column
+								prop="mycontract.cnumber"
+							   label="合同编号"
+							  >					        
+							 </el-table-column>
+							 
+							 <el-table-column
+								prop="pmname"
+							   label="付款流程"
+							   width="240px"
+							  >					        
+							 </el-table-column>
+							 
+							 <
+					         <el-table-column
+					           label="操作"
+					       							   >
+					           <template slot-scope="scope">
+						  
+						  
+						 
+					       									
+					           </template>
+					         </el-table-column>
+					       </el-table>
+					       <el-pagination
+					         :total="total2"
+					         :current-page="current2"
+					         :page-size="size2"
+					         @current-change="handleCurrentChange"
+					       ></el-pagination>
 					   </div>
 					</div>
 				</el-tab-pane>
@@ -231,10 +309,18 @@
 			calnum:0,			
 			/* 采购合同 */
 			cgList:[],
-			sum:0
+			sum:0,
+			payments:[],
+			current2:0,
+			size2:5,
+			total2:0,
 	      };
 	    },
 	    methods: {		
+			/* 付款 */
+			paymentPost(r){
+				 this.$router.push({path:'/paymentpost',query:{params:r}})
+			},
 	      handleClick(tab, event) {
 	        console.log(tab, event);
 	      },
@@ -259,12 +345,28 @@
 				  alert("出错了"+e)
 			  })
 		  
-		  }, /* 查询我的所有采购合同*/
+		  }
+		  ,/* 查询所有付款信息*/
+		  getPayall(){
+		  			  let url="http://localhost:8888/payment/all";
+		  			  let param={
+		  				  pageNo:this.current,
+		  				  pageSize:this.size		  				
+		  			  }
+		  			  param = this.$Qs.stringify(param);
+		  			  this.$axios.post(url,param).then(r=>{
+		  				  this.payments=r.data.obj.list;
+		  				  this.total2=r.data.obj.total;
+		  			  }).catch(e=>{
+		  				  alert("出错了"+e)
+		  			  })
+		  },
+		  /* 查询我的所有采购合同*/
 		  getCgAll(){
 			  let url="http://localhost:8888/contract/cgall";
 			  let param={
-				  pageNo:this.current,
-				  pageSize:this.size,
+				  pageNo:this.current2,
+				  pageSize:this.size2,
 				  empno:this.$store.state.empno
 			  }
 			  param = this.$Qs.stringify(param);
@@ -303,6 +405,7 @@
 			this.getCgTotal();
 			this.getCalNum();
 			this.getCgAll();
+			this.getPayall();
 		}
 	  };
 </script>

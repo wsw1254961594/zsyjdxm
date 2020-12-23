@@ -284,7 +284,8 @@
 			
 				let url="http://localhost:8888/contract/addcg";
 				this.$axios.post(url,this.contract).then(r=>{
-					alert("叼你妈的成功了");
+					this.$message.success("合同申请成功");
+					this.$router.push({path:'/contractbacklog'})
 				}).catch(e=>{
 					alert(e)
 				})

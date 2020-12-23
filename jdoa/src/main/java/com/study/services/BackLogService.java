@@ -6,6 +6,7 @@ import com.study.config.MyResult;
 import com.study.model.mdao.IBackLogMapper;
 import com.study.model.mdao.IEmpMapper;
 import com.study.pojo.Backlog;
+import com.study.pojo.Contract;
 import com.study.pojo.Emp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,13 @@ public class BackLogService {
         Backlog backLogResult = backLogMapper.getBackLog(blid);
         if (backLogResult == null) {
             return MyResult.ERROR("没有该待办");
+        }
+        if (backLogResult.getBtetle().equals("采购合同申请")) {
+            Contract byTitleAndId = backLogMapper.getByTitleAndId(backLogResult.getBianhao());
+            int editContractState = backLogMapper.editContractState(byTitleAndId.getCid());
+            if (editContractState != 1) {
+                return MyResult.ERROR("合同状态修改失败");
+            }
         }
         int editBackLog = backLogMapper.editBackLog(backlog);
         if (editBackLog != 1) {

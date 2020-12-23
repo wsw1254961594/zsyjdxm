@@ -144,11 +144,10 @@
 										<span v-if="scope.row.cstate!=2">
 											
 											<span v-if="Math.floor(scope.row.money/scope.row.cmoney*100)==100">
-											<el-dropdown-item @click.native="edit()"><i class="el-icon-check" style="color: #67C23A;font-size: 13px;">合同结项</i></el-dropdown-item>
+											<el-dropdown-item @click.native="consucc(scope.row)"><i class="el-icon-check" style="color: #67C23A;font-size: 13px;">合同结项</i></el-dropdown-item>
 											</span>
 											<span v-else>
-												<el-dropdown-item @click.native="edit()"><i class="el-icon-plus" style="color: #1E90FF;font-size: 13px;">新建付款</i></el-dropdown-item>
-												<el-dropdown-item @click.native="edit()"><i class="el-icon-close" style="color: #d93e34;font-size: 13px;">合同解除</i></el-dropdown-item>																						
+												<el-dropdown-item @click.native="condel(scope.row)"><i class="el-icon-close" style="color: #d93e34;font-size: 13px;">合同解除</i></el-dropdown-item>																						
 											</span>
 											
 										</span>
@@ -166,7 +165,7 @@
 					   </div>
 					</div>
 				</el-tab-pane>
-			    <el-tab-pane label="销售类合同" name="first">
+			 <!--   <el-tab-pane label="销售类合同" name="first">
 					<div id="rigth_select">
 					     <el-row>
 					   					      <el-col :span="4">
@@ -243,7 +242,7 @@
 					       
 					   </div>
 					</div>
-				</el-tab-pane>
+				</el-tab-pane> -->
 			  
 			  </el-tabs>
 		</div>
@@ -364,6 +363,33 @@
 				 }) 
 			  }
 			 
+		  },/* 合同结项 */
+		  consucc(r){
+			  let url="http://localhost:8888/contract/consucc"
+			  let param={
+				  cid:r.cid
+			  }
+			  param = this.$Qs.stringify(param);
+			  this.$axios.post(url,param).then(r=>{
+			  		this.$message.success("合同结项成功");
+			  		this.getCgAll();
+					this.getCgTotalEnd();
+			  }).catch(e=>{
+			  	alert("出错了"+e)
+			  }) 
+		  },/* 合同解除 */
+		  condel(r){
+			  let url="http://localhost:8888/contract/condel"
+			  let param={
+				  cid:r.cid
+			  }
+			  param = this.$Qs.stringify(param);
+			  this.$axios.post(url,param).then(r=>{
+			  		this.$message.success("合同解除成功");
+			  		this.getCgAll();
+			  }).catch(e=>{
+			  	alert("出错了"+e)
+			  }) 
 		  }
 	    },
 		created(){

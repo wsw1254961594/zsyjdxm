@@ -56,4 +56,11 @@ public interface IContractMapper {
 
     //查询申请中的信息
     List<Contract> selectLogContract(Integer empno);
+
+    //合同结项
+    void conSucc(Integer cid);
+
+    //合同解除
+    void conDel(Integer cid);
+
 }
