@@ -67,12 +67,13 @@
 
     <!--查询我的资产全部信息-->
     <select id="selectPropertyAll" resultMap="IProperty">
-        select pr.* from property pr
+        select * from property pr
         left join emp e on pr.empno=e.empno
         left join dept d on e.deptno=d.deptno
-        left join asset a on pr.atid=a.atid
+        left join propertyasset et on pr.cpid=et.cpid
+        left join asset a on et.atid=a.atid
         left join assets ass on a.aid=ass.aid
-        where pr.empno=#{empno}
+        where pr.empno=#{empno}  and pr.pstate='领取'
     </select>
 
 
@@ -82,8 +83,8 @@
         <selectKey keyColumn="cpid" keyProperty="cpid" resultType="Integer" order="AFTER">
             SELECT LAST_INSERT_ID();
         </selectKey>
-        insert into property(pserial,pname,pstate,pquantity,punits,pstorage,pget,pvalue,premark)
-        values(#{property.pserial},#{property.pname},#{property.pstate},#{property.pquantity},#{property.punits}
+        insert into property(empno,pserial,pname,pstate,pquantity,punits,pstorage,pget,pvalue,premark)
+        values(#{property.myemp.empno},#{property.pserial},#{property.pname},'待办',#{property.pquantity},#{property.punits}
         ,#{property.pstorage},#{property.pget},#{property.pvalue},#{property.premark})
     </insert>
    <!-- <insert id="insertProperty" parameterType="com.study.vo.PropertyVo" useGeneratedKeys="true" keyProperty="cpid" keyColumn="cpid">
@@ -147,9 +148,15 @@
             </if>
         </trim>
     </insert>-->
-
-
+    <!--资产归还-->
+    <update id="updateProperty" parameterType="Property">
+        update property set pstate=#{property.pstate},pstorage=#{property.pstorage} where cpid=#{property.cpid}
+    </update>
+    <!--<update id="updateExamin" parameterType="Examin">
+            update examin set ex_date=#{examin.exDate},ex_opinion=#{examin.exOpinion},ex_result=#{examin.exResult} where ex_id=#{examin.exId}
+        </update>-->
     <!--查询主键新增id-->
+
     <select id="selectCpid" resultType="java.lang.Integer">
         select max(cpid) from property
     </select>

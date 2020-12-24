@@ -4,94 +4,46 @@
 		<el-header style="border-bottom:1px solid #e6e6e6;padding-top: 10px;height: 80px;">
 			<div class="juzhong">
 				<br>
-				<span class="L0">非生产性采购合同申请</span>
-				<p>APPROVAL OF UNPRODUCTIVE PURCHASE CONTRACT FORM</p>
+				<span class="L0">资产借用</span>
+
 			</div>
 		</el-header>
 
-		<el-form ref="form" :model="contract" label-width="80px" style="margin-top: 10px; width: 100%;border:1px solid #e6e6e6;background-color: #FFFFFF;margin-top: 20px;">
+		<el-form ref="form" :model="property" label-width="80px" style="margin-top: 10px; width: 100%;border:1px solid #e6e6e6;background-color: #FFFFFF;margin-top: 20px;">
 			<div style="margin-left: 30px;width: 1000px;">
 				<el-form-item>
 					<div style="background-color: #EFEFEF;width: 100%;height: 30px;line-height: 30px;">
 						<span style="margin-left: 0px; font-weight: 800;">|&nbsp合同信息</span></div>
 				</el-form-item>
-				<el-row>
-					<el-col :span="24">
-						<el-form-item label="编号" label-width="100px">
-							<el-input v-model="contract.pserial"></el-input>
-						</el-form-item>
-					</el-col>
-				</el-row>
 
 				<el-row>
 					<el-col :span="11">
-						<el-form-item label="名称" label-width="100px">
-							<el-input v-model="contract.pname"></el-input>
-						</el-form-item>
-					</el-col>
-
-					<el-col :span="11" style="margin-left: 80px;">
-						<el-form-item label="状态" label-width="100px">
-							<el-input v-model="contract.pstate"></el-input>
-						</el-form-item>
-					</el-col>
-				</el-row>
-
-			<!--	<el-row>
-					<el-col :span="11">
-						<el-form-item label="合同金额" label-width="100px">
+						<el-form-item label="金额" label-width="100px">
 							<el-input v-model="sumMoney"></el-input>
 						</el-form-item>
 					</el-col>
 
 					<el-col :span="11" style="margin-left: 80px;" label-width="100px">
-						<el-form-item label="经办人" label-width="100px">
+						<el-form-item label="申请人" label-width="100px">
 							<el-input v-model="this.$store.state.ename"></el-input>
 						</el-form-item>
 					</el-col>
-				</el-row>-->
+				</el-row>
 
 				<el-row>
 					<el-col :span="11">
-						<el-form-item label="开始时间" label-width="100px">
-							<el-date-picker v-model="contract.pstorage" type="date" placeholder="选择日期" style="width: 100%;">
+						<el-form-item label="申请日期" label-width="100px">
+							<el-date-picker v-model="property.pget" type="date" placeholder="选择日期" style="width: 100%;">
 							</el-date-picker>
 						</el-form-item>
 					</el-col>
-						<el-col :span="11">
-						<el-form-item label="领取日期" label-width="100px">
-							<el-date-picker v-model="contract.pget" type="date" placeholder="选择日期" style="width: 100%;">
-							</el-date-picker>
-						</el-form-item>
-					</el-col>
+
 					<el-col :span="11" style="margin-left: 80px;" label-width="100px">
-						<el-form-item label="数量" label-width="100px">
-							<el-input v-model="contract.pquantity"></el-input>
-						</el-form-item>
-					</el-col>
-				</el-row>
-
-			
-
-				<el-row>
-					<el-col :span="11">
-						<el-form-item label="单位" label-width="100px">
-							<el-input v-model="contract.punits"></el-input>
-						</el-form-item>
-					</el-col>
-
-					<el-col :span="11" style="margin-left: 80px;">
-						<el-form-item label="价格" label-width="100px">
-							<el-input v-model="contract.pvalue"></el-input>
-						</el-form-item>
-					</el-col>
-					<el-col :span="11" style="margin-left: 80px;">
 						<el-form-item label="备注" label-width="100px">
-							<el-input v-model="contract.premark"></el-input>
+							<el-input v-model="property.premark"></el-input>
 						</el-form-item>
 					</el-col>
 				</el-row>
-
 				<el-form-item>
 
 				</el-form-item>
@@ -111,7 +63,7 @@
 				</el-form-item>
 				<el-form-item>
 
-					<el-button @click="addshow()">添加</el-button>
+					<el-button type="primary" icon="el-icon-edit" @click="addshow()">添加</el-button>
 					<el-table :data="tableData" border style="width: 100%">
 						<el-table-column label="序号" width="80">
 							<template slot-scope="scope">
@@ -141,10 +93,8 @@
 					</span>
 				</el-row>
 				<el-form-item style="padding-bottom: 40px;">
-					<el-button type="primary" style="color: white;" @click="addContract()">发布</el-button>
-					<router-link to="/job">
-						<el-button>返回</el-button>
-					</router-link>
+					<el-button type="primary" style="color: white;" @click="addproperty()">确定</el-button>
+
 				</el-form-item>
 			</div>
 
@@ -173,12 +123,13 @@
 				<el-table-column label="操作">
 					<template slot-scope="scope">
 						<el-button type="primary" plain @click="handleAdd(scope.row)">添加</el-button>
+
 					</template>
 				</el-table-column>
 			</el-table>
 			<span slot="footer" class="dialog-footer">
 		    <el-button @click="dialogVisible = false">取 消</el-button>
-		    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+		   
 		  </span>
 		</el-dialog>
 	</div>
@@ -191,8 +142,8 @@
 			return {
 
 				dialogVisible: false,
-				contract: {
-					
+				property: {
+
 					myemp: {
 
 					},
@@ -205,18 +156,21 @@
 		},
 		methods: {
 			//添加合同信息
-			addContract() {
-				this.contract.cmoney = this.sumMoney;
-				this.contract.myemp.empno = this.$store.state.empno;
+			addproperty() {
+				this.property.cmoney = this.sumMoney;
+				this.property.myemp.empno = this.$store.state.empno;
 				this.tableData.forEach(i => {
 					console.log("21", i)
 					console.log("22", i.num);
-					this.contract.asser = this.tableData
+					this.property.asser = this.tableData
+
 				})
 
 				let url = "http://localhost:8888/property/insert";
-				this.$axios.post(url, this.contract).then(r => {
-					alert("叼你妈的成功了");
+				this.$axios.post(url, this.property).then(r => {
+					this.$router.push({
+						path: '/Property'
+					})
 				}).catch(e => {
 					alert(e)
 				})
@@ -260,7 +214,7 @@
 				var summon = this.tableData.map(
 					row => row.num * row.price).reduce(
 					(acc, cur) => (parseFloat(cur) + acc), 0)
-				this.contract.cmoney = summon;
+				this.property.cmoney = summon;
 
 				return summon;
 			}

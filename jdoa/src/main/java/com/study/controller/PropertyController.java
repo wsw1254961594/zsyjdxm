@@ -2,9 +2,7 @@ package com.study.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.study.config.MyResult;
-import com.study.pojo.Borrow;
-import com.study.pojo.Property;
-import com.study.pojo.Prreturn;
+import com.study.pojo.*;
 import com.study.services.PropertyServices;
 import com.study.vo.PropertyVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +29,11 @@ public class PropertyController {
     }
     /*分页查询全部信息*/
     @RequestMapping("/page")
+  /*  public MyResult selectLogContract(Integer pageNo,Integer pageSize,Integer empno){
+        PageInfo<Property> info=propertyServices.selectByProperty(pageNo, pageSize,empno);
+        MyResult mr=MyResult.returnObj(info);
+        return mr;
+    }*/
     public MyResult selectByProperty(@RequestParam("pageNo") Integer pageNo,
                                      @RequestParam("pageSize") Integer pageSize,
                                      @RequestParam("empno") Integer empon) {
@@ -45,6 +48,12 @@ public class PropertyController {
 
         Integer result=propertyServices.insertProperty(propertyVo);
         return result>0?MyResult.SUCCESS:MyResult.ERROR("新增失败");
+    }
+    /*归还我的资产*/
+    @RequestMapping("/update")
+    public MyResult updateDimission(@RequestBody Property property) {
+        int result = propertyServices.updateDimission(property);
+        return result > 0 ? MyResult.SUCCESS : MyResult.ERROR("修改失败！");
     }
 /* public void insertProperty(@RequestBody PropertyVo propertyVo){
      propertyServices.insertProperty(propertyVo);
