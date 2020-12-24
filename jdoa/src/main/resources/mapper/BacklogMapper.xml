@@ -26,37 +26,43 @@
     <insert id="addBackLog" parameterType="com.study.pojo.Backlog">
         INSERT INTO backlog
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="btetle != null and btetle != ''">
+            <if test="b.btetle != null and b.btetle != ''">
                 btetle,
             </if>
-            <if test="bianhao != null">
+            <if test="b.bianhao != null">
                 bianhao,
             </if>
-            <if test="bcondition != null">
+            <if test="b.bcondition != null">
                 bcondition,
             </if>
-            <if test="baccept != null">
+            <if test="b.baccept != null">
                 baccept,
             </if>
-            <if test="empid != null">
+            <if test="b.empid != null">
                 empid,
+            </if>
+            <if test="b.myemp.empno != null">
+                empno,
             </if>
         </trim>
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
-            <if test="btetle != null and btetle != ''">
-                #{btetle},
+            <if test="b.btetle != null and b.btetle != ''">
+                #{b.btetle},
             </if>
-            <if test="bianhao != null">
-                #{bianhao},
+            <if test="b.bianhao != null">
+                #{b.bianhao},
             </if>
-            <if test="bcondition != null">
-                #{bcondition},
+            <if test="b.bcondition != null">
+                #{b.bcondition},
             </if>
-            <if test="baccept != null">
-                #{baccept},
+            <if test="b.baccept != null">
+                #{b.baccept},
             </if>
-            <if test="empid != null">
-                #{empid},
+            <if test="b.empid != null">
+                #{b.empid},
+            </if>
+            <if test="b.myemp.empno != null">
+                #{b.myemp.empno},
             </if>
         </trim>
     </insert>

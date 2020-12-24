@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Repository
 public interface IBackLogMapper {
-    int addBackLog(Backlog backlog);
+    int addBackLog(@Param("b") Backlog backlog);
     int editBackLog(Backlog backlog);
     Backlog getBackLog(Integer blid);
     List<Backlog> listBackLog(Backlog backlog);

@@ -114,6 +114,7 @@ public class ContractServices {
         backlog.setBcondition(0);
         backlog.setBaccept(DateUtils.getDate());
         backlog.setEmpid(emp.getMgr());
+        backlog.setMyemp(emp);
         int addBackLog = backLogMapper.addBackLog(backlog);
     }
 
