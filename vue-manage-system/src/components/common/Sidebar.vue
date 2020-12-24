@@ -109,7 +109,7 @@
                 ]
               },
               {
-                index: 'biangeng',
+                index: 'contractchanges',
                 title: '合同变更'
               },
               {

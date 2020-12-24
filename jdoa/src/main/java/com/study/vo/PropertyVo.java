@@ -1,6 +1,8 @@
 package com.study.vo;
 
 import com.study.pojo.Asset;
+import com.study.pojo.Borrow;
+import com.study.pojo.Emp;
 
 import java.sql.Date;
 import java.util.List;
@@ -23,6 +25,24 @@ public class PropertyVo {
     private String pvalue;
     private String premark;
     private List<Asset> asser;
+    private List<Borrow> borrow;
+    private Emp myemp;
+
+    @Override
+    public String toString() {
+        return "PropertyVo{" +
+                "cpid=" + cpid +
+                ", pserial='" + pserial + '\'' +
+                ", pname='" + pname + '\'' +
+                ", pstate='" + pstate + '\'' +
+                ", pquantity=" + pquantity +
+                ", punits='" + punits + '\'' +
+                ", pstorage=" + pstorage +
+                ", pget=" + pget +
+                ", pvalue='" + pvalue + '\'' +
+                ", premark='" + premark + '\'' +
+                '}';
+    }
 
     public Integer getCpid() {
         return cpid;
@@ -110,5 +130,21 @@ public class PropertyVo {
 
     public void setAsser(List<Asset> asser) {
         this.asser = asser;
+    }
+
+    public List<Borrow> getBorrow() {
+        return borrow;
+    }
+
+    public void setBorrow(List<Borrow> borrow) {
+        this.borrow = borrow;
+    }
+
+    public Emp getMyemp() {
+        return myemp;
+    }
+
+    public void setMyemp(Emp myemp) {
+        this.myemp = myemp;
     }
 }

@@ -61,11 +61,11 @@
         </trim>
         WHERE blid = #{blid}
     </update>
-
+    
     <select id="getBackLog" resultType="Backlog">
         SELECT * FROM backlog WHERE blid = #{blid}
     </select>
-
+    
     <select id="listBackLog" resultType="Backlog" parameterType="Backlog">
         SELECT * FROM backlog
         <where>
@@ -125,5 +125,11 @@
         UPDATE emp SET state = 2 WHERE empno = #{empno}
     </update>
 
-    <select id=""
+
+    <insert id="insert" parameterType="com.study.pojo.Backlog">
+         insert into backlog(btetle,bianhao,bcondition,baccept,empid)
+        values (#{btetle},#{bianhao},#{bcondition}, #{baccept},
+         #{empid}
+        )
+    </insert>
 </mapper>

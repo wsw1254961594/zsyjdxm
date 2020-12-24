@@ -4,6 +4,7 @@ import com.study.pojo.*;
 import com.study.pojo.Approval;
 import com.study.pojo.Backlog;
 import com.study.pojo.Contract;
+import com.study.pojo.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,7 +23,6 @@ public interface IBackLogMapper {
 
     /**
      * 根据类型和编号查询合同详情
-     * @param btetle
      * @param bianhao
      * @return
      */
@@ -59,8 +59,9 @@ public interface IBackLogMapper {
 
     /**
      * 修改员工状态
-     * @param pvid
      * @return
      */
     int editEmpState(Integer empno);
+
+
 }

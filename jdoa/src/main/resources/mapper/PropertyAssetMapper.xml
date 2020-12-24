@@ -6,4 +6,5 @@
     <insert id="addProAss">
         INSERT INTO propertyasset VALUES (#{cpid},#{atid})
     </insert>
+
 </mapper>

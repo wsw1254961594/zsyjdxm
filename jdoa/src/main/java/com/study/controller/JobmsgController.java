@@ -19,7 +19,7 @@ public class JobmsgController {
     JobmsgService js;
 
     @RequestMapping("/bydeptno")
-    public MyResult selectBydeptno(Integer deptno){
+        public MyResult selectBydeptno(Integer deptno){
         List<Dept> list=js.selectbydeptno(deptno);
         return MyResult.returnObjs(list);
     }

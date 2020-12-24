@@ -141,8 +141,8 @@
 					               <el-dropdown-menu slot="dropdown" style="font-size: 17px;margin-right: -70px;width: 100px;text-align: center;float: right;">
 					                 	<el-dropdown-item @click.native="edit()"><i class="el-icon-info" style="color: #E6A23C;font-size: 13px;">查看合同</i></el-dropdown-item>
 					                 	
-										<span v-if="scope.row.cstate!=2">
-											
+										<span v-if="scope.row.cstate!=2&&scope.row.cstate!=3">
+									
 											<span v-if="Math.floor(scope.row.money/scope.row.cmoney*100)==100">
 											<el-dropdown-item @click.native="consucc(scope.row)"><i class="el-icon-check" style="color: #67C23A;font-size: 13px;">合同结项</i></el-dropdown-item>
 											</span>
@@ -365,31 +365,14 @@
 			 
 		  },/* 合同结项 */
 		  consucc(r){
-			  let url="http://localhost:8888/contract/consucc"
-			  let param={
-				  cid:r.cid
-			  }
-			  param = this.$Qs.stringify(param);
-			  this.$axios.post(url,param).then(r=>{
-			  		this.$message.success("合同结项成功");
-			  		this.getCgAll();
-					this.getCgTotalEnd();
-			  }).catch(e=>{
-			  	alert("出错了"+e)
-			  }) 
+			  r.cont='结项'
+			  r.type='合同结项';
+			 this.$router.push({path:'/changes',query:{params:r}})
 		  },/* 合同解除 */
 		  condel(r){
-			  let url="http://localhost:8888/contract/condel"
-			  let param={
-				  cid:r.cid
-			  }
-			  param = this.$Qs.stringify(param);
-			  this.$axios.post(url,param).then(r=>{
-			  		this.$message.success("合同解除成功");
-			  		this.getCgAll();
-			  }).catch(e=>{
-			  	alert("出错了"+e)
-			  }) 
+			  r.cont='解除'
+			  r.type='合同解除';
+			this.$router.push({path:'/changes',query:{params:r}})
 		  }
 	    },
 		created(){

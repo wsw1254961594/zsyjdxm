@@ -43,7 +43,7 @@ export function get(params) {
 export function postJson(params) {
   return request({
     headers : {
-      'Content-Type':'application/json'
+      'Content-Type':'application/json;charset=UTF-8'
     },
     transformRequest : [function (data) {
       data = JSON.stringify(data)
