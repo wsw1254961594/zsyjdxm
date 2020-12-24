@@ -5,6 +5,7 @@ import com.study.pojo.Approval;
 import com.study.pojo.Backlog;
 import com.study.pojo.Contract;
 import com.study.pojo.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -63,5 +64,10 @@ public interface IBackLogMapper {
      */
     int editEmpState(Integer empno);
 
-
+    /**
+     * 查询我发起的所有流程
+     * @param backlog
+     * @return
+     */
+    List<Backlog> listByMineFlow(@Param("bl") Backlog backlog);
 }

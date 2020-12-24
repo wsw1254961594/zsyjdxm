@@ -33,7 +33,7 @@
             {{dateFormat(scope.row.baccept)}}
           </template>
         </el-table-column>
-        <el-table-column label="申请人" prop="applicantResp"></el-table-column>
+        <el-table-column label="申请人" prop="myemp.ename"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button type="text" size="mini" icon="el-icon-edit"

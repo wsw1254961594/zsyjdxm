@@ -73,6 +73,20 @@ public class BackLogService {
                 return MyResult.ERROR("转正申请失败");
             }
         }
+        if (backLogResult.getBtetle().equals("合同解除申请")) {
+
+        }
+        if (backLogResult.getBtetle().equals("调岗申请")) {
+
+        }
+        if (backLogResult.getBtetle().equals("合同结项申请")) {
+
+        }
+        if (backLogResult.getBtetle().equals("资产借用")) {
+
+        }
+
+
         int editBackLog = backLogMapper.editBackLog(backlog);
         if (editBackLog != 1) {
             return MyResult.ERROR("待办修改失败");
@@ -101,7 +115,7 @@ public class BackLogService {
             } else {
                 backlogs.get(i).setMgrResp(emp.getEname());
             }
-            //设置返回申请人
+            /*//设置返回申请人
             if (backlogs.get(i).getBtetle().equals("采购合同申请")) {
                 Emp byCidToLeaves = contractMapper.getByCidToLeaves(backlogs.get(i).getBianhao());
                 backlogs.get(i).setApplicantResp(byCidToLeaves.getEname());
@@ -127,14 +141,12 @@ public class BackLogService {
             if (backlogs.get(i).getBtetle().equals("合同付款申请")) {
                 Emp byPmIdToLeaves = paymentMapper.getByPmIdToLeaves(backlogs.get(i).getBianhao());
                 backlogs.get(i).setApplicantResp(byPmIdToLeaves.getEname());
-            }
+            }*/
         }
         PageHelper.startPage(pageNum,10);
         PageInfo<Backlog> list = new PageInfo<>(backlogs);
         return MyResult.okAndpage(list);
     }
-
-
 
     //新增转正信息
     public Integer doinsert(Backlog backlog){
@@ -144,5 +156,15 @@ public class BackLogService {
             e.printStackTrace();
             return -1;
         }
+    }
+
+    public MyResult listAllByMineFlowPath(Backlog backlog,Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        Emp emp = new Emp();
+        emp.setEmpno(backlog.getReqEmp());
+        backlog.setMyemp(emp);
+        List<Backlog> backlogs = backLogMapper.listByMineFlow(backlog);
+        PageInfo<Backlog> list = new PageInfo<>(backlogs);
+        return MyResult.okAndpage(list);
     }
 }

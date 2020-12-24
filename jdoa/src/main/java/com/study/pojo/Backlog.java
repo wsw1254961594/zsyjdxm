@@ -21,6 +21,15 @@ public class Backlog {
     private String mgrResp;
     private String applicantResp;
     private Emp myemp;
+    private Integer reqEmp;
+
+    public Integer getReqEmp() {
+        return reqEmp;
+    }
+
+    public void setReqEmp(Integer reqEmp) {
+        this.reqEmp = reqEmp;
+    }
 
     public String getApplicantResp() {
         return applicantResp;

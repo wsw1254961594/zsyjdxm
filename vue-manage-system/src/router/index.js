@@ -29,15 +29,15 @@ const routes = [
         meta: {title: '404'}
       },
       {
-        path: '/xinjianliucheng',
-        component: () => import('../components/HelloWorld'),
-        meta: {title: '新建流程'}
+        path: '/myflowpath',
+        component: () => import('../components/view/MyFlowPath'),
+        meta: {title: '我的流程'}
       },
       {
         path: '/editor',
         component: () => import('../components/page/Test'),
         meta: {title: '编辑'}
-      },  
+      },
 	  {
         path: '/contractmenu',
         component: () => import('../components/view/ContractMenu'),
@@ -166,7 +166,7 @@ const routes = [
 	    path: '/acceptance',
 	    component: () => import('../components/view/Acceptance'),
 	    meta: {title: '项目验收'}
-	  } 
+	  }
     ]
   },
   {

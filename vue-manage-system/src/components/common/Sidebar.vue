@@ -58,8 +58,8 @@
             title: '流程管理',
             subs: [
               {
-                index: 'xinjianliucheng',
-                title: '新建流程'
+                index: 'myflowpath',
+                title: '我的流程'
               },
               {
                 index: '4-2',
@@ -85,7 +85,7 @@
             icon: 'el-icon-tickets',
             index: '5',
             title: '合同管理',
-            subs: [          
+            subs: [
               {
                 index: 'contractadd',
                 title: '合同起草'
