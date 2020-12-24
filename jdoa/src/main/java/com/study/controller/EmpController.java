@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @RestController
 @RequestMapping("/emps")
@@ -39,9 +40,16 @@ public class EmpController {
 
     //根据eid查找
     @RequestMapping("/byeid")
-    public MyResult selectByeid(Integer eid){
-        Emp emp=es.selectByeid(eid);
+    public MyResult selectByeid(Integer empno){
+        System.out.println("eid方法");
+        Emp emp=es.selectByeid(empno);
         return MyResult.returnObj(emp);
+    }
+
+    @RequestMapping("/all")
+    public MyResult selectall(){
+        List<Emp> emp=es.selectall();
+        return MyResult.returnObjs(emp);
     }
 
     //高级查询
@@ -86,9 +94,6 @@ public class EmpController {
         System.out.println("新增之后的emp"+emp.toString());
         if (i>0){
             System.out.println("我来啦");
-          /*  Personal personal=new Personal();
-            personal.setPassword("123456");
-            personal.setMyemp(emp);*/
             Integer id=es.selectid();
             Integer in=ps.doInsert("123456",id);
             if(in>=1){
@@ -112,6 +117,15 @@ public class EmpController {
         }
         return MyResult.okAndpage(es.selectstate(no, pagesize));
     }
-    
+
+    @RequestMapping("/updatestate")
+    public MyResult updatestate(Integer empno){
+        Integer i=es.updatestate(empno);
+        if (i>0){
+            return MyResult.ok("操作成功");
+        }else {
+            return MyResult.ERROR("操作失败");
+        }
+    }
 }
 

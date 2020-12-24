@@ -65,10 +65,10 @@
 
     <select id="selectByeid" resultMap="empresult">
         SELECT * FROM emp e
-                  INNER JOIN jobmsg j on e.jmid=j.jmid
-                  INNER JOIN job b on j.jid=b.jid
-                  INNER JOIN dept d on b.deptno=d.deptno
-                  INNER JOIN personal s ON s.empno=e.empno
+                  left JOIN jobmsg j on e.jmid=j.jmid
+                  left JOIN job b on j.jid=b.jid
+                  left JOIN dept d on b.deptno=d.deptno
+                  left JOIN personal s ON s.empno=e.empno
         where e.empno=#{empno}
     </select>
 
@@ -128,6 +128,7 @@
     <update id="updatestate" parameterType="com.study.pojo.Emp">
         update emp set state=4 where empno=#{empno}
     </update>
+
 
     <select id="getEmpDetail" resultMap="empresult">
         SELECT e.*,d.*
