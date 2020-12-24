@@ -1,7 +1,6 @@
 package com.study.model.mdao;
 
-import com.study.pojo.Backlog;
-import com.study.pojo.Contract;
+import com.study.pojo.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -31,4 +30,32 @@ public interface IBackLogMapper {
      * @return
      */
     int editContractState(Integer cid);
+
+    /**
+     * 根据类型和编号查询付款
+     * @param pmid
+     * @return
+     */
+    Payment getPmidByTitleAndId(Integer pmid);
+
+    /**
+     * 修改付款申请状态
+     * @param pmid
+     * @return
+     */
+    int editPaymentState(Integer pmid);
+
+    /**
+     * 根据类型和编号查询员工
+     * @param pvid
+     * @return
+     */
+    Emp getEmpByTitleAndId(Integer pvid);
+
+    /**
+     * 修改员工状态
+     * @param pvid
+     * @return
+     */
+    int editEmpState(Integer empno);
 }

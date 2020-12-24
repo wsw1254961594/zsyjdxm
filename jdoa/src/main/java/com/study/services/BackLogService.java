@@ -7,6 +7,7 @@ import com.study.model.mdao.*;
 import com.study.pojo.Backlog;
 import com.study.pojo.Contract;
 import com.study.pojo.Emp;
+import com.study.pojo.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +56,20 @@ public class BackLogService {
                 return MyResult.ERROR("合同状态修改失败");
             }
         }
+        if (backLogResult.getBtetle().equals("合同付款申请")) {
+            Payment pmidByTitleAndId = backLogMapper.getPmidByTitleAndId(backLogResult.getBianhao());
+            int editPaymentState = backLogMapper.editPaymentState(pmidByTitleAndId.getPmid());
+            if (editPaymentState != 1) {
+                return MyResult.ERROR("合同付款状态修改失败");
+            }
+        }
+        if (backLogResult.getBtetle().equals("转正申请")) {
+            Emp empByTitleAndId = backLogMapper.getEmpByTitleAndId(backLogResult.getBianhao());
+            int editEmpState = backLogMapper.editEmpState(empByTitleAndId.getEmpno());
+            if (editEmpState != 1) {
+                return MyResult.ERROR("转正申请失败");
+            }
+        }
         int editBackLog = backLogMapper.editBackLog(backlog);
         if (editBackLog != 1) {
             return MyResult.ERROR("待办修改失败");
@@ -97,6 +112,12 @@ public class BackLogService {
                 backlogs.get(i).setApplicantResp(byJnIdToLeaves.getEname());
             }
             if (backlogs.get(i).getBtetle().equals("转正申请")) {
+
+            }
+            if (backlogs.get(i).getBtetle().equals("合同结项申请")) {
+
+            }
+            if (backlogs.get(i).getBtetle().equals("合同解除申请")) {
 
             }
             if (backlogs.get(i).getBtetle().equals("合同付款申请")) {
