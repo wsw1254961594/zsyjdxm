@@ -37,18 +37,9 @@
 			    <el-tab-pane label="项目验收单" name="second">
 					<div style="width: 1200px; margin-top: 5px; margin-left: 40px;">
 					<el-table :data="Lists">
+						<el-table-column label="验收单编号" prop="piid"></el-table-column>
 					      <el-table-column label="验收项目名称" prop="pname"></el-table-column>
 						  <el-table-column label="验收状态" prop="approvalstatus"></el-table-column>
-						  <el-table-column label="操作" >
-						      <template slot-scope="s">
-						  		<el-popover
-						  		  placement="right"
-						  		  trigger="click">
-						  		  <el-button  @click="sc(s.row)" >删除</el-button>
-						  		  <el-button slot="reference">...</el-button>
-						  		</el-popover>
-						  	</template>
-						  </el-table-column>
 					</el-table>
 					    <!-- current-page	当前页数，支持 .sync 修饰符-->
 					    <el-pagination
