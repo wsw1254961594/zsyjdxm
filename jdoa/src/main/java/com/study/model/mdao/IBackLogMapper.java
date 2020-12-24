@@ -4,6 +4,7 @@ import com.study.pojo.Approval;
 import com.study.pojo.Backlog;
 import com.study.pojo.Contract;
 import com.study.pojo.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Repository
 public interface IBackLogMapper {
-    int addBackLog(Backlog backlog);
+    int addBackLog(@Param("b") Backlog backlog);
     int editBackLog(Backlog backlog);
     Backlog getBackLog(Integer blid);
     List<Backlog> listBackLog(Backlog backlog);
