@@ -102,4 +102,8 @@ public interface IBackLogMapper {
 
     Contractchange selectByContractChangeByBianhao(Integer bianhao);
 
+    Property getPropertyByBianhao(Integer bianhao);
+
+    int editPropertyStatus(Integer cpid);
+
 }

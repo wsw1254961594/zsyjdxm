@@ -198,4 +198,14 @@
         WHERE bl.bianhao = #{bianhao} AND bl.btetle = '合同结项申请'
     </select>
 
+    <select id="getPropertyByBianhao" resultType="Property">
+        SELECT * FROM property p
+        INNER JOIN backlog b ON b.bianhao = p.cpid
+        WHERE b.bianhao = #{bianhao}
+    </select>
+
+    <update id="editPropertyStatus">
+        UPDATE property SET pstate = '领取' WHERE cpid = #{cpid}
+    </update>
+
 </mapper>

@@ -329,6 +329,17 @@
 	      };
 	    },
 	    methods: {		
+			//跳转页面
+			handleCurrentChange(c){
+			  this.current = c;
+			  this.getCgAll();
+			},
+			//跳转页面
+			handleCurrentChange2(c){
+			  this.current2 = c;
+			  this.getPayall();
+			},
+			
 			/* 付款 */
 			paymentPost(r){
 				 this.$router.push({path:'/paymentpost',query:{params:r}})

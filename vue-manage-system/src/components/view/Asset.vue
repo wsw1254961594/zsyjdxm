@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<p style="float: left;">
-			<el-button type="primary" v-on:click="readyInsert">新增</el-button>
+			
 			<el-button type="primary" v-on:click="isAdquery=!isAdquery">高级查询</el-button>
 		</p>
 		<el-form :inline="true" class="demo-form-inline adquery" v-show="isAdquery">
@@ -29,55 +29,12 @@
 			<el-table-column label="价格" prop="price"></el-table-column>
 			<el-table-column label="编号" prop="myassets.aserial"></el-table-column>
 			
-			<el-table-column label="操作">
-				<template slot-scope="scope">
-					<el-button type="primary" v-on:click="readyUpdate(scope.row)">修改</el-button>
-					
-				</template>
-			</el-table-column>
+			
 		</el-table>
 		<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current" :page-sizes="[1, 2, 3, 4]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
 		</el-pagination>
 
-		<el-dialog :title="deptisadd?'新增转正':'修改转正'" :visible.sync="deptdialog">
-			<el-form :model="idept" :rules="deptrules" ref="deptrefs">
-				<el-form-item label="编号" prop="pserial" label-width="100px">
-					<el-input v-model="idept.pserial" class="inputs" />
-				</el-form-item>
-				<el-form-item label="名称" prop="pname" label-width="100px">
-					<el-input v-model="idept.pname" class="inputs" />
-				</el-form-item>
-				<el-form-item label="状态" prop="pstate" label-width="100px">
-					<el-input v-model="idept.pstate" class="inputs"/>
-				</el-form-item>
-				<el-form-item label="数量" prop="pquantity" label-width="100px">
-					<el-input v-model="idept.pquantity" class="inputs"  />
-				</el-form-item>
-				<el-form-item label="计算单位" prop="punits" label-width="100px">
-					<el-input v-model="idept.punits" class="inputs" />
-				</el-form-item>
-				
-				<el-form-item label="入库日期" prop="pstorage" label-width="100px">
-					<el-date-picker v-model="idept.pstorage"   placeholder="开始时间">
-					</el-date-picker>
-				</el-form-item>
-				<el-form-item label="领取日期" prop="pget" label-width="100px">
-					<el-date-picker v-model="idept.pget"   placeholder="开始时间">
-					</el-date-picker>
-				</el-form-item>
-				<el-form-item label="价格" prop="pvalue" label-width="100px">
-					<el-input v-model="idept.pvalue" class="inputs" />
-				</el-form-item>
-				<el-form-item label="备注" prop="premark" label-width="100px">
-					<el-input v-model="idept.premark" class="inputs" />
-				</el-form-item>
-				
-			</el-form>
-			<div slot="footer" class="dialog-footer">
-				<el-button @click="cancel">取 消</el-button>
-				<el-button type="primary" @click="ensure">确 定</el-button>
-			</div>
-		</el-dialog>
+		
 	</div>
 
 </template>

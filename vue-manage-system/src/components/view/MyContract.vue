@@ -409,6 +409,11 @@
 			this.$router.push({path:'/changes',query:{params:r}})
 		  }
 	    },
+		//跳转页面
+		handleCurrentChange(c){
+		  this.current = c;
+		  this.getCgAll();
+		},
 		created(){
 			this.getCgTotal();
 			this.getCgTotalNow();

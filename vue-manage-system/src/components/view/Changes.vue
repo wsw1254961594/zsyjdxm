@@ -12,7 +12,7 @@
                 <el-input
                     placeholder="合同名称"
                     prefix-icon="el-icon-search"                 
-                    @change="getPostBy"
+                   
                     clearable>
                 </el-input>
               </el-col>
@@ -22,7 +22,7 @@
                     placeholder="合同编号"
                      prefix-icon="el-icon-search"
                   
-                    @change="getPostBy"
+                   
                     clearable>
                 </el-input>
               </el-col>
@@ -119,6 +119,11 @@
 		total:0,
       }
     },methods:{
+		//跳转页面
+		handleCurrentChange(c){
+		  this.current = c;
+		  this.getChanges();
+		},
 		/* 查询所有变更信息*/
 		getChanges(){
 					  let url="http://localhost:8888/changes/all";

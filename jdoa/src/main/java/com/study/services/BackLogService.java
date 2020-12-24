@@ -94,7 +94,11 @@ public class BackLogService {
             }
         }
         if (backLogResult.getBtetle().equals("资产借用")) {
-
+            Property propertyByBianhao = backLogMapper.getPropertyByBianhao(backLogResult.getBianhao());
+            int editPropertyStatus = backLogMapper.editPropertyStatus(propertyByBianhao.getCpid());
+            if (editPropertyStatus != 1) {
+                return MyResult.ERROR("资产借用失败");
+            }
         }
 
 

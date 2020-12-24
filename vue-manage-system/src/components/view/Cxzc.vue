@@ -13,7 +13,7 @@
 			<div style="margin-left: 30px;width: 1000px;">
 				<el-form-item>
 					<div style="background-color: #EFEFEF;width: 100%;height: 30px;line-height: 30px;">
-						<span style="margin-left: 0px; font-weight: 800;">|&nbsp合同信息</span></div>
+						<span style="margin-left: 0px; font-weight: 800;">|&nbsp基本信息</span></div>
 				</el-form-item>
 
 				<el-row>
@@ -54,7 +54,7 @@
 
 				<el-form-item label="">
 					<div style="background-color: #EFEFEF;width: 100%;height: 30px;line-height: 30px;">
-						<span style="margin-left: 0px; font-weight: 800;">|&nbsp合同明细信息</span></div>
+						<span style="margin-left: 0px; font-weight: 800;">|&nbsp资产借用</span></div>
 				</el-form-item>
 				<el-form-item label="">
 					<div style="background-color: #EFEFEF;width: 100%;height: 30px;" v-show="false">
@@ -168,6 +168,7 @@
 
 				let url = "http://localhost:8888/property/insert";
 				this.$axios.post(url, this.property).then(r => {
+					this.$message.success("资产借用新增成功");
 					this.$router.push({
 						path: '/Property'
 					})
@@ -206,7 +207,8 @@
 
 		},
 		created() {
-			this.sumMoney()
+			this.sumMoney(),
+			this.addproperty()
 
 		},
 		computed: {
