@@ -45,6 +45,9 @@ public interface IEmpMapper {
     //转正 修改员工状态
     Integer update(Integer empno);
 
+    //离职
+    Integer updatelizhi(Integer empno);
+
     Integer selectid();
 
     Integer updatestate(Integer empno);

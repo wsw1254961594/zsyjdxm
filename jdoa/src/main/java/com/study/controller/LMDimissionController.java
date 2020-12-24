@@ -4,10 +4,10 @@ import com.study.config.MyResult;
 import com.study.model.mdao.IBackLogMapper;
 import com.study.model.mdao.IEmpMapper;
 import com.study.pojo.Backlog;
+import com.study.pojo.Dimission;
 import com.study.pojo.Emp;
-import com.study.pojo.Posts;
 import com.study.services.EmpServices;
-import com.study.services.PostsServices;
+import com.study.services.LMDimissionServices;
 import com.study.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,12 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @Author: LiaoMiao
+ * @Description:
+ * @Date: create in 2020/12/24 14:45
+ */
 @RestController
-@RequestMapping("/postsc")
+@RequestMapping("/dimissions")
 @CrossOrigin   //跨域访问
-public class PostsController {
+public class LMDimissionController {
     @Autowired
-    PostsServices ps;
+    LMDimissionServices ls;
     @Autowired
     EmpServices es;
     @Autowired
@@ -28,38 +33,23 @@ public class PostsController {
     @Autowired
     private IBackLogMapper backLogMapper;
 
-    @RequestMapping("/insert")
-    public MyResult add(@RequestParam("pcause") String pcause,
-                        @RequestParam("yuanpost") Integer yuanpost,
-                        @RequestParam("xinpost") Integer xinpost,
-                        @RequestParam("yuandept") Integer yuandept,
-                        @RequestParam("xindept") Integer xindept,
+    @RequestMapping("/add")
+    public MyResult add(@RequestParam("dcause") String dcause,
                         @RequestParam("empno") Integer empno
                         ){
         Emp emp=es.selectByeid(empno);
         //修改员工状态
-        Integer ee=es.updatestate(empno);
-        System.out.println(pcause);
-        System.out.println(yuandept);
-        System.out.println(yuanpost);
-        System.out.println(xinpost);
-        System.out.println(xindept);
-        System.out.println(empno);
-        Posts pp=new Posts();
-        System.out.println(emp+"emp");
-        pp.setTitle(emp.getEname()+"转岗申请");
-        pp.setPcause(pcause);
-        pp.setYuanpost(yuanpost);
-        pp.setXinpost(xinpost);
-        pp.setXindept(xindept);
-        pp.setYuandept(yuandept);
-        pp.setMyemp(emp);
-        Integer i=ps.insertpost(pp);
+        Integer integer=es.updatelizhi(empno);
+        Dimission dimission=new Dimission();
+        dimission.setDdate(DateUtils.getDate());
+        dimission.setDcause(dcause);
+        dimission.setMyemp(emp);
+        Integer i=ls.insert(dimission);
         if (i>0){
             /*新增待办表*/
             Backlog backlog = new Backlog();
-            backlog.setBtetle("调岗申请");
-            Integer bb=ps.selectmax();
+            backlog.setBtetle("离职申请");
+            Integer bb=ls.selectmax();
             backlog.setBianhao(bb);
 
             backlog.setBcondition(0);
@@ -72,5 +62,4 @@ public class PostsController {
             return MyResult.ERROR("申请失败");
         }
     }
-
 }

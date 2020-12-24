@@ -13,6 +13,7 @@
 			  <span v-if="x.row.state==1">试用期员工</span>
 			  <span v-else-if="x.row.state==2">正式员工</span>
 			  <span v-else-if="x.row.state==4">转岗待审批</span>
+			  <span v-else-if="x.row.state==5">离职待审批</span>
 			  <span v-else>转正待审批</span>
 		  </template>
 	  </el-table-column>
@@ -27,7 +28,7 @@
 	  				</el-button>
 	  			 </el-tooltip>
 				 <el-tooltip class="item" effect="dark" content="员工申请离职" placement="top">
-					<el-button size="mini" style="background-color: dodgerblue;">
+					<el-button size="mini" style="background-color: dodgerblue;" @click="lizhi(x.row)">
 					  <i class="el-icon-circle-close" style="color: white;"></i>
 					</el-button>
 				 </el-tooltip>
@@ -51,7 +52,6 @@
 	      <el-input autocomplete="off" class="input2" v-model="name"></el-input>
 	    </el-form-item>
 	    <el-form-item label="员工性别">
-	       <!-- <el-input autocomplete="off" class="input2" v-model="esex"></el-input> -->
 		   <el-radio v-model="esex" label="男">男</el-radio>
 		     <el-radio v-model="esex" label="女">女</el-radio>
 	    </el-form-item>
@@ -59,7 +59,7 @@
 	        <el-input autocomplete="off" class="input2" v-model="phone"></el-input>
 	    </el-form-item>
 		<el-form-item label="所属部门">
-		    <el-select v-model="bumen" placeholder="请选择" @change="selectdeptno">
+		    <el-select v-model="bumen" placeholder="请选择" @change="selectdeptnoss">
 		        <el-option
 		          v-for="item in depts"
 		          :key="item.deptno"
@@ -80,8 +80,8 @@
 		</el-form-item>
 		
 		<!-- 上级编号 -->
-		<el-form-item label="上级编号" class="shangji">
-			<el-select v-model="mgr" placeholder="请选择">
+		<el-form-item label="上级" class="shangji">
+			<el-select v-model="mgrs" placeholder="请选择">
 			    <el-option
 			      v-for="item in empmgrs"
 			      :key="item.empno"
@@ -188,6 +188,24 @@
 	</el-dialog>
 	
 	
+	<!-- 员工离职 -->
+	<el-dialog title="员工离职申请" :visible.sync="logForm">
+	  <el-form>
+	    <el-form-item label="员工名称">
+	      <el-input autocomplete="off" v-model="yuanname" class="input2" disabled></el-input>
+	    </el-form-item>
+	   <el-form-item label="离职原因">
+		   <textarea style="height: 100px; width: 85%;" class="input2" v-model="dcause"></textarea>
+	    </el-form-item>
+	
+	
+	  </el-form>
+	  <div slot="footer" class="dialog-footer">
+	    <el-button @click="dialogForm = false">取 消</el-button>
+	    <el-button type="primary" @click="addlizhi()">确 定</el-button>
+	  </div>
+	</el-dialog>
+	
   </div>
 </template>
 
@@ -195,6 +213,8 @@
   export default {
     data(){
       return{
+		yuanname:'',
+		dcause:'',
 		empmgrs:[],
 		mgr:'',
 		zhuangangyuanyou:'',
@@ -207,6 +227,7 @@
         pageSize:3,
         total:0,
 		dialog:false,
+		logForm:false,
 		dialogFormVisible:false,
 		dialogForm:false,
 		ename:'',
@@ -231,7 +252,9 @@
 		dname:'',
 		jmname:'',
 		bumenid:'',
-		gangweiid:''
+		gangweiid:'',
+		mgrs:'',
+		ee:''
       }
     },
     methods:{
@@ -266,6 +289,32 @@
 		    }
 		  })
 	  },
+	  lizhi(rows){
+		  this.logForm=true;
+		  console.log(rows,'rows');
+		  this.yuanname=rows.ename;
+		  this.ee=rows.empno;
+	  },
+	  addlizhi(){
+		  var e={
+				ename:this.yuanname,
+				empno:this.ee,
+				dcause:this.dcause
+		  };
+		  var qq=this.$Qs.stringify(e);
+		  this.$axios.post("http://localhost:8888/dimissions/add",qq)
+		  .then(r=>{
+		    if(r.data.code){
+		      this.logForm=false;
+		      this.getList();
+		      this.dcause="";
+		    }else{
+		      alert("操作失败")
+		    }
+		  }).catch(e=>{
+		      console.log(e)
+		  })
+	  },
 	  /* 查询所有部门*/
 	  selectdept(){
 	     this.$axios.post("http://localhost:8888/depts/all")
@@ -281,6 +330,19 @@
 			  deptno:this.yuanbumen
 		  };
 		  console.log('aaaa',e)
+	     this.$axios.post("http://localhost:8888/jobmsg/bydeptno",this.$Qs.stringify(e))
+	     .then(r=>{
+	       if(r.data.code){
+	  		 console.log(r.data.objs,"dddd数据")
+	         this.jobmsg=r.data.objs;
+	       }
+	     })
+	  },
+	  selectdeptnoss(){
+	  		  let e={
+	  			  deptno:this.bumen
+	  		  };
+	  		  console.log('aaaa',e)
 	     this.$axios.post("http://localhost:8888/jobmsg/bydeptno",this.$Qs.stringify(e))
 	     .then(r=>{
 	       if(r.data.code){
@@ -367,6 +429,7 @@
 		  var e={
 		    ename:this.name,
 		    sex:this.esex,
+			mgr:this.mgrs,
 		    ephone:this.phone,
 		    deptno:this.bumen,
 		    jmid:this.gangwei
@@ -410,6 +473,7 @@
 <style>
 	.empsstyle .shangji{
 		position: relative;
+		left: 28px;
 		bottom: 50px;
 	}
 	.empsstyle textarea{

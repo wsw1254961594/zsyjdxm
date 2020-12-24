@@ -1,7 +1,7 @@
 package com.study.pojo;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -17,6 +17,7 @@ public class Dimission {
     private Emp myemp;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "did", nullable = false)
     public Integer getDid() {
         return did;

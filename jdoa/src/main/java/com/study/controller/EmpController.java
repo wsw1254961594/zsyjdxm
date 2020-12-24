@@ -73,6 +73,7 @@ public class EmpController {
     public MyResult doInsert(@RequestParam("ename")String ename,
                              @RequestParam("ephone")String ephone,
                              @RequestParam("sex")String sex,
+                             @RequestParam("mgr")Integer mgr,
                              @RequestParam("deptno")Integer deptno,
                              @RequestParam("jmid")Integer jmid){
         System.out.println(ename);
@@ -85,6 +86,7 @@ public class EmpController {
         emp.setEname(ename);
         emp.setEphone(ephone);
         emp.setSex(sex);
+        emp.setMgr(mgr);
         emp.setOfday(new Timestamp(System.currentTimeMillis()));
         Jobmsg jobmsg=js.selectByjmid(jmid);
         emp.setMyjobmsg(jobmsg);
