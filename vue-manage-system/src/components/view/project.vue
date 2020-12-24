@@ -21,6 +21,19 @@
 			  <el-table-column label="项目状态" prop="status"></el-table-column>
 		      <el-table-column label="计划开始日期" prop="planstartdate"></el-table-column>
 		      <el-table-column label="计划结束日期" prop="planenddate"></el-table-column>
+			  <el-table-column label="操作" >
+			      <template slot-scope="s">
+			  		<el-popover
+			  		  placement="right"
+			  		  trigger="click">
+			  		  <el-button  @click="zc(s.row)" >正常</el-button>
+			  		  <el-button  @click="yq(s.row)" >延期</el-button>
+			  		  <el-button  @click="dj(s.row)" >冻结</el-button>
+			  		  <el-button  @click="sc(s.row)" >删除</el-button>
+			  		  <el-button slot="reference">...</el-button>
+			  		</el-popover>
+			  	</template>
+			  </el-table-column>
 		</el-table>
 		    <!-- current-page	当前页数，支持 .sync 修饰符-->
 		    <el-pagination
@@ -39,7 +52,6 @@
 </template>
 
 <script>
-
 	export default {
 	    data() {
 	      return {
@@ -70,7 +82,7 @@
 				  })
 	            },
 		  open() {
-					     if(this.select=='1'){
+					  if(this.select=='1'){
 					        let param={
 					          no:this.current,
 					          size:this.pageSize,
@@ -116,6 +128,74 @@
 					          })
 					      }
 					      },
+						  zc(row){
+							  if(row.status!="完成"){
+						    let param={
+						      status:"正常",
+						      iid:row.iid
+						    };
+						    let ppp = this.$Qs.stringify(param);
+							this.$axios.post("http://localhost:8888/Itemlist/Update",ppp)
+							.then(r=>{
+							  if(r.status===200){
+								 this.loadData();
+							    alert(row.pname+"项目修改为正常")
+							  }
+							  })
+							  }else{
+								  alert(row.pname+"项目已完成")
+							  }
+						  },
+						  yq(row){
+							   if(row.status!="完成"){
+						    let param={
+						      status:"延期",
+						      iid:row.iid
+						    };
+						    let ppp = this.$Qs.stringify(param);
+						  	this.$axios.post("http://localhost:8888/Itemlist/Update",ppp)
+						  .then(r=>{
+						  	 if(r.status===200){
+						  	this.loadData();
+						  	alert(row.pname+"项目修改为延期")
+						   }
+						   })
+						   }else{
+						   		alert(row.pname+"项目已完成")
+						   }
+						  },
+						  dj(row){
+							  if(row.status!="完成"){
+						    let param={
+						      status:"冻结",
+						      iid:row.iid
+						    };
+						    let ppp = this.$Qs.stringify(param);
+						  		this.$axios.post("http://localhost:8888/Itemlist/Update",ppp)
+						  		.then(r=>{
+								if(r.status===200){
+						  		 this.loadData();
+								alert(row.pname+"项目修改为冻结")
+							}
+							})
+							}else{
+								 alert(row.pname+"项目已完成")
+							}
+						  },
+						 sc(row) {
+							 let param={
+							   iid:row.iid
+							 };
+							 let ppp = this.$Qs.stringify(param);
+							 this.$axios.post("http://localhost:8888/Itemlist/doDelete",ppp)
+							 		.then(r=>{
+							 	if(r.status===200){
+							 	 this.loadData();
+							 alert("删除成功")
+							 }
+							 })
+						 }
+						 ,
 	               handleCurrentChange(pagerindex){
 	                    //参数是当前页码
 	                    this.current = pagerindex;
