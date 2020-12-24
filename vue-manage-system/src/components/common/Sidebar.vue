@@ -196,16 +196,13 @@
                 index: 'property',
                 title: '我的资产'
               },
-              {
-                index: 'cxzc',
-                title: '查询资产',
-              },
+            
               {
                 index: 'asset',
                 title: '资产类别'
               },
               {
-                index: 'borrow',
+                index: 'cxzc',
                 title: '资产借用'
               },
               {

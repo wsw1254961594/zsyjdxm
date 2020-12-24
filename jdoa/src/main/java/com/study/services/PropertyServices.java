@@ -6,11 +6,7 @@ import com.study.model.mdao.IBackLogMapper;
 import com.study.model.mdao.IEmpMapper;
 import com.study.model.mdao.IPropertyMapper;
 import com.study.model.mdao.PropertyAssetMapper;
-import com.study.pojo.Asset;
-import com.study.pojo.Backlog;
-import com.study.pojo.Emp;
-import com.study.pojo.Property;
-
+import com.study.pojo.*;
 import com.study.utils.DateUtils;
 import com.study.vo.PropertyVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,21 +35,23 @@ public class PropertyServices {
     PropertyAssetMapper propertyAssetMapper;
 
     /*查询我的资产全部信息*/
-    public List<Property> selectPropertyAll(Integer enpno){
+    public List<Property> selectPropertyAll(Integer enpno) {
         return propertyMapper.selectPropertyAll(enpno);
     }
+
     /*查询我的资产表分页*/
-    public PageInfo<Property> selectByProperty(Integer pageNO, Integer pageSize ,Integer empno){
+    public PageInfo<Property> selectByProperty(Integer pageNO, Integer pageSize, Integer empno) {
         //1配置分页信息
-        PageHelper.startPage(pageNO,pageSize);
+        PageHelper.startPage(pageNO, pageSize);
         //2执行分页
-        List<Property> list=propertyMapper.selectPropertyAll(empno);
+        List<Property> list = propertyMapper.selectPropertyAll(empno);
         //将分页数据封装到PageInfo中
-        PageInfo<Property> info=new PageInfo<>(list);
+        PageInfo<Property> info = new PageInfo<>(list);
         return info;
     }
+
     /*新增我的资产表*/
-    public Integer insertProperty(PropertyVo propertyVo){
+    public Integer insertProperty(PropertyVo propertyVo) {
         try {
             int addpro = propertyMapper.insertProperty(propertyVo);
             if (addpro != 1) {
@@ -61,14 +59,14 @@ public class PropertyServices {
             }
 
             /*查询主键id*/
-            int cpid=propertyMapper.selectCpid();
-            System.err.println("cpid:"+cpid);
+            int cpid = propertyMapper.selectCpid();
+            System.err.println("cpid:" + cpid);
             List<Asset> assetList = propertyVo.getAsser();
 
-            System.err.println("properId:"+propertyVo.getCpid());
+            System.err.println("properId:" + propertyVo.getCpid());
             for (Asset asset : assetList) {
 
-                propertyAssetMapper.addProAss(cpid,asset.getAtid());
+                propertyAssetMapper.addProAss(cpid, asset.getAtid());
             }
             /*新增待办表*/
             Emp emp = empMapper.leavesGetEmp(propertyVo.getMyemp().getEmpno());
@@ -78,13 +76,15 @@ public class PropertyServices {
             backlog.setBcondition(0);
             backlog.setBaccept(DateUtils.getDate());
             backlog.setEmpid(emp.getMgr());
+            backlog.setMyemp(emp);
             int addBackLog = backLogMapper.addBackLog(backlog);
             return 1;
         } catch (Exception e) {
             return -1;
         }
     }
-/*    *//*新增我的资产表*//*
+
+    /*    *//*新增我的资产表*//*
     public void propxz(PropertyVo propertyVo){
         *//*新增我的资产表*//*
         propertyMapper.insertProperty(propertyVo);
@@ -102,6 +102,15 @@ public class PropertyServices {
 
 
     }*/
+    /*归还我的资产*/
+    public Integer updateDimission(Property property) {
+        try {
+            propertyMapper.updateProperty(property);
+            return 1;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
 
     /*高级查询我的资产根据 名称 领取日期 价格来查询*/
     public PageInfo<Property> selectsProperty(Integer pageNo, Integer pageSize, String pname, String pget, String pvalue) {

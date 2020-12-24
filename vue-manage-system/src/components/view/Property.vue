@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<p style="float: left;">
-			<el-button type="primary" v-on:click="readyInsert">借用资产</el-button>
+			
 			<el-button type="primary" v-on:click="isAdquery=!isAdquery">高级查询</el-button>
 		</p>
 		<el-form :inline="true" class="demo-form-inline adquery" v-show="isAdquery">
@@ -20,27 +20,43 @@
 			</el-form-item>
 		</el-form>
 		<el-table :data="deptDatadg" style="width: 100%">
-			<el-table-column label="编号id" prop="cpid"></el-table-column>
-			<el-table-column label="编号" prop="pserial"></el-table-column>
-			<el-table-column label="名称" prop="pname"></el-table-column>			
-			<el-table-column label="数量" prop="pquantity"></el-table-column>
-			<el-table-column label="计算单位" prop="punits"></el-table-column>
-			<el-table-column label="入库日期" prop="pstorage"></el-table-column>
+			
+			<el-table-column label="编号" prop="myasset.myassets.aserial"></el-table-column>
+			<el-table-column label="名称" prop="myasset.atname"></el-table-column>			
+			<el-table-column label="领取人" prop="myemp.ename"></el-table-column>
+			<el-table-column label="部门" prop="myemp.mydept.dname"></el-table-column>
+			<el-table-column label="计算单位" prop="myasset.aunits"></el-table-column>
 			<el-table-column label="领取日期" prop="pget"></el-table-column>
-			<el-table-column label="价格" prop="pvalue"></el-table-column>
+			<el-table-column label="价格" prop="myasset.price"></el-table-column>
 			
 			<el-table-column label="状态" prop="pstate"></el-table-column>
 			<el-table-column label="备注" prop="premark"></el-table-column>
 			<el-table-column label="操作">
 				<template slot-scope="scope">
-					<el-button type="primary" v-on:click="readyUpdate(scope.row)">查看</el-button>
+					<el-button type="primary" v-on:click="readyUpdate(scope.row)">资产归还</el-button>
 					
 				</template>
 			</el-table-column>
 		</el-table>
 		<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current" :page-sizes="[1, 2, 3, 4]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
 		</el-pagination>
-
+		<el-dialog :title="deptisadd?'资产归还':'资产归还'" :visible.sync="deptdialog">
+			<el-form :model="idept" :rules="deptrules" ref="deptrefs">
+				
+				<el-form-item label="归还" prop="pstate" label-width="100px">
+					<el-input v-model="idept.pstate" class="inputs" />
+				</el-form-item>
+				<el-form-item label="归还日期" prop="pstorage" label-width="100px">
+					<el-date-picker v-model="idept.pstorage" value-format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="开始时间">
+					</el-date-picker>
+				</el-form-item>
+				
+			</el-form>
+			<div slot="footer" class="dialog-footer">
+				<el-button @click="cancel">取 消</el-button>
+				<el-button type="primary" @click="ensure">确 定</el-button>
+			</div>
+		</el-dialog>
 	</div>
 
 </template>
@@ -53,12 +69,13 @@
 		data() {
 			return {
 				//分页
-				pageSize: 3,
+				pageSize: 1,
 				current: 1,
 				total: 0,
 				//初始数据
 				deptDatadg: [],
-				
+				deptdialog: false,
+				deptisadd: false,
 				idept: {},
 				deptrules: {
 					exDate: [{
@@ -123,6 +140,49 @@
 				/*propertyHttp.list(this.current,this.pageSize).then(res =>{
 					console.log(res)
 				})*/
+			},
+			readyInsert() {
+				this.deptisadd = true;
+				this.deptdialog = true;
+				this.idept = {};
+			},
+			readyUpdate(row) {
+				console.log("即将操作的行数据：", row);
+				this.idept = { ...row
+				};
+				this.deptdialog = true;
+				this.deptisadd = false;
+				this.startdept = this.idept.dName;
+			},
+
+			//取消
+			cancel() {
+				this.deptdialog = false;
+				this.idept = {};
+			},
+			//确定
+			ensure() {
+				this.$refs['deptrefs'].validate(v => {
+					if(v) {
+						if(this.deptisadd) {
+							let param = { ...this.idept
+							};
+							console.log("新建--参数：", param);
+							this.$myhttp.updatePost("property/insert", param, (res) => {
+								this.loadData();
+								this.deptdialog = false;
+							});
+						} else {
+							let param = { ...this.idept
+							};
+							console.log("修改--当前的参数为：", param);
+							this.$myhttp.updatePost("property/update", param, (res) => {
+								this.loadData();
+								this.deptdialog = false;
+							});
+						}
+					}
+				})
 			},
 			//高级查询
 			selecstProperty() {

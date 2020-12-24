@@ -25,7 +25,8 @@ public interface IPropertyMapper {
 
     *//*查询主键id*/
     Integer selectCpid();
-
+    /*资产归还*/
+    int updateProperty(@Param("property") Property property);
 
     /*新增我的资产表*/
     int insertProperty(@Param("property") PropertyVo property);
