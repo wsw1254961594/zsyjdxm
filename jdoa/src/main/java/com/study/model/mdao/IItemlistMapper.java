@@ -24,7 +24,13 @@ public interface IItemlistMapper {
 
     List<Itemlist> SelectStatus(String status);
 
+    List<Itemlist> SelectStageof();
+
     Integer UpdateStatus(String status,Integer iid);
 
     Integer DoInsert(Itemlists it);
+
+    Integer empDoInsert(Integer empno,Integer iid);
+
+    Integer doDelete(Integer iid);
 }

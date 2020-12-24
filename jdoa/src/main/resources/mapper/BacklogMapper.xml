@@ -5,37 +5,43 @@
     <insert id="addBackLog" parameterType="com.study.pojo.Backlog">
         INSERT INTO backlog
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="btetle != null and btetle != ''">
+            <if test="b.btetle != null and b.btetle != ''">
                 btetle,
             </if>
-            <if test="bianhao != null">
+            <if test="b.bianhao != null">
                 bianhao,
             </if>
-            <if test="bcondition != null">
+            <if test="b.bcondition != null">
                 bcondition,
             </if>
-            <if test="baccept != null">
+            <if test="b.baccept != null">
                 baccept,
             </if>
-            <if test="empid != null">
+            <if test="b.empid != null">
                 empid,
+            </if>
+            <if test="b.myemp.empno != null">
+                empno,
             </if>
         </trim>
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
-            <if test="btetle != null and btetle != ''">
-                #{btetle},
+            <if test="b.btetle != null and b.btetle != ''">
+                #{b.btetle},
             </if>
-            <if test="bianhao != null">
-                #{bianhao},
+            <if test="b.bianhao != null">
+                #{b.bianhao},
             </if>
-            <if test="bcondition != null">
-                #{bcondition},
+            <if test="b.bcondition != null">
+                #{b.bcondition},
             </if>
-            <if test="baccept != null">
-                #{baccept},
+            <if test="b.baccept != null">
+                #{b.baccept},
             </if>
-            <if test="empid != null">
-                #{empid},
+            <if test="b.empid != null">
+                #{b.empid},
+            </if>
+            <if test="b.myemp.empno != null">
+                #{b.myemp.empno},
             </if>
         </trim>
     </insert>
@@ -87,4 +93,43 @@
         </where>
         ORDER BY baccept DESC
     </select>
+
+    <select id="getByTitleAndId" resultType="Contract">
+        SELECT con.* FROM contract con
+        INNER JOIN backlog bl ON con.cid = bl.bianhao
+        WHERE bl.bianhao = #{bianhao}
+    </select>
+
+    <update id="editContractState">
+        UPDATE contract SET cstate = 1 WHERE cid = #{cid}
+    </update>
+
+    <select id="getPmidByTitleAndId" resultType="Payment">
+        SELECT pay.* FROM payment pay
+        INNER JOIN backlog bl ON pay.pmid = bl.bianhao
+        WHERE bl.bianhao = #{pmid}
+    </select>
+
+    <update id="editPaymentState">
+        UPDATE payment SET pmstate = 1 WHERE pmid = #{pmid}
+    </update>
+
+    <select id="getPvidByTitleAndId" resultType="Positive">
+        SELECT e.* FROM positive pos
+        INNER JOIN backlog bl ON pos.pvid = bl.bianhao
+        INNER JOIN emp e ON pos.empno = e.empno
+        WHERE bl.bianhao = #{pvid}
+    </select>
+
+    <update id="editPositiveState">
+        UPDATE emp SET state = 2 WHERE empno = #{empno}
+    </update>
+
+
+    <insert id="insert" parameterType="com.study.pojo.Backlog">
+         insert into backlog(btetle,bianhao,bcondition,baccept,empid)
+        values (#{btetle},#{bianhao},#{bcondition}, #{baccept},
+         #{empid}
+        )
+    </insert>
 </mapper>

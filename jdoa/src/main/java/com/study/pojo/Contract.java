@@ -28,6 +28,7 @@ public class Contract {
     private List<Payment> payments;
     private List<Purchaseinfo> purchaseinfos;
     private Supplier mysupplier;
+    private List<Contractchange> changes;
 
     public Contract() {
     }
@@ -228,5 +229,14 @@ public class Contract {
 
     public void setMysupplier(Supplier mysupplier) {
         this.mysupplier = mysupplier;
+    }
+
+    @OneToMany(mappedBy = "mycontract")
+    public List<Contractchange> getChanges() {
+        return changes;
+    }
+
+    public void setChanges(List<Contractchange> changes) {
+        this.changes = changes;
     }
 }

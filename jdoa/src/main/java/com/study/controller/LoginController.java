@@ -2,12 +2,10 @@ package com.study.controller;
 
 import com.study.config.MyResult;
 import com.study.pojo.Emp;
+import com.study.services.EmpServices;
 import com.study.services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author: pengjia
@@ -17,10 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
     @Autowired
-    private LoginService empService;
+    private LoginService loginService;
+    @Autowired
+    private EmpServices empServices;
 
     @PostMapping("/login")
     public MyResult login(@RequestBody Emp emp) {
-        return empService.login(emp);
+        return loginService.login(emp);
+    }
+
+    @GetMapping("/emp_detail")
+    public MyResult getEmpDetail(Integer empno) {
+        return empServices.getEmpDetail(empno);
     }
 }

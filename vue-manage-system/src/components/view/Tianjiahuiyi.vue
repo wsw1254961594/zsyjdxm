@@ -44,7 +44,8 @@
 		   			         <el-date-picker
 		   			           v-model="value1"
 		   			           type="datetime"
-		   			           placeholder="选择日期时间">
+		   			           placeholder="选择日期时间"
+							   :picker-options="pickerOptions1">
 		   			         </el-date-picker>
 		   			       </div>		      
 		   			    </el-form-item>
@@ -57,7 +58,8 @@
 		   			     		    <el-date-picker
 		   			     		      v-model="value2"
 		   			     		      type="datetime"
-		   			     		      placeholder="选择日期时间">
+		   			     		      placeholder="选择日期时间"
+									  :picker-options="pickerOptions1">
 		   			     		    </el-date-picker>
 		   			     		  </div>    
 		   			    </el-form-item>
@@ -69,7 +71,7 @@
 		   			   <el-form-item label="会议类型" label-width="100px">			      
 		   			     
 		   			         <el-select  v-model="row.xueli" placeholder="请选择活动区域">
-		   			           <el-option label="部门会议" value="部门会议"></el-option>
+		   			           
 		   			           <el-option label="临时会议" value="临时会议"></el-option>
 		   			      	 <el-option label="项目会议" value="项目会议"></el-option>
 		   			      	 <el-option label="办公室会议" value="办公室会议"></el-option>
@@ -128,6 +130,11 @@
   export default{
       data(){
         return {
+			pickerOptions1: {
+			       disabledDate(time) {
+			          return time.getTime() < Date.now() - 8.64e7;
+			        },
+			      }       ,
 		value3:'',
 		value4:[],
 		contract:[],
@@ -162,7 +169,7 @@
 					 this.row.fbz=this.$store.state.ename;
 					 this.empid=this.$store.state.empno;
 					 console.log("12" ,this.$store.state.empno)
-					this.$axios.post("http://localhost:8888/huiyi/xla").then(r => {
+					this.$axios.post("http://localhost:8888/huiyi/x").then(r => {
 						this.dz = r.data;
 						console.log("11" ,r)
 					}).catch(e => {
@@ -222,15 +229,17 @@
 							this.dzid=this.value3;
 						this.$axios.post("http://localhost:8888/huiyi/xgdzid?dzid="+this.dzid)
 								.then(r => {
-
+								this.$router.push('/chaxunhy')
 								}).catch(e => {
 
 								});
 
 									this.$message({
+										
 									          message: '创建成功，等待审批',
 									          type: 'success'
 									        });
+											
 				 },
          
         }, created() {

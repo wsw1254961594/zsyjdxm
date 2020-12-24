@@ -1,5 +1,8 @@
 package com.study.vo;
 
+import com.study.pojo.Emp;
+import com.study.pojo.Supplier;
+
 import java.math.BigDecimal;
 import java.sql.Date;
 
@@ -18,14 +21,23 @@ public class contractlist {
     private Date cday;
     private Integer cstate;
     private Integer money;
-    private String sname;
+    private Supplier mysupplier;
+    private Emp myemp;
 
-    public String getSname() {
-        return sname;
+    public Supplier getMysupplier() {
+        return mysupplier;
     }
 
-    public void setSname(String sname) {
-        this.sname = sname;
+    public void setMysupplier(Supplier mysupplier) {
+        this.mysupplier = mysupplier;
+    }
+
+    public Emp getMyemp() {
+        return myemp;
+    }
+
+    public void setMyemp(Emp myemp) {
+        this.myemp = myemp;
     }
 
     public Integer getCid() {

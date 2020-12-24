@@ -1,5 +1,7 @@
 package com.study.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -22,6 +24,7 @@ public class Posts {
     private Emp myemp;
 
     @Id
+    @JsonFormat(pattern ="yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     @Column(name = "postid", nullable = false)
     public Integer getPostid() {
         return postid;

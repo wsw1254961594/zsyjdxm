@@ -58,6 +58,14 @@ public class ItemlistServices {
         return new PageInfo<>(list);
     }
 
+    /*分页查询项目阶段为项目验收的所有项目*/
+    public PageInfo<Itemlist> SelectStageof(Integer pageNo, Integer pageSize){
+        System.out.println("分页业务类："+pageNo+"---"+pageSize);
+        PageHelper.startPage(pageNo,pageSize);
+        List<Itemlist> list = mapper.SelectStageof();
+        return new PageInfo<>(list);
+    }
+
     /*根据id修改项目状态*/
     public Integer UpdateStatus(String status,Integer iid){
         return mapper.UpdateStatus(status,iid);
@@ -66,5 +74,15 @@ public class ItemlistServices {
     /*新增项目*/
     public Integer DoInsert(Itemlists it){
         return mapper.DoInsert(it);
+    }
+
+    /*新增项目成员*/
+    public Integer empDoInsert(Integer empno,Integer iid){
+        return mapper.empDoInsert(empno,iid);
+    }
+
+    /*根据id删除项目*/
+    public Integer doDelete(Integer iid){
+        return mapper.doDelete(iid);
     }
 }

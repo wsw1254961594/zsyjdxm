@@ -53,7 +53,7 @@
             title: '系统首页'
           },
           {
-            icon: 'el-icon-s-order',
+            icon: 'el-icon-s-check',
             index: '4',
             title: '流程管理',
             subs: [
@@ -82,14 +82,10 @@
             ]
           },
           {
-            icon: 'el-icon-s-order',
+            icon: 'el-icon-tickets',
             index: '5',
             title: '合同管理',
-            subs: [
-              {
-                index: 'contractmenu',
-                title: '合同首页'
-              },
+            subs: [          
               {
                 index: 'contractadd',
                 title: '合同起草'
@@ -109,15 +105,11 @@
                   {
                     index: 'contractpayment',
                     title: '付款管理'
-                  },
-                  {
-                    index: 'shoukuan',
-                    title: '收款管理'
                   }
                 ]
               },
               {
-                index: 'biangeng',
+                index: 'contractchanges',
                 title: '合同变更'
               },
               {
@@ -127,7 +119,7 @@
             ]
           },
           {
-            icon: 'el-icon-s-order',
+            icon: 'el-icon-user-solid',
             index: '6',
             title: '人事关系',
             subs: [
@@ -144,10 +136,6 @@
                 title: '员工转正'
               },
               {
-                index: 'diaogang',
-                title: '员工调岗'
-              },
-              {
                 index: 'lizhi',
                 title: '员工离职'
               },
@@ -158,7 +146,7 @@
             ]
           },
           {
-            icon: 'el-icon-s-order',
+            icon: 'el-icon-collection',
             index: '7',
             title: '人事档案',
             subs: [
@@ -173,7 +161,7 @@
             ]
           },
           {
-            icon: 'el-icon-s-order',
+            icon: 'el-icon-s-management',
             index: '8',
             title: '会议管理',
             subs: [
@@ -200,7 +188,7 @@
             ]
           },
           {
-            icon: 'el-icon-s-order',
+            icon: 'el-icon-share',
             index: '9',
             title: '资产管理',
             subs: [
@@ -227,13 +215,13 @@
             ]
           },
           {
-            icon: 'el-icon-s-order',
+            icon: 'el-icon-coordinate',
             index: '10',
             title: '项目管理',
             subs: [
               {
                 index: '/newitem',
-                title: '新建项目'
+                title: '新建'
               },
               {
                 index: '/project',
@@ -244,7 +232,7 @@
                 title: '查询项目'
               },
               {
-                index: 'renwuzhixing',
+                index: '/taskexecution',
                 title: '任务执行'
               },
               {
@@ -252,13 +240,11 @@
                 title: '查询任务'
               },
               {
-                index: 'xiangmuyanshou',
+                index: '/acceptance',
                 title: '项目验收'
               }
             ]
           },
-
-
           /*{
             icon: 'el-icon-phone',
             index: 'table',
@@ -368,7 +354,7 @@
 
 <style scoped>
 
-	
+
   .sidebar {
     display: block;
     position: absolute;

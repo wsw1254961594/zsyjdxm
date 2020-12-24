@@ -1,5 +1,6 @@
 package com.study.model.mdao;
 
+import com.study.pojo.Emp;
 import com.study.pojo.Jiaban;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +16,5 @@ public interface IOverTimeMapper {
     int addOverTime(Jiaban jiaban);
     Jiaban getJiaBan(Integer jnid);
     List<Jiaban> listJiaBan(Jiaban jiaban);
+    Emp getByJnIdToLeaves(Integer jnid);
 }

@@ -91,6 +91,10 @@ const routes = [
 	    component: () => import('../components/view/ContractAdd'),
 	    meta: {title: '合同起草'}
 	  },{
+	    path: '/changes',
+	    component: () => import('../components/view/ContractChange'),
+	    meta: {title: '变更申请'}
+	  },{
 	    path: '/contractbacklog',
 	    component: () => import('../components/view/ContractBacklog'),
 	    meta: {title: '我的申请'}
@@ -102,7 +106,12 @@ const routes = [
 	    path: '/cgpost',
 	    component: () => import('../components/view/ContractCgPost'),
 	    meta: {title: '采购合同申请'}
+	  },{
+	    path: '/contractchanges',
+	    component: () => import('../components/view/Changes'),
+	    meta: {title: '采购合同申请'}
 	  },
+
         {
             path: '/leaves',
             component: () => import('../components/view/Leaves'),
@@ -142,7 +151,22 @@ const routes = [
         path: '/daiban',
         component: () => import('../components/view/BackLog'),
         meta: {title: '我的待办'}
-      }
+      },{
+	    path: '/paymentpost',
+	    component: () => import('../components/view/PaymentAdd'),
+	    meta: {title: '新建付款'}
+	  
+      },
+	   {
+	    path: '/taskexecution',
+	    component: () => import('../components/view/taskexecution'),
+	    meta: {title: '任务执行'}
+	  },
+	  {
+	    path: '/acceptance',
+	    component: () => import('../components/view/Acceptance'),
+	    meta: {title: '项目验收'}
+	  } 
     ]
   },
   {

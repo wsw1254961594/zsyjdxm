@@ -83,4 +83,16 @@ public class ContractController {
         MyResult mr=MyResult.returnObj(info);
         return mr;
     }
+
+    @RequestMapping("consucc")
+    //合同结项
+    public void conSucc(Integer cid){
+        cs.conSucc(cid);
+    }
+
+    @RequestMapping("condel")
+    //合同结项
+    public void conDel(Integer cid){
+        cs.conDel(cid);
+    }
 }

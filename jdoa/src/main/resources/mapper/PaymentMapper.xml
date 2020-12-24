@@ -6,25 +6,43 @@
     
   <!--实际付款金额-->
     <select id="selectcalNum" resultType="java.lang.Integer">
-        select sum(pmmoney) from payment
+        select sum(pmmoney) from payment where pmstate=1
     </select>
 
     <resultMap id="payment" type="com.study.pojo.Payment">
         <id property="pmid" column="pmid"/>
+        <result property="pmname" column="pmname"/>
         <result property="pmdate" column="pmdate"/>
         <result property="pmmoney" column="pmmoney"/>
         <result property="pmpayee" column="pmpayee"/>
+        <result property="pmstate" column="pmstate"/>
         <association property="mycontract" javaType="com.study.pojo.Contract">
             <id property="cid" column="cid"/>
             <result property="ctitle" column="ctitle"/>
             <result property="cnumber" column="cnumber"/>
         </association>
     </resultMap>
-
-<select id="selectAll" resultMap="payment">
+    <!--查询所有付款信息-->
+    <select id="selectAll" resultMap="payment">
         select * from payment p
         left join contract c on c.cid=p.cid
+        where p.pmstate=1 order by p.pmid desc
+    </select>
+
+    <!--添加付款记录-->
+    <insert id="insertPay">
+        insert into payment values(#{p.pmid},#{p.myemp.empno},#{p.mycontract.cid},#{p.pmname},#{p.pmdate},#{p.pmmoney},#{p.pmpayee},#{p.pmstate})
+    </insert>
+
+    <!--查询最新付款id-->
+    <select id="selectNewPmid" resultType="java.lang.Integer">
+        select max(pmid) from payment
+    </select>
+
+
+<select id="getByPmIdToLeaves" resultType="Emp">
+    SELECT e.* FROM payment pm
+    INNER JOIN emp e ON e.empno = pm.empno
+    WHERE pm.pmid = #{pmid}
 </select>
-
-
 </mapper>

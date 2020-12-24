@@ -15,5 +15,14 @@ export const empHttp = {
       }
     }
     return postJson(params)
+  },
+  getEmpDetail:function (empno) {
+    let params = {
+      url:'/emp_detail',
+      data:{
+        'empno':empno
+      }
+    }
+    return get(params)
   }
 }

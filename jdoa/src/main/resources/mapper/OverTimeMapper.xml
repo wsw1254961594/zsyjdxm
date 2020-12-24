@@ -70,4 +70,10 @@
             </if>
         </trim>
     </insert>
+
+    <select id="getByJnIdToLeaves" resultType="Emp">
+        SELECT e.* FROM jiaban j
+        INNER JOIN emp e ON e.empno = j.empno
+        WHERE j.jnid = #{jnid}
+    </select>
 </mapper>

@@ -33,6 +33,10 @@
         #{planenddate},null,null,#{empid})
     </insert>
 
+    <insert id="empDoInsert">
+        insert into empitem values(#{empno},#{iid},null)
+    </insert>
+
     <select id="SelectAll" resultMap="ItemlistResult">
             select i.* from itemlist i left join emp e on i.empid=e.empno
     </select>
@@ -49,10 +53,17 @@
            select i.* from itemlist i left join emp e on i.empid=e.empno where status LIKE #{status}
     </select>
 
+    <select id="SelectStageof" resultMap="ItemlistResult">
+            select i.* from itemlist i left join emp e on i.empid=e.empno where stageof='项目验收'
+    </select>
+
     <update id="UpdateStatus" parameterType="com.study.pojo.Itemlist">
                 UPDATE itemlist SET status=#{status} WHERE iid=#{iid}
     </update>
 
+    <delete id="doDelete">
+        delete from itemlist where iid=#{iid}
+    </delete>
 
 
 </mapper>

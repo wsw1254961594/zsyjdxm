@@ -141,14 +141,13 @@
 					               <el-dropdown-menu slot="dropdown" style="font-size: 17px;margin-right: -70px;width: 100px;text-align: center;float: right;">
 					                 	<el-dropdown-item @click.native="edit()"><i class="el-icon-info" style="color: #E6A23C;font-size: 13px;">查看合同</i></el-dropdown-item>
 					                 	
-										<span v-if="scope.row.cstate!=2">
-											
+										<span v-if="scope.row.cstate!=2&&scope.row.cstate!=3">
+									
 											<span v-if="Math.floor(scope.row.money/scope.row.cmoney*100)==100">
-											<el-dropdown-item @click.native="edit()"><i class="el-icon-check" style="color: #67C23A;font-size: 13px;">合同结项</i></el-dropdown-item>
+											<el-dropdown-item @click.native="consucc(scope.row)"><i class="el-icon-check" style="color: #67C23A;font-size: 13px;">合同结项</i></el-dropdown-item>
 											</span>
 											<span v-else>
-												<el-dropdown-item @click.native="edit()"><i class="el-icon-plus" style="color: #1E90FF;font-size: 13px;">新建付款</i></el-dropdown-item>
-												<el-dropdown-item @click.native="edit()"><i class="el-icon-close" style="color: #d93e34;font-size: 13px;">合同解除</i></el-dropdown-item>																						
+												<el-dropdown-item @click.native="condel(scope.row)"><i class="el-icon-close" style="color: #d93e34;font-size: 13px;">合同解除</i></el-dropdown-item>																						
 											</span>
 											
 										</span>
@@ -166,7 +165,7 @@
 					   </div>
 					</div>
 				</el-tab-pane>
-			    <el-tab-pane label="销售类合同" name="first">
+			 <!--   <el-tab-pane label="销售类合同" name="first">
 					<div id="rigth_select">
 					     <el-row>
 					   					      <el-col :span="4">
@@ -243,7 +242,7 @@
 					       
 					   </div>
 					</div>
-				</el-tab-pane>
+				</el-tab-pane> -->
 			  
 			  </el-tabs>
 		</div>
@@ -364,6 +363,16 @@
 				 }) 
 			  }
 			 
+		  },/* 合同结项 */
+		  consucc(r){
+			  r.cont='结项'
+			  r.type='合同结项';
+			 this.$router.push({path:'/changes',query:{params:r}})
+		  },/* 合同解除 */
+		  condel(r){
+			  r.cont='解除'
+			  r.type='合同解除';
+			this.$router.push({path:'/changes',query:{params:r}})
 		  }
 	    },
 		created(){

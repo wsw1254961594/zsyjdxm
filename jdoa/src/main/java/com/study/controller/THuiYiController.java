@@ -65,7 +65,7 @@ public class THuiYiController{
         return hys.dizhis(dzid);
     }
 
-    //下拉框的地址
+    //地址
     @RequestMapping("/xla")
     public List<Dizhi> xialakuang(){
         return hys.xiala();
@@ -75,7 +75,27 @@ public class THuiYiController{
     public  List<Emp> yyg(){
         return  hys.yg();
     }
+    //查询空闲的会议室
+    @RequestMapping("/x")
+    public List<Dizhi> xialakuangs(){
+        return hys.x();
+    }
+    @RequestMapping("/jieshu")
+    public Integer jie(@RequestParam(required = false,value = "ids") Integer ids){
+        return hys.jieshu(ids);
+    }
 
-
+    //查询会议详细信息
+    @RequestMapping("/mohuhy")
+    public PageInfo<Xiangqing> selectmohu(@RequestParam(value = "pageNum", required = false) Integer pageNo,
+                                     @RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                          @RequestParam(value = "empname", required = false) String empname,
+                                          @RequestParam(value = "hyname", required = false) String hyname) {
+        System.out.println("dd"+empname);
+        System.out.println("dd"+hyname);
+        Integer no = (pageNo != null && pageNo >= 1) ? pageNo : 1;
+        Integer size = (pageSize != null) ? pageSize : 5;
+        return hys.selcemohu(no, size,empname,hyname);
+    }
 
 }

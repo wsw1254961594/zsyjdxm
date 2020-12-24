@@ -19,6 +19,16 @@ public class Backlog {
     private Integer empid;
     private Approval myapproval;
     private String mgrResp;
+    private String applicantResp;
+    private Emp myemp;
+
+    public String getApplicantResp() {
+        return applicantResp;
+    }
+
+    public void setApplicantResp(String applicantResp) {
+        this.applicantResp = applicantResp;
+    }
 
     public String getMgrResp() {
         return mgrResp;
@@ -113,5 +123,15 @@ public class Backlog {
 
     public void setMyapproval(Approval myapproval) {
         this.myapproval = myapproval;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "empno", referencedColumnName = "empno")
+    public Emp getMyemp() {
+        return myemp;
+    }
+
+    public void setMyemp(Emp myemp) {
+        this.myemp = myemp;
     }
 }

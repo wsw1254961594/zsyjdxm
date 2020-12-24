@@ -114,6 +114,7 @@ public class ContractServices {
         backlog.setBcondition(0);
         backlog.setBaccept(DateUtils.getDate());
         backlog.setEmpid(emp.getMgr());
+        backlog.setMyemp(emp);
         int addBackLog = backLogMapper.addBackLog(backlog);
     }
 
@@ -123,5 +124,15 @@ public class ContractServices {
         List<Contract> list=mapper.selectLogContract(empno);
         PageInfo<Contract> info=new PageInfo<>(list);
         return info;
+    }
+
+    //合同结项
+    public void conSucc(Integer cid){
+        mapper.conSucc(cid);
+    }
+
+    //合同解除
+    public void conDel(Integer cid){
+        mapper.conDel(cid);
     }
 }
