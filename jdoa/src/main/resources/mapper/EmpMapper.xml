@@ -118,7 +118,7 @@
     </select>
 
     <update id="update" parameterType="com.study.pojo.Emp">
-        update emp set state=3 where empno=#{empno}
+        update emp set state=2 where empno=#{empno}
     </update>
 
     <select id="selectid" resultType="java.lang.Integer">
@@ -129,6 +129,9 @@
         update emp set state=4 where empno=#{empno}
     </update>
 
+    <update id="updatelizhi" parameterType="com.study.pojo.Emp">
+        update emp set state=5 where empno=#{empno}
+    </update>
 
     <select id="getEmpDetail" resultMap="empresult">
         SELECT e.*,d.*

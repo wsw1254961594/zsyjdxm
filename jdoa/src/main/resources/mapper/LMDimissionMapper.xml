@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.ILMdimissionMapper">
+    <resultMap id="missionResult" type="com.study.pojo.Dimission">
+        <id property="did" column="did"/>
+        <result property="empno" column="empno"/>
+        <result property="ddate" column="ddate"/>
+        <result property="dcause" column="dcause"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.study.pojo.Dimission">
+          insert into dimission(ddate,dcause,empno)
+          values (#{ddate},#{dcause},
+         #{myemp.empno,jdbcType=INTEGER})
+    </insert>
+
+    <select id="selectmax" resultType="java.lang.Integer">
+        select max(did) from dimission
+    </select>
+
+</mapper>

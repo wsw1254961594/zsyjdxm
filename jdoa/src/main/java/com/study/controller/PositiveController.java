@@ -41,33 +41,13 @@ public class PositiveController {
 
     //新增一条转正申请
     @RequestMapping("/add")
-    public MyResult add(@RequestParam("prequire") String prequire,
+    public MyResult add(
                         @RequestParam("empno") Integer empno
                         ){
         Emp emp=es.selectByeid(empno);
         //修改员工状态
         Integer integer=es.update(empno);
         System.out.println(empno+"empno");
-        Positive positive=new Positive();
-        positive.setPrequire(prequire);
-        positive.setPdate(new Timestamp(System.currentTimeMillis()));
-        positive.setPtitle(emp.getEname()+"转正申请");
-        positive.setMyemp(emp);
-        Integer i=ps.doinsert(positive);
-        if (i>0){
-            /*新增待办表*/
-            Backlog backlog = new Backlog();
-            backlog.setBtetle("转正申请");
-            Integer pp=ps.selectmax();
-            backlog.setBianhao(pp);
-
-            backlog.setBcondition(0);
-            backlog.setBaccept(DateUtils.getDate());
-            backlog.setEmpid(emp.getMgr());
-            int addBackLog = backLogMapper.addBackLog(backlog);
-            return MyResult.ok("申请成功");
-        }else {
-            return MyResult.ERROR("申请失败");
-        }
+        return MyResult.ok("转正成功");
     }
 }

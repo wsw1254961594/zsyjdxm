@@ -40,7 +40,14 @@ public class EmpServices {
             return -1;
         }
     }
-
+    public Integer updatelizhi(Integer empno){
+        try {
+            return mapper.updatelizhi(empno);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
     public  Integer updatestate(Integer empno){
         try {
             return mapper.updatestate(empno);
