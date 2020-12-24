@@ -84,10 +84,6 @@ public class Backlog {
         return baccept;
     }
 
-    public void setBaccept(java.sql.Date baccept) {
-        this.baccept = baccept;
-    }
-
     public void setBaccept(Date baccept) {
         this.baccept = baccept;
     }
