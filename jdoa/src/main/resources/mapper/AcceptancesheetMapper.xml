@@ -27,4 +27,12 @@
             select a.* from acceptancesheet a left join itemlist i on i.iid=a.iid
     </select>
 
+    <insert id="DoInsert">
+        insert into acceptancesheet values(null,#{pname},#{approvalstatus},#{iid})
+    </insert>
+
+    <delete id="doDelete">
+        delete from acceptancesheet where piid=#{piid}
+    </delete>
+
 </mapper>

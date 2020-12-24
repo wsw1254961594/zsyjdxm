@@ -166,6 +166,11 @@ const routes = [
 	    path: '/acceptance',
 	    component: () => import('../components/view/Acceptance'),
 	    meta: {title: '项目验收'}
+	  } ,
+	  {
+	    path: '/queryitem',
+	    component: () => import('../components/view/Queryitem'),
+	    meta: {title: '查询项目'}
 	  } 
     ]
   },

@@ -23,11 +23,21 @@ public class AcceptancesheetServices {
     @Autowired
     IAcceptancesheetMapper mapper;
 
-    /*分页查询所有项目*/
+    /*分页查询所有验收单*/
     public PageInfo<Acceptancesheet> SelectByPager(Integer pageNo, Integer pageSize){
         System.out.println("分页业务类："+pageNo+"---"+pageSize);
         PageHelper.startPage(pageNo,pageSize);
         List<Acceptancesheet> list = mapper.selectAll();
         return new PageInfo<>(list);
+    }
+
+    /*新增验收单*/
+    public Integer DoInsert(String pname,String approvalstatus,Integer iid){
+        return mapper.DoInsert(pname, approvalstatus, iid);
+    }
+
+    /*根据id删除验收单*/
+    public Integer doDelete(Integer piid){
+        return mapper.doDelete(piid);
     }
 }

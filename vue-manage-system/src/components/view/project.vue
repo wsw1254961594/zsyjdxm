@@ -13,7 +13,7 @@
 		    <el-button slot="append" icon="el-icon-search" @click="open"></el-button>
 		  </el-input>
 		</div>
-		<div style="width: 1200px; margin-top: 5px; margin-left: 40px;">
+		<div style="width: 1200px; margin-top: 10px; margin-left: 40px;">
 		<el-table :data="List">
 		      <el-table-column label="项目名称" prop="pname"></el-table-column>
 			  <el-table-column label="项目类型" prop="types"></el-table-column>
@@ -37,7 +37,7 @@
 		</el-table>
 		    <!-- current-page	当前页数，支持 .sync 修饰符-->
 		    <el-pagination
-			style="margin-left: 720px;"
+			style="margin-left: 680px;"
 		          @size-change="handleSizeChange"
 		          @current-change="handleCurrentChange"
 		          :current-page="current"
@@ -46,7 +46,6 @@
 		          layout="total, sizes, prev, pager, next, jumper"
 		          :total="total">
 		        </el-pagination>
-		
 		  </div>
 	</div>
 </template>
@@ -139,7 +138,7 @@
 							.then(r=>{
 							  if(r.status===200){
 								 this.loadData();
-							    alert(row.pname+"项目修改为正常")
+								 this.$message(row.pname+"项目修改为正常");
 							  }
 							  })
 							  }else{
@@ -157,11 +156,11 @@
 						  .then(r=>{
 						  	 if(r.status===200){
 						  	this.loadData();
-						  	alert(row.pname+"项目修改为延期")
+						  	this.$message(row.pname+"项目修改为延期")
 						   }
 						   })
 						   }else{
-						   		alert(row.pname+"项目已完成")
+						   		this.$message(row.pname+"项目已完成")
 						   }
 						  },
 						  dj(row){
@@ -175,11 +174,11 @@
 						  		.then(r=>{
 								if(r.status===200){
 						  		 this.loadData();
-								alert(row.pname+"项目修改为冻结")
+								this.$message(row.pname+"项目修改为冻结")
 							}
 							})
 							}else{
-								 alert(row.pname+"项目已完成")
+								 this.$message(row.pname+"项目已完成")
 							}
 						  },
 						 sc(row) {
@@ -191,7 +190,7 @@
 							 		.then(r=>{
 							 	if(r.status===200){
 							 	 this.loadData();
-							 alert("删除成功")
+							 this.$message("删除成功")
 							 }
 							 })
 						 }

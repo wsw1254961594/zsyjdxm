@@ -228,16 +228,12 @@
                 title: '项目执行',
               },
               {
-                index: 'chaxunxiangmu',
+                index: '/queryitem',
                 title: '查询项目'
               },
               {
                 index: '/taskexecution',
                 title: '任务执行'
-              },
-              {
-                index: 'chaxunrenwu',
-                title: '查询任务'
               },
               {
                 index: '/acceptance',

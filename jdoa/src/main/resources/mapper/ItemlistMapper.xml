@@ -41,16 +41,21 @@
             select i.* from itemlist i left join emp e on i.empid=e.empno
     </select>
 
+    <select id="SelectSs" resultMap="ItemlistResult">
+            select i.* from itemlist i left join emp e on i.empid=e.empno where i.pname LIKE #{pname}
+            or i.types = #{types} or i.status = #{status} or i.jobtype = #{jobtype}
+    </select>
+
     <select id="SelectPname" resultMap="ItemlistResult">
-            select i.* from itemlist i left join emp e on i.empid=e.empno where pname LIKE #{pname}
+            select i.* from itemlist i left join emp e on i.empid=e.empno where i.pname LIKE #{pname}
     </select>
 
     <select id="SelectTypes" resultMap="ItemlistResult">
-           select i.* from itemlist i left join emp e on i.empid=e.empno where types LIKE #{types}
+           select i.* from itemlist i left join emp e on i.empid=e.empno where i.types LIKE #{types}
     </select>
 
     <select id="SelectStatus" resultMap="ItemlistResult">
-           select i.* from itemlist i left join emp e on i.empid=e.empno where status LIKE #{status}
+           select i.* from itemlist i left join emp e on i.empid=e.empno where i.status LIKE #{status}
     </select>
 
     <select id="SelectStageof" resultMap="ItemlistResult">
@@ -59,6 +64,10 @@
 
     <update id="UpdateStatus" parameterType="com.study.pojo.Itemlist">
                 UPDATE itemlist SET status=#{status} WHERE iid=#{iid}
+    </update>
+
+    <update id="UpdateStageof" parameterType="com.study.pojo.Itemlist">
+                UPDATE itemlist SET Stageof='项目结束' WHERE iid=#{iid}
     </update>
 
     <delete id="doDelete">

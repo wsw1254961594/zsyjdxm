@@ -38,12 +38,17 @@
             select * from tasklist t left join itemlist i on i.iid=t.iid
     </select>
 
+    <select id="selectMn" resultMap="TasklistResult">
+            select * from tasklist t left join itemlist i on i.iid=t.iid where t.mname LIKE #{mname}
+            and t.stage LIKE #{stage} and i.pname LIKE #{pname}
+    </select>
+
     <select id="selectMname" resultMap="TasklistResult">
-            select * from tasklist t left join itemlist i on i.iid=t.iid where mname LIKE #{mname}
+            select * from tasklist t left join itemlist i on i.iid=t.iid where t.mname LIKE #{mname}
     </select>
 
     <select id="selectStage" resultMap="TasklistResult">
-            select * from tasklist t left join itemlist i on i.iid=t.iid where stage LIKE #{stage}
+            select * from tasklist t left join itemlist i on i.iid=t.iid where t.stage LIKE #{stage}
     </select>
 
     <select id="selectPname" resultMap="TasklistResult">
