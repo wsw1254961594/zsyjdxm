@@ -244,9 +244,7 @@
 			
 		},
 		mysupplier:{},
-		purchaseinfos:[]
-		
-			
+		purchaseinfos:[]		
 		},
          tableData:[],
 		 productcg:[],
@@ -265,7 +263,7 @@
 		         }, {
 		           value: 'E',
 		           label: 'E'
-		         }]
+		         }],
         }
         },methods:{
 			//添加合同信息
@@ -273,8 +271,6 @@
 				this.contract.cmoney=this.sumMoney;
 				this.contract.myemp.empno=this.$store.state.empno;
 				this.tableData.forEach(i=>{
-					console.log("21",i)
-					console.log("22",i.num);
 					this.contract.purchaseinfos.push({	
 						pnum:i.num,
 						myproductcg:i

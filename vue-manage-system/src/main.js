@@ -6,12 +6,13 @@ import axios from 'axios'
 Vue.prototype.$axios = axios;
 import Qs from 'qs'
 Vue.prototype.$Qs=Qs
+
 //element
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css' //默认主题
 //echarts
 import echarts from 'echarts'
-Vue.prototype.$echarts = echarts
+Vue.prototype.$echarts = echarts;
 
 import {dateFormat} from "./components/common/shijian.js"
 Vue.filter('dateFormat',dateFormat)

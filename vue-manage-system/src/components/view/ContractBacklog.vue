@@ -10,7 +10,7 @@
             <el-row>
               <el-col :span="4">
                 <el-input
-                    placeholder="岗位名称"
+                    placeholder="合同名称"
                     prefix-icon="el-icon-search"
                    
                     @change="getPostBy"
@@ -20,23 +20,14 @@
               <el-col :span="0.5">&nbsp;</el-col>
               <el-col :span="4">
                 <el-input
-                    placeholder="职位名称"
+                    placeholder="合同编号"
                      prefix-icon="el-icon-search"
                   
                     @change="getPostBy"
                     clearable>
                 </el-input>
               </el-col>
-               <el-col :span="0.5">&nbsp;</el-col>
-              <el-col :span="4">
-                <el-input
-                    placeholder="部门名称"
-                    prefix-icon="el-icon-search"
-                 
-                    @change="getPostBy"
-                    clearable>
-                </el-input>
-              </el-col>
+           
               
             </el-row>
 

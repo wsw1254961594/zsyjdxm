@@ -133,7 +133,6 @@
 				this.payment.mycontract=this.contract
 				this.payment.myemp=this.contract.myemp;
 				this.payment.pmmoney=this.pmmoney;
-				alert(this.contract.mysupplier.sname);
 				this.payment.pmpayee=this.contract.mysupplier.sname;
 				let url="http://localhost:8888/payment/addpay";
 				this.$axios.post(url,this.payment).then(r=>{
