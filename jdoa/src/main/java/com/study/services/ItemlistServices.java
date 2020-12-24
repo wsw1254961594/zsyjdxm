@@ -76,6 +76,11 @@ public class ItemlistServices {
         return mapper.DoInsert(it);
     }
 
+    /*新增项目成员*/
+    public Integer empDoInsert(Integer empno,Integer iid){
+        return mapper.empDoInsert(empno,iid);
+    }
+
     /*根据id删除项目*/
     public Integer doDelete(Integer iid){
         return mapper.doDelete(iid);

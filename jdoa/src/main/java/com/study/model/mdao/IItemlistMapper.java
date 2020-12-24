@@ -30,5 +30,7 @@ public interface IItemlistMapper {
 
     Integer DoInsert(Itemlists it);
 
+    Integer empDoInsert(Integer empno,Integer iid);
+
     Integer doDelete(Integer iid);
 }
