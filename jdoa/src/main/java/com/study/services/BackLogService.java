@@ -72,23 +72,23 @@ public class BackLogService {
         if (backLogResult.getBtetle().equals("合同解除申请")) {
             Contractchange byContractByBianhao = backLogMapper.getByContractChangeByBianhao(backLogResult.getBianhao());
 
-            int editContractState = backLogMapper.editContractState(byContractByBianhao.getMycontract().getCid());
+            int editContractState = backLogMapper.relieveContract(byContractByBianhao.getMycontract().getCid(),3);
             if (editContractState != 1) {
                 return MyResult.ERROR("合同解除失败");
             }
-            int editContractChange = backLogMapper.editContractChange(byContractByBianhao.getChid(), 3);
+            int editContractChange = backLogMapper.editContractChange(byContractByBianhao.getChid());
             if (editContractChange != 1) {
                 return MyResult.ERROR("合同解除失败");
             }
         }
         if (backLogResult.getBtetle().equals("合同结项申请")) {
-            Contractchange byContractByBianhao = backLogMapper.getByContractChangeByBianhao(backLogResult.getBianhao());
+            Contractchange byContractByBianhao = backLogMapper.selectByContractChangeByBianhao(backLogResult.getBianhao());
 
-            int editContractState = backLogMapper.editContractState(byContractByBianhao.getMycontract().getCid());
+            int editContractState = backLogMapper.relieveContract(byContractByBianhao.getMycontract().getCid(),2);
             if (editContractState != 1) {
                 return MyResult.ERROR("合同解除失败");
             }
-            int editContractChange = backLogMapper.editContractChange(byContractByBianhao.getChid(), 2);
+            int editContractChange = backLogMapper.editContractChange(byContractByBianhao.getChid());
             if (editContractChange != 1) {
                 return MyResult.ERROR("合同解除失败");
             }

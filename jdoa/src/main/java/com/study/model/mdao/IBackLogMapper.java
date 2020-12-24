@@ -83,16 +83,15 @@ public interface IBackLogMapper {
      * @param chid
      * @return
      */
-    int editContractChange(@Param("chid") Integer chid,
-                           @Param("cstate") Integer cstate);
+    int editContractChange( Integer chid );
 
 
-    /**
+  /*  *
      * 合同解除修改为3
      * @param cid
      * @return
      */
-    int relieveContract(Integer cid);
+    int relieveContract(@Param("cid") Integer cid,@Param("cstate")Integer cstate);
 
     /**
      * 合同结项修改为2
@@ -101,6 +100,6 @@ public interface IBackLogMapper {
      */
     int conclusionContract(Integer cid);
 
-    int selectByContractChangeByBianhao(Integer bianhao);
+    Contractchange selectByContractChangeByBianhao(Integer bianhao);
 
 }

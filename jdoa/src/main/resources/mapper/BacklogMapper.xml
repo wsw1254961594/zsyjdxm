@@ -123,7 +123,7 @@
     </select>
 
     <update id="editContractChange">
-        UPDATE contractchange SET cstate = #{cstate}
+        UPDATE contractchange SET chstate = 1
         WHERE chid = #{chid}
     </update>
 
@@ -132,7 +132,7 @@
     </update>
 
     <update id="relieveContract">
-        UPDATE contract SET cstate = 3 WHERE cid = #{cid}
+        UPDATE contract SET cstate = #{cstate} WHERE cid = #{cid}
     </update>
 
     <!--<insert id="insert" parameterType="com.study.pojo.Backlog">
@@ -176,15 +176,25 @@
         WHERE b.empno = #{bl.myemp.empno} AND b.bcondition = 0
     </select>
 
-    <select id="getByContractChangeByBianhao" resultType="ContractChange">
-        SELECT con.* FROM contractchange con
+    <resultMap id="cc" type="com.study.pojo.Contractchange">
+        <id property="chid" column="chid"/>
+        <association property="mycontract" javaType="com.study.pojo.Contract">
+            <id property="cid" column="cid"/>
+        </association>
+    </resultMap>
+
+
+    <select id="getByContractChangeByBianhao" resultMap="cc">
+        SELECT con.chid,c.cid FROM contractchange con
         INNER JOIN backlog bl ON con.chid = bl.bianhao
+        left join contract c on con.cid = c.cid
         WHERE bl.bianhao = #{bianhao} AND bl.btetle = '合同解除申请'
     </select>
 
-    <select id="selectByContractChangeByBianhao" resultType="ContractChange">
-        SELECT con.* FROM contractchange con
+    <select id="selectByContractChangeByBianhao" resultMap="cc">
+        SELECT con.chid,c.cid FROM contractchange con
         INNER JOIN backlog bl ON con.chid = bl.bianhao
+         left join contract c on con.cid = c.cid
         WHERE bl.bianhao = #{bianhao} AND bl.btetle = '合同结项申请'
     </select>
 
