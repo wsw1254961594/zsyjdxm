@@ -3,13 +3,17 @@ package com.study.services;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.study.model.mdao.IPropertyMapper;
+import com.study.model.mdao.PropertyAssetMapper;
+import com.study.pojo.Asset;
 import com.study.pojo.Property;
 import com.study.pojo.Prreturn;
+import com.study.vo.PropertyVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * @author Li-xing Chen
@@ -22,6 +26,10 @@ import java.util.List;
 public class PropertyServices {
     @Autowired
     IPropertyMapper propertyMapper;
+
+    @Autowired
+    PropertyAssetMapper propertyAssetMapper;
+
     /*查询我的资产全部信息*/
     public List<Property> selectPropertyAll(Integer enpno){
         return propertyMapper.selectPropertyAll(enpno);
@@ -35,6 +43,18 @@ public class PropertyServices {
         //将分页数据封装到PageInfo中
         PageInfo<Property> info=new PageInfo<>(list);
         return info;
+    }
+    /*新增我的资产表*/
+    public void propxz(PropertyVo propertyVo){
+        /*新增我的资产表*/
+        propertyMapper.insertProperty(propertyVo);
+
+        List<Asset> assetList = propertyVo.getAsser();
+        for (Asset asset : assetList) {
+            propertyAssetMapper.addProAss(propertyVo.getCpid(),asset.getAtid());
+        }
+
+
     }
 
     /*高级查询我的资产根据 名称 领取日期 价格来查询*/

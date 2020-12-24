@@ -72,16 +72,16 @@
 					任务名称：<el-input
 					  placeholder="请输入任务名称"
 					  style="width: 380px;"
-					  v-model="input1"
+					  v-model="input3"
 					  clearable>
 					</el-input>
 					</span>	
-					<span style="margin-left: 150px;">
-					所属阶段：<el-select style="width: 380px;"  v-model="select2" 
+					<span style="margin-left: 180px;">
+					阶段：<el-select style="width: 380px;"  v-model="select3" 
 					slot="prepend" placeholder="请选择">
-					      <el-option label="施工工程" value="施工工程"></el-option>
-					      <el-option label="监理工程" value="监理工程"></el-option>
-					      <el-option label="市场调查" value="市场调查"></el-option>
+					      <el-option label="项目准备" value="项目准备"></el-option>
+					      <el-option label="需求调研" value="需求调研"></el-option>
+					      <el-option label="系统搭建" value="系统搭建"></el-option>
 					    </el-select>
 					</span>
 					</div>
@@ -90,7 +90,7 @@
 					所属项目编号：<el-input
 					  placeholder="请输入所属项目编号"
 					  style="width: 380px;"
-					  v-model="input2"
+					  v-model="input4"
 					  clearable>
 					</el-input>
 					</span>
@@ -98,7 +98,7 @@
 					<div style="margin-top: 25px;">
 					<span style="margin-left: 20px;">
 					计划开始时间：<el-date-picker
-					   v-model="value1"
+					   v-model="value3"
 					    style="width: 380px;"
 					   type="date"
 					   placeholder="选择日期">
@@ -106,16 +106,27 @@
 					</span>
 					<span style="margin-left: 120px;">
 					计划结束时间：<el-date-picker
-					   v-model="value2"
+					   v-model="value4"
 					    style="width: 380px;"
 					   type="date"
 					   placeholder="选择日期">
 					</el-date-picker>
 					</span>
 					</div>
+					<div style="margin-top: 25px;">
+						<span style="margin-left: 50px;">
+						任务说明：<el-input
+						  type="textarea"
+						  style="width: 420px;"
+						  :rows="2"
+						  placeholder="请输入任务说明"
+						  v-model="textarea">
+						</el-input>
+						</span>
+					</div>
 					<div style="margin-top: 35px;">
 						<span style="margin-left: 480px;">
-						<el-button type="primary" @click="">立即创建</el-button>
+						<el-button type="primary" @click="rw">立即创建</el-button>
 						<el-button>取消</el-button>
 						</span>
 					</div>
@@ -133,11 +144,17 @@
 	       return {
 	         input1:"",
 			 input2:"",
+			 input3:"",
+			 input4:"",
 			 select1:"",
 			 select2:"",
+			 select3:"",
 			 value1:"",
 			 value2:"",
-			 activeName: 'first'
+			 value3:"",
+			 value4:"",
+			 activeName: 'first',
+			  textarea: ''
 	       }
 	     },
 	     methods: {
@@ -159,6 +176,25 @@
 			   }).catch(e=>{
 			   		alert(e)
 			   })
+			   },
+			   rw(){
+				   let param={
+					 iid:this.input4,
+				     mname:this.input3,
+				     stage:this.select3,
+				   	 ingtime:this.value3,
+				   	 endtime:this.value4,
+				   	 taskdescription:this.textarea
+				   };
+				   let ppp = this.$Qs.stringify(param);
+				   this.$axios.post("http://localhost:8888/Tasklist/doInsert",ppp)
+				   .then(r=>{
+				     if(r.status===200){
+				   	 this.$message('新增成功');
+				     }
+				   }).catch(e=>{
+				   		alert(e)
+				   })
 			   },
 			    handleClick(tab, event) {
 			           console.log(tab, event);

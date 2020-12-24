@@ -1,7 +1,10 @@
 package com.study.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 /**
@@ -12,12 +15,14 @@ import java.util.Objects;
 @Entity
 public class Positive {
     private Integer pvid;
-    private Date pdate;
+    @JsonFormat(pattern ="yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
+    private Timestamp pdate;
     private String prequire;
     private String ptitle;
     private Emp myemp;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pvid", nullable = false)
     public Integer getPvid() {
         return pvid;
@@ -29,11 +34,11 @@ public class Positive {
 
     @Basic
     @Column(name = "pdate", nullable = true)
-    public Date getPdate() {
+    public Timestamp getPdate() {
         return pdate;
     }
 
-    public void setPdate(Date pdate) {
+    public void setPdate(Timestamp pdate) {
         this.pdate = pdate;
     }
 

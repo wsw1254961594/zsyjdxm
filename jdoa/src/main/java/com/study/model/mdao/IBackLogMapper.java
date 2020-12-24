@@ -1,6 +1,9 @@
 package com.study.model.mdao;
 
 import com.study.pojo.*;
+import com.study.pojo.Approval;
+import com.study.pojo.Backlog;
+import com.study.pojo.Contract;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,6 +33,8 @@ public interface IBackLogMapper {
      * @return
      */
     int editContractState(Integer cid);
+
+    int insert(Backlog backlog);
 
     /**
      * 根据类型和编号查询付款

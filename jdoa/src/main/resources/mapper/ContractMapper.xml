@@ -27,26 +27,44 @@
         <result column="ctype" property="ctype"/>
         <result column="cday" property="cday"/>
         <result column="cstate" property="cstate"/>
+        <association property="myemp" javaType="com.study.pojo.Emp">
+            <id property="empno" column="empno"/>
+            <result property="ename" column="ename"/>
+            <association property="mydept" javaType="com.study.pojo.Dept">
+                <id property="deptno" column="deptno"/>
+                <result property="dname" column="dname"/>
+            </association>
+        </association>
+        <association property="mysupplier" javaType="com.study.pojo.Supplier">
+            <id property="sid" column="sid"/>
+            <result property="sname" column="sname"/>
+            <result property="rank" column="rank"/>
+            <result property="opening" column="opening"/>
+            <result property="sman" column="sman"/>
+            <result property="sphone" column="sphone"/>
+        </association>
         <association property="money" javaType="java.lang.Integer" column="{cid=cid}" select="selectFkmoney">
         </association>
-        <association property="sname" javaType="java.lang.String" column="{cid=cid}" select="selectSname">
-        </association>
+
+
+
     </resultMap>
-    
+
     <!--查询我的所有合同-->
     <select id="selectCgAll" resultMap="contract">
-       select * from contract where empno=#{empno} and ctype=1 and cstate!=0
+       select * from contract c
+       left join emp e on e.empno=c.empno
+       left join dept d on d.deptno=e.deptno
+       left join supplier s on s.cid=c.cid
+       where c.empno=#{empno} and c.ctype=1 and c.cstate!=0 order by c.cid desc
     </select>
 
     <!--查询合同已付款金额-->
     <select id="selectFkmoney" resultType="java.lang.Integer">
-       select sum(pmmoney) as money from payment where cid=#{cid}
+       select sum(pmmoney) as money from payment where cid=#{cid} and pmstate=1
     </select>
 
-    <!--查询合同客户-->
-    <select id="selectSname" resultType="java.lang.String">
-        select sname from supplier where cid=#{cid}
-    </select>
+
 
     <!--多条件模糊查询-->
     <select id="selectCgBylike" resultMap="contract">
@@ -63,6 +81,7 @@
             </if>
             and empno=#{empno} and ctype=1 and cstate!=0
         </where>
+        order by cid desc
     </select>
 
     <!--查询产品信息-->
@@ -116,8 +135,18 @@
         select * from contract c
         left join emp e on c.empno=e.empno
         left join dept d on d.deptno=e.deptno
-        where c.empno=#{empno} and c.cstate=0
+        where c.empno=#{empno} and c.cstate=0 order by c.cid desc
     </select>
+
+    <!--合同结项-->
+    <update id="conSucc">
+        update contract set cstate=2 where cid=#{cid}
+    </update>
+
+    <!--合同解除-->
+    <update id="conDel">
+        update contract set cstate=3 where cid=#{cid}
+    </update>
 
     <select id="getByCidToLeaves" resultType="Emp">
         SELECT e.* FROM contract con

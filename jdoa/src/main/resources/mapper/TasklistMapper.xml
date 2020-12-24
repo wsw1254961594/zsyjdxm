@@ -13,7 +13,7 @@
         <result property="schedule" column="schedule"/>
         <result property="taskdescription" column="taskdescription"/>
 
-        <association property="Itemlist" javaType="com.study.pojo.Itemlist">
+        <association property="myitemlist" javaType="com.study.pojo.Itemlist">
             <id property="iid" column="iid"/>
             <result property="pname" column="pname"/>
             <result property="type" column="type"/>
@@ -29,8 +29,29 @@
         </association>
     </resultMap>
 
+    <insert id="DoInsert">
+        insert into tasklist values(null,#{iid},#{mname},#{stage},#{startingtime},
+        #{endtime},null,null,'0%',#{taskdescription})
+    </insert>
+
     <select id="selectAll" resultMap="TasklistResult">
             select * from tasklist t left join itemlist i on i.iid=t.iid
     </select>
+
+    <select id="selectMname" resultMap="TasklistResult">
+            select * from tasklist t left join itemlist i on i.iid=t.iid where mname LIKE #{mname}
+    </select>
+
+    <select id="selectStage" resultMap="TasklistResult">
+            select * from tasklist t left join itemlist i on i.iid=t.iid where stage LIKE #{stage}
+    </select>
+
+    <select id="selectPname" resultMap="TasklistResult">
+            select * from tasklist t left join itemlist i on i.iid=t.iid where i.pname LIKE #{pname}
+    </select>
+
+    <delete id="doDelete">
+        delete from tasklist where tid=#{tid}
+    </delete>
 
 </mapper>

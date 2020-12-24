@@ -42,6 +42,14 @@ public interface IEmpMapper {
     //查询所有转正员工
     List<Emp> selectstate();
 
+    //转正 修改员工状态
+    Integer update(Integer empno);
+
+    Integer selectid();
+
+    Integer updatestate(Integer empno);
+
+
     /**
      * 获取员工详情：pj
      * @param empno

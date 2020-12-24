@@ -45,4 +45,15 @@ public interface ITmHuiYiMapper {
     //添加会议使用表记录
     void shiyong(@Param("v") Shiyong v);
 
+    //添加审批
+    void shenpi(@Param("s") Backlog s);
+
+    //查询空闲会议室
+    List<Dizhi> kx();
+
+    //结束会议
+    Integer jieshu(Integer ids);
+
+    //根据名字 会议室查询
+    List<Xiangqing> mohu(@Param("empname") String empname,@Param("hyname") String hyname);
 }

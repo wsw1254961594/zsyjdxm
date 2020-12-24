@@ -17,9 +17,27 @@ public class Payment {
     private BigDecimal pmmoney;
     private String pmpayee;
     private Contract mycontract;
+    private String pmname;
+    private Integer pmstate;
+    private Emp myemp;
+
+    public Payment() {
+    }
+
+    public Payment(Integer pmid, Date pmdate, BigDecimal pmmoney, String pmpayee, Contract mycontract, String pmname, Integer pmstate, Emp myemp) {
+        this.pmid = pmid;
+        this.pmdate = pmdate;
+        this.pmmoney = pmmoney;
+        this.pmpayee = pmpayee;
+        this.mycontract = mycontract;
+        this.pmname = pmname;
+        this.pmstate = pmstate;
+        this.myemp = myemp;
+    }
 
     @Id
     @Column(name = "pmid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getPmid() {
         return pmid;
     }
@@ -82,5 +100,35 @@ public class Payment {
 
     public void setMycontract(Contract mycontract) {
         this.mycontract = mycontract;
+    }
+
+    @Basic
+    @Column(name = "pmname", nullable = true, length = 255)
+    public String getPmname() {
+        return pmname;
+    }
+
+    public void setPmname(String pmname) {
+        this.pmname = pmname;
+    }
+
+    @Basic
+    @Column(name = "pmstate", nullable = true)
+    public Integer getPmstate() {
+        return pmstate;
+    }
+
+    public void setPmstate(Integer pmstate) {
+        this.pmstate = pmstate;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "empno", referencedColumnName = "empno")
+    public Emp getMyemp() {
+        return myemp;
+    }
+
+    public void setMyemp(Emp myemp) {
+        this.myemp = myemp;
     }
 }

@@ -46,6 +46,7 @@ public class Emp {
 
     //前台数据接收
     private String password;
+    private Payment mypayment;
 
     public String getPassword() {
         return password;
@@ -284,8 +285,6 @@ public class Emp {
         this.prreturns = prreturns;
     }
 
-
-
     @OneToMany(mappedBy = "ese")
     public List<Xiangqing> getXqs() {
         return xqs;
@@ -334,5 +333,14 @@ public class Emp {
                 ", ry=" + ry +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    @OneToOne(mappedBy = "myemp")
+    public Payment getMypayment() {
+        return mypayment;
+    }
+
+    public void setMypayment(Payment mypayment) {
+        this.mypayment = mypayment;
     }
 }

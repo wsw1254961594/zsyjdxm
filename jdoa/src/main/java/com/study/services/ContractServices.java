@@ -124,4 +124,14 @@ public class ContractServices {
         PageInfo<Contract> info=new PageInfo<>(list);
         return info;
     }
+
+    //合同结项
+    public void conSucc(Integer cid){
+        mapper.conSucc(cid);
+    }
+
+    //合同解除
+    public void conDel(Integer cid){
+        mapper.conDel(cid);
+    }
 }

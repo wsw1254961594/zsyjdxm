@@ -4,6 +4,7 @@ import com.study.pojo.Contract;
 import com.study.pojo.Emp;
 import com.study.pojo.Payment;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,6 +22,12 @@ public interface IPaymentMapper {
 
     //查询所有付款记录
     List<Payment> selectAll();
+
+    //新增付款记录
+    void insertPay(@Param("p") Payment payment);
+
+    //查询最新的付款编号
+    Integer selectNewPmid();
 
     /**
      * 根据付款申请获取员工详情

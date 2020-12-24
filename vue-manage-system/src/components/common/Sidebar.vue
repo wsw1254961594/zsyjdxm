@@ -85,11 +85,7 @@
             icon: 'el-icon-tickets',
             index: '5',
             title: '合同管理',
-            subs: [
-              {
-                index: 'contractmenu',
-                title: '合同首页'
-              },
+            subs: [          
               {
                 index: 'contractadd',
                 title: '合同起草'
@@ -109,10 +105,6 @@
                   {
                     index: 'contractpayment',
                     title: '付款管理'
-                  },
-                  {
-                    index: 'shoukuan',
-                    title: '收款管理'
                   }
                 ]
               },
@@ -142,10 +134,6 @@
               {
                 index: 'empregular',
                 title: '员工转正'
-              },
-              {
-                index: 'diaogang',
-                title: '员工调岗'
               },
               {
                 index: 'lizhi',
@@ -209,7 +197,7 @@
                 title: '我的资产'
               },
               {
-                index: 'chaxunzichan',
+                index: 'cxzc',
                 title: '查询资产',
               },
               {
@@ -233,7 +221,7 @@
             subs: [
               {
                 index: '/newitem',
-                title: '新建项目'
+                title: '新建'
               },
               {
                 index: '/project',
@@ -244,7 +232,7 @@
                 title: '查询项目'
               },
               {
-                index: 'renwuzhixing',
+                index: '/taskexecution',
                 title: '任务执行'
               },
               {
@@ -252,7 +240,7 @@
                 title: '查询任务'
               },
               {
-                index: 'xiangmuyanshou',
+                index: '/acceptance',
                 title: '项目验收'
               }
             ]

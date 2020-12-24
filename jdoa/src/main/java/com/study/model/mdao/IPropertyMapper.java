@@ -1,6 +1,7 @@
 package com.study.model.mdao;
 
 import com.study.pojo.Property;
+import com.study.vo.PropertyVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,12 @@ public interface IPropertyMapper {
 
     /*查询我的资产*/
     List<Property> selectPropertyAll(Integer empno);
+
+    /*新增我的资产表*/
+    List<Property> insertProperty(PropertyVo propertyVo);
+
+    /*查询主键id*/
+    Property selectCpid();
 
     /*高级查询我的资产根据 名称 领取日期 价格来查询*/
     List<Property> selectsProperty(@Param("pname") String pname,@Param("pget") String pget,@Param("pvalue")String pvalue);

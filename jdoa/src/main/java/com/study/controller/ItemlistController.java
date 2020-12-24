@@ -1,6 +1,5 @@
 package com.study.controller;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.study.pojo.Itemlist;
 import com.study.vo.Itemlists;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @Author: timelinbao
@@ -59,7 +57,7 @@ public class ItemlistController {
 
     /*根据项目类型分页查询项目*/
     @RequestMapping("Status")
-    public  PageInfo<Itemlist> SelectStatus(Integer no, @RequestParam(required = false) Integer size,String status){
+    public  PageInfo<Itemlist> SelectStatus(Integer no, @RequestParam(required = false) Integer size, String status){
         Integer pageSize = 10;
         if(size!=null){
             pageSize = size;
@@ -67,10 +65,26 @@ public class ItemlistController {
         return se.SelectStatus(no, size, status);
     }
 
+    /*分页查询项目阶段为项目验收的所有项目*/
+    @RequestMapping("Stageof")
+    public PageInfo<Itemlist> SelectStageof(Integer no, @RequestParam(required = false) Integer size){
+        Integer pageSize = 10;
+        if(size!=null){
+            pageSize = size;
+        }
+        return se.SelectStageof(no,pageSize);
+    }
+
     /*根据id修改项目状态*/
     @RequestMapping("Update")
     public Integer updateStatus(String status,Integer iid){
         return se.UpdateStatus(status,iid);
+    }
+
+    /*根据id删除项目*/
+    @RequestMapping("doDelete")
+    public Integer doDelete(Integer iid){
+        return se.doDelete(iid);
     }
 
     /*新增项目*/

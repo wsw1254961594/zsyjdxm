@@ -3,6 +3,9 @@ package com.study.services;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.study.config.MyResult;
+import com.study.model.mdao.IBackLogMapper;
+import com.study.model.mdao.IEmpMapper;
+import com.study.pojo.Approval;
 import com.study.model.mdao.*;
 import com.study.pojo.Backlog;
 import com.study.pojo.Contract;
@@ -125,9 +128,20 @@ public class BackLogService {
                 backlogs.get(i).setApplicantResp(byPmIdToLeaves.getEname());
             }
         }
+        PageHelper.startPage(pageNum,10);
         PageInfo<Backlog> list = new PageInfo<>(backlogs);
         return MyResult.okAndpage(list);
     }
 
 
+
+    //新增转正信息
+    public Integer doinsert(Backlog backlog){
+        try {
+            return backLogMapper.insert(backlog);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 }
