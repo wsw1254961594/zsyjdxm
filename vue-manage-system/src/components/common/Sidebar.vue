@@ -113,7 +113,7 @@
                 title: '合同变更'
               },
               {
-                index: 'hetongbaobiao',
+                index: 'contracttongji',
                 title: '合同报表'
               }
             ]

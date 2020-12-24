@@ -44,6 +44,10 @@ const routes = [
         meta: {title: '合同首页'}
       },
 	  {
+	    path: '/contracttongji',
+	    component: () => import('../components/view/ContractTongji'),
+	    meta: {title: '统计报表'}
+	  }, {
 	    path: '/mycontract',
 	    component: () => import('../components/view/MyContract'),
 	    meta: {title: '我的合同'}

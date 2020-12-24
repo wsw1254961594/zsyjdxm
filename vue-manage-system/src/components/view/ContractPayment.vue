@@ -85,10 +85,17 @@
 							  >					        
 					         </el-table-column>
 							 
-							 <el-table-column
-								prop="money"
+							 <el-table-column						
 							   label="已付金额"
-							  >					        
+							  >		
+									<template slot-scope="scope">
+										<span v-if="scope.row.money==null"> 
+											0
+										</span>
+										<span v-else>
+											{{scope.row.money}}
+										</span>
+									</template>			  
 							 </el-table-column>
 							 
 							 <el-table-column							 
@@ -151,7 +158,7 @@
 					     <el-row>
 					   					      <el-col :span="4">
 					   					        <el-input
-					   					            placeholder="岗位名称"
+					   					            placeholder="合同名称"
 					   					            prefix-icon="el-icon-search"
 					   								style="margin-left: 10px;"
 					   					            clearable>
@@ -160,25 +167,13 @@
 					   					      <el-col :span="0.5">&nbsp;</el-col>
 					   					      <el-col :span="4">
 					   					        <el-input
-					   					            placeholder="职位名称"
+					   					            placeholder="合同编号"
 					   					             prefix-icon="el-icon-search"
 					   					        style="margin-left: 10px;"
 					   					            clearable>
 					   					        </el-input>
 					   					      </el-col>
-					   					       <el-col :span="0.5">&nbsp;</el-col>
-					   					      <el-col :span="4">
-					   					        <el-input
-					   					            placeholder="部门名称"
-					   					            prefix-icon="el-icon-search"
-					   					         style="margin-left: 10px;"
-					   					            clearable>
-					   					        </el-input>
-					   					      </el-col>
-					   					       <el-col :span="0.5">&nbsp;</el-col>
-					   					       <el-col :span="4">
-					   					          <el-button type="primary" @click="getPostBy" icon="el-icon-search" style="margin-left: 10px;width: 70px;height: 31px; color: white;">搜索</el-button>
-					   					       </el-col>
+					   					     
 					   					    </el-row>
 						
 						
@@ -192,15 +187,32 @@
 							  <el-col :span="12">
 							    <div class="tj_div_one">
 							        <br>
-							        <span class="tj_span">应付款金额</span><br/>
-							        <span class="tj_sj">{{cgtotal}}</span>
+							        <span class="tj_span">应付款金额</span><br/>							       
+									<span class="tj_sj">
+										<span v-if="cgtotal==''"> 
+											0
+										</span>
+										<span v-else>
+											{{cgtotal}}
+										</span>
+									
+									</span>
 							    </div>
 							  </el-col>
 							  <el-col :span="12">
 							    <div class="tj_div_two">
 							       <br>
 							        <span class="tj_span">实际付款金额</span><br/>
-							        <span class="tj_sj">{{calnum}}</span>
+							        
+									<span class="tj_sj">
+										<span v-if="calnum==''"> 
+											0
+										</span>
+										<span v-else>
+											{{calnum}}
+										</span>
+									
+									</span>
 							    </div>
 							  </el-col>
 							 

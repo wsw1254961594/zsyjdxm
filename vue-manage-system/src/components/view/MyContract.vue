@@ -59,28 +59,62 @@
 					        <div class="tj_div_one">
 					            <br>
 					            <span class="tj_span">合同总数</span><br/>
-					            <span class="tj_sj">{{cgList.length}}</span>
+					        
+								<span class="tj_sj">
+									<span v-if="cgList==null"> 
+										0
+									</span>
+									<span v-else>
+										{{cgList.length}}
+									</span>
+								</span>
+								
+								
 					        </div>
 					      </el-col>
 					      <el-col :span="5">
 					        <div class="tj_div_two">
 					           <br>
-					            <span class="tj_span">合同总金额</span><br/>
-					            <span class="tj_sj">{{cgtotal}}</span>
+					            <span class="tj_span">合同总金额</span><br/>					        
+							
+								<span class="tj_sj">
+									<span v-if="cgtotal==''"> 
+										0
+									</span>
+									<span v-else>
+										{{cgtotal}}
+									</span>
+								</span>
+								
 					        </div>
 					      </el-col>
 						  <el-col :span="5">
 						    <div class="tj_div_two">
 						        <br>
 						        <span class="tj_span">进行中合同金额</span><br/>
-						        <span class="tj_sj">{{cgtotalnow}}</span>
+								<span class="tj_sj">
+									<span v-if="cgtotalnow==''"> 
+										0
+									</span>
+									<span v-else>
+										{{cgtotalnow}}
+									</span>
+						        </span>
 						    </div>
 						  </el-col>
 						  <el-col :span="6">
 						    <div class="tj_div_two">
 						       <br>
 						        <span class="tj_span">已完成合同金额</span><br/>
-						        <span class="tj_sj">{{cgtotalend}}</span>
+						        <span class="tj_sj">							
+									<span v-if="cgtotalend==''"> 
+										0
+									</span>
+									<span v-else>
+										{{cgtotalend}}
+									</span>
+								
+								</span>
 						    </div>
 						  </el-col>
 					    </el-row>
