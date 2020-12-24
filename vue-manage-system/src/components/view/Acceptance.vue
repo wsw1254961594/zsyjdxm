@@ -15,7 +15,7 @@
 						  		<el-popover
 						  		  placement="right"
 						  		  trigger="click">
-						  		  <el-button  @click="" >项目验收</el-button>
+						  		  <el-button  @click="ys(s.row)" >项目验收</el-button>
 						  		  <el-button slot="reference">...</el-button>
 						  		</el-popover>
 						  	</template>
@@ -37,18 +37,9 @@
 			    <el-tab-pane label="项目验收单" name="second">
 					<div style="width: 1200px; margin-top: 5px; margin-left: 40px;">
 					<el-table :data="Lists">
+						<el-table-column label="验收单编号" prop="piid"></el-table-column>
 					      <el-table-column label="验收项目名称" prop="pname"></el-table-column>
 						  <el-table-column label="验收状态" prop="approvalstatus"></el-table-column>
-						  <el-table-column label="操作" >
-						      <template slot-scope="s">
-						  		<el-popover
-						  		  placement="right"
-						  		  trigger="click">
-						  		  <el-button  @click="" >删除</el-button>
-						  		  <el-button slot="reference">...</el-button>
-						  		</el-popover>
-						  	</template>
-						  </el-table-column>
 					</el-table>
 					    <!-- current-page	当前页数，支持 .sync 修饰符-->
 					    <el-pagination
@@ -111,9 +102,68 @@
 				            console.log(this.List)
 				          }
 				        }).catch(e=>{
-									  alert(e)
+							  alert(e)
 								  })
-				      }
+				      },
+					  ys(row){
+						  let param={
+						    id:row.iid,
+						    pname:row.pname,
+							a:"通过"
+						  };
+						  let ppp = this.$Qs.stringify(param);
+						  this.$axios.post("http://localhost:8888/Acceptancesheet/doInsert",ppp)
+						  .then(r=>{
+						    if(r.status===200){
+						     this.zc(row);
+						    }
+						  }).catch(e=>{
+						    alert(e)
+						  })
+					  },
+					  zc(row){
+					    let param={
+					      status:"完成",
+					      iid:row.iid
+					    };
+					    let ppp = this.$Qs.stringify(param);
+						this.$axios.post("http://localhost:8888/Itemlist/Update",ppp)
+							.then(r=>{
+					  			  if(r.status===200){
+					  			this.jd(row);
+							  }
+						  }).catch(e=>{
+									  alert(e)
+								  })			  
+					  },
+					  jd(row){
+						  let param={
+						    iid:row.iid
+						  };
+						  let ppp = this.$Qs.stringify(param);
+						  this.$axios.post("http://localhost:8888/Itemlist/UpdateStageof",ppp)
+						  	.then(r=>{
+						  		  if(r.status===200){
+						  		this.$message("验收成功")
+								this.loadData();
+						  	  }
+						    }).catch(e=>{
+									  alert(e)
+								  })	
+					  },
+					  sc(row) {
+					  		 let param={
+								   piid:row.piid
+					  					 };
+					  				 let ppp = this.$Qs.stringify(param);
+					  				 this.$axios.post("http://localhost:8888/Acceptancesheet/doDelete",ppp)
+								 		.then(r=>{
+					  		 	if(r.status===200){
+					  			 this.loadDatas();
+					  				 this.$message("删除成功")
+					  				 }
+					  				 })
+					  }
 				,
 	               handleCurrentChange(pagerindex){
 	                    //参数是当前页码

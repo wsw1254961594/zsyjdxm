@@ -34,6 +34,17 @@ public class TasklistServices {
         return new PageInfo<>(list);
     }
 
+    /*分页查询任务*/
+    public PageInfo<ItemTask> SelectMn(Integer pageNo, Integer pageSize, String mname, String stage, String pname){
+        System.out.println("分页业务类："+pageNo+"---"+pageSize);
+        PageHelper.startPage(pageNo,pageSize);
+        String m="%"+mname+"%";
+        String s="%"+stage+"%";
+        String p="%"+pname+"%";
+        List<ItemTask> list = mapper.selectMn(m,s,p);
+        return new PageInfo<>(list);
+    }
+
     /*根据任务名称分页查询任务*/
     public PageInfo<ItemTask> SelectMname(Integer pageNo, Integer pageSize, String mname){
         System.out.println("分页业务类："+pageNo+"---"+pageSize);

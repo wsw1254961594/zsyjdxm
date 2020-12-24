@@ -1,6 +1,5 @@
 <template>
 	<div>
-	
 		 <el-tabs v-model="activeName" @tab-click="handleClick">
 		    <el-tab-pane label="新建项目" name="first">
 				<div style="width: 1200px; margin-top: 25px; margin-left: 40px; ">
@@ -124,13 +123,16 @@
 					</span>
 					</div>
 					<div style="margin-top: 25px;">
-					<span style="margin-left: 20px;">
-					所属项目编号：<el-input
-					  placeholder="请输入所属项目编号"
-					  style="width: 380px;"
-					  v-model="input4"
-					  clearable>
-					</el-input>
+					<span style="margin-left: 50px;">
+					所属项目：<el-select style="width: 380px;"  v-model="input4" 
+					slot="prepend" placeholder="请选择">
+					      <el-option
+					        v-for="item in Lists"
+					        :key="item.iid"
+					        :label="item.pname"
+					        :value="item.iid">
+					      </el-option>
+					    </el-select>
 					</span>
 					</div>
 					<div style="margin-top: 25px;">
@@ -179,6 +181,7 @@
 	     data() {
 	       return {
 			 List:[],
+			 Lists:[],
 	         input1:"",
 			 input2:"",
 			 input3:"",
@@ -217,6 +220,23 @@
 			 			  alert(e)
 			 				  })
 			       },
+				   loadDatas(){
+				           let param={
+				             no:this.current,
+				             size:this.pageSize
+				           };
+				           let ppp = this.$Qs.stringify(param);
+				           this.$axios.post("http://localhost:8888/Itemlist/page",ppp)
+				           .then(r=>{
+				             if(r.status===200){
+				               this.Lists = r.data.list
+				               this.total = r.data.total;
+				               console.log(this.List)
+				             }
+				           }).catch(e=>{
+				   			  alert(e)
+				   				  })
+				         },
 	       onSubmit(){
 			   let param={
 			     pname:this.input1,
@@ -238,9 +258,6 @@
 			   }).catch(e=>{
 			   		alert(e)
 			   })
-			   },
-			   a(){
-				   
 			   },
 			   rw(){
 				   let param={
@@ -266,7 +283,8 @@
 			         }
 	     },
 		   mounted() {
-		       this.loadData();
+		      this.loadData();
+			  this.loadDatas()
 		     }
 	   }
 </script>

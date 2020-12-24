@@ -20,6 +20,8 @@ public interface IItemlistMapper {
 
     List<Itemlist> SelectPname(String pname);
 
+    List<Itemlist> SelectSs(String pname, String types, String status, String jobtype);
+
     List<Itemlist> SelectTypes(String types);
 
     List<Itemlist> SelectStatus(String status);
@@ -27,6 +29,8 @@ public interface IItemlistMapper {
     List<Itemlist> SelectStageof();
 
     Integer UpdateStatus(String status,Integer iid);
+
+    Integer UpdateStageof(Integer iid);
 
     Integer DoInsert(Itemlists it);
 

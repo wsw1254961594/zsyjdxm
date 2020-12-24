@@ -37,6 +37,17 @@ public class ItemlistController {
         return se.SelectByPager(no,pageSize);
     }
 
+   /*分页查询项目*/
+    @RequestMapping("Ss")
+    public PageInfo<Itemlist> SelectSs(Integer no, @RequestParam(required = false) Integer size, String pname, String types,
+                                      String status, String jobtype ){
+        Integer pageSize = 10;
+        if(size!=null){
+            pageSize = size;
+        }
+        return se.SelectSs(no, size, pname, types, status, jobtype);
+    }
+
     /*根据项目名称分页查询项目*/
     @RequestMapping("Pname")
     public PageInfo<Itemlist> SelectPname(Integer no, @RequestParam(required = false) Integer size,String pname){
@@ -83,6 +94,11 @@ public class ItemlistController {
         return se.UpdateStatus(status,iid);
     }
 
+    /*根据id修改项目阶段*/
+    @RequestMapping("UpdateStageof")
+    public Integer UpdateStageof(Integer iid) {
+        return se.UpdateStageof(iid);
+    }
     /*根据id删除项目*/
     @RequestMapping("doDelete")
     public Integer doDelete(Integer iid){

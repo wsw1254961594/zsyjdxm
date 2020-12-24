@@ -42,7 +42,6 @@
 		          layout="total, sizes, prev, pager, next, jumper"
 		          :total="total">
 		        </el-pagination>
-		
 		  </div>
 	</div>
 </template>
@@ -133,7 +132,7 @@
 		  				.then(r=>{
 		  					if(r.status===200){
 		  						 this.loadData();
-		  						 alert("删除成功")
+		  						 this.$message("删除成功")
 		  					 }
 		  			 })
 		  },

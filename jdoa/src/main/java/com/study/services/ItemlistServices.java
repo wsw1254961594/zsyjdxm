@@ -30,6 +30,19 @@ public class ItemlistServices {
         List<Itemlist> list = mapper.SelectAll();
         return new PageInfo<>(list);
     }
+    /*分页查询项目*/
+    public PageInfo<Itemlist> SelectSs(Integer pageNo, Integer pageSize,String pname, String types,
+                                       String status, String jobtype ){
+        System.out.println("分页业务类："+pageNo+"---"+pageSize);
+        PageHelper.startPage(pageNo,pageSize);
+        if(pname!="") {
+            String pn = "%" + pname + "%";
+            List<Itemlist> list = mapper.SelectSs(pn, types, status, jobtype);
+            return new PageInfo<>(list);
+        }
+        List<Itemlist> list = mapper.SelectSs(pname, types, status, jobtype);
+        return new PageInfo<>(list);
+    }
 
     /*根据项目名称分页查询项目*/
     public PageInfo<Itemlist> SelectPname(Integer pageNo, Integer pageSize,String pname){
@@ -69,6 +82,11 @@ public class ItemlistServices {
     /*根据id修改项目状态*/
     public Integer UpdateStatus(String status,Integer iid){
         return mapper.UpdateStatus(status,iid);
+    }
+
+    /*根据id修改项目阶段*/
+    public Integer UpdateStageof(Integer iid){
+        return mapper.UpdateStageof(iid);
     }
 
     /*新增项目*/

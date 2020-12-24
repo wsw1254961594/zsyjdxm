@@ -19,6 +19,8 @@ public interface ITasklistMapper {
 
     List<ItemTask> selectAll();
 
+    List<ItemTask> selectMn(String mname,String stage,String pname);
+
     List<ItemTask> selectMname(String mname);
 
     List<ItemTask> selectStage(String stage);

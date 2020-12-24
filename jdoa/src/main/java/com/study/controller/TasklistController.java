@@ -36,6 +36,17 @@ public class TasklistController {
         return se.SelectByPager(no,pageSize);
     }
 
+    /*分页查询任务*/
+    @RequestMapping("Mn")
+    public PageInfo<ItemTask> SelectMn(Integer no, @RequestParam(required = false) Integer size,
+                                       String mname, String stage, String pname){
+        Integer pageSize = 10;
+        if(size!=null){
+            pageSize = size;
+        }
+        return se.SelectMn(no,pageSize,mname,stage,pname);
+    }
+
     /*根据任务名称分页查询任务*/
     @RequestMapping("Mname")
     public PageInfo<ItemTask> SelectMname(Integer no, @RequestParam(required = false) Integer size, String mname){
