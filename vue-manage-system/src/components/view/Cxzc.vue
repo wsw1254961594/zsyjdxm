@@ -196,28 +196,11 @@
 					myemp: {
 
 					},
-					mysupplier: {},
 					asser: []
 
 				},
 				tableData: [],
 				productcg: [],
-				options: [{
-					value: 'A',
-					label: 'A'
-				}, {
-					value: 'B',
-					label: 'B'
-				}, {
-					value: 'C',
-					label: 'C'
-				}, {
-					value: 'D',
-					label: 'D'
-				}, {
-					value: 'E',
-					label: 'E'
-				}]
 			}
 		},
 		methods: {
@@ -228,10 +211,7 @@
 				this.tableData.forEach(i => {
 					console.log("21", i)
 					console.log("22", i.num);
-					this.contract.asser.push({
-						pnum: i.num,
-						myproductcg: i
-					})
+					this.contract.asser = this.tableData
 				})
 
 				let url = "http://localhost:8888/property/insert";

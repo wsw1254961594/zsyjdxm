@@ -1,5 +1,6 @@
 package com.study.model.mdao;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,5 +11,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PropertyAssetMapper {
-    int addProAss(Integer cpid,Integer atid);
+    int addProAss(@Param("cpid") Integer cpid, @Param("atid") Integer atid);
+
+    /*查询主键id*/
+    int selectCpid();
 }

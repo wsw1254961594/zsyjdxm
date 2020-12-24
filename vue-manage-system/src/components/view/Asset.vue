@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<p style="float: left;">
-			<el-button type="primary" v-on:click="readyInsert">借用资产</el-button>
+			<el-button type="primary" v-on:click="readyInsert">新增</el-button>
 			<el-button type="primary" v-on:click="isAdquery=!isAdquery">高级查询</el-button>
 		</p>
 		<el-form :inline="true" class="demo-form-inline adquery" v-show="isAdquery">
@@ -41,28 +41,37 @@
 
 		<el-dialog :title="deptisadd?'新增转正':'修改转正'" :visible.sync="deptdialog">
 			<el-form :model="idept" :rules="deptrules" ref="deptrefs">
-				<el-form-item label="标题" prop="faTitle" label-width="100px">
-					<el-input v-model="idept.faTitle" class="inputs" :disabled="true"/>
+				<el-form-item label="编号" prop="pserial" label-width="100px">
+					<el-input v-model="idept.pserial" class="inputs" />
 				</el-form-item>
-				<el-form-item label="转正人员岗位" prop="faPosition" label-width="100px">
-					<el-input v-model="idept.faPosition" class="inputs" :disabled="true" />
+				<el-form-item label="名称" prop="pname" label-width="100px">
+					<el-input v-model="idept.pname" class="inputs" />
 				</el-form-item>
-				<el-form-item label="申请时间" prop="faDate" label-width="100px">
-					<el-date-picker v-model="idept.faDate" value-format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="开始时间" :disabled="true">
+				<el-form-item label="状态" prop="pstate" label-width="100px">
+					<el-input v-model="idept.pstate" class="inputs"/>
+				</el-form-item>
+				<el-form-item label="数量" prop="pquantity" label-width="100px">
+					<el-input v-model="idept.pquantity" class="inputs"  />
+				</el-form-item>
+				<el-form-item label="计算单位" prop="punits" label-width="100px">
+					<el-input v-model="idept.punits" class="inputs" />
+				</el-form-item>
+				
+				<el-form-item label="入库日期" prop="pstorage" label-width="100px">
+					<el-date-picker v-model="idept.pstorage"   placeholder="开始时间">
 					</el-date-picker>
 				</el-form-item>
-				<el-form-item label="对本岗位职责的要求的理解" prop="faComprehend" label-width="100px">
-					<el-input v-model="idept.faComprehend" class="inputs" />
+				<el-form-item label="领取日期" prop="pget" label-width="100px">
+					<el-date-picker v-model="idept.pget"   placeholder="开始时间">
+					</el-date-picker>
 				</el-form-item>
-				<el-form-item label="试用期在那些方面有了成长" prop="faGrowth" label-width="100px">
-					<el-input v-model="idept.faGrowth" class="inputs" />
+				<el-form-item label="价格" prop="pvalue" label-width="100px">
+					<el-input v-model="idept.pvalue" class="inputs" />
 				</el-form-item>
-				<el-form-item label="目前存在的不足" prop="faInsufficient" label-width="100px">
-					<el-input v-model="idept.faInsufficient" class="inputs" />
+				<el-form-item label="备注" prop="premark" label-width="100px">
+					<el-input v-model="idept.premark" class="inputs" />
 				</el-form-item>
-				<el-form-item label="如何在本岗位做的更好" prop="faBetter" label-width="100px">
-					<el-input v-model="idept.faBetter" class="inputs" />
-				</el-form-item>
+				
 			</el-form>
 			<div slot="footer" class="dialog-footer">
 				<el-button @click="cancel">取 消</el-button>
@@ -174,7 +183,7 @@
 							let param = { ...this.idept
 							};
 							console.log("新建--参数：", param);
-							this.$myhttp.updatePost("formalapply/insert", param, (res) => {
+							myhttp.updatePost("property/insert", param, (res) => {
 								this.loadData();
 								this.deptdialog = false;
 							});
