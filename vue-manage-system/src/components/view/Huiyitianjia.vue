@@ -162,7 +162,7 @@
 				let param={
 				hyname:this.cxdz,
 				empname:this.cxdz1,
-				pageNo:this.pageNum,
+				pageNum:this.pageNum,
 				pageSize:this.pageSize
 			}
 			 param=this.$Qs.stringify(param);  

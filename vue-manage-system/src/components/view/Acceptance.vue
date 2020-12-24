@@ -146,6 +146,7 @@
 						  		  if(r.status===200){
 						  		this.$message("验收成功")
 								this.loadData();
+								this.loadDatas();
 						  	  }
 						    }).catch(e=>{
 									  alert(e)

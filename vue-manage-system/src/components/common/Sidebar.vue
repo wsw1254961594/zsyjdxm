@@ -127,10 +127,7 @@
                 index: '/emps',
                 title: '员工入职'
               },
-              {
-                index: 'hetongqianshu',
-                title: '劳动合同签署',
-              },
+            
               {
                 index: 'empregular',
                 title: '员工转正'
@@ -145,30 +142,13 @@
               }
             ]
           },
-          {
-            icon: 'el-icon-collection',
-            index: '7',
-            title: '人事档案',
-            subs: [
-              {
-                index: '/card',
-                title: '我的卡片'
-              },
-              {
-                index: 'wodexiashu',
-                title: '我的下属',
-              }
-            ]
-          },
+        
           {
             icon: 'el-icon-s-management',
             index: '8',
             title: '会议管理',
             subs: [
-              {
-                index: 'huiyirili',
-                title: '会议日历'
-              },
+             
               {
                 index: 'huiyitianjia',
                 title: '会议室使用详情',
@@ -177,10 +157,7 @@
                 index: 'chaxunhy',
                 title: '查询会议'
               },
-              {
-                index: 'huiyirenwu',
-                title: '会议任务'
-              },
+             
               {
                 index: 'dizhi',
                 title: '会议室详情'

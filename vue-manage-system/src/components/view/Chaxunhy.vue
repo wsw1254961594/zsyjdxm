@@ -132,7 +132,7 @@
 	    },
 		methods: {
 			huiyi() {
-			let url = "http://localhost:8888/huiyi/xiangqing";
+			let url = "http://localhost:8888/huiyi/xiangqing?pageSize=" + this.pageSize + "&pageNum=" + this.pageNum;
 			this.$axios.get(url).then(r => {
 				this.tableData = r.data
 			}).catch(e => {
@@ -172,7 +172,7 @@
 				let param={
 				hyname:this.cxdz,
 				empname:this.cxdz1,
-				pageNo:this.pageNum,
+				pageNum:this.pageNum,
 				pageSize:this.pageSize
 			}
 			 param=this.$Qs.stringify(param);  
