@@ -39,10 +39,12 @@
 		   
 		   <el-row>
 		   			   <el-col :span="11">
-		   			   <el-form-item label="开始时间" label-width="100px">			      
+		   			   <el-form-item label="开始时间" label-width="100px" >			      
 		   			     <div class="block">
 		   			         <el-date-picker
+							 value-format="yyyy-MM-dd HH:mm:ss"
 		   			           v-model="value1"
+							   @change="shijian()"
 		   			           type="datetime"
 		   			           placeholder="选择日期时间"
 							   :picker-options="pickerOptions1">
@@ -51,11 +53,13 @@
 		   			    </el-form-item>
 		   				</el-col>
 		   				
-		   				<el-col :span="11" style="margin-left: 80px;" label-width="100px">			
-		   			   <el-form-item label="结束时间" label-width="100px">			     
+		   				<el-col :span="11" style="margin-left: 80px;" label-width="100px"  >			
+		   			   <el-form-item label="结束时间" label-width="100px" >			     
 		   			     		<div class="block">
 		   			     		    
 		   			     		    <el-date-picker
+									value-format="yyyy-MM-dd HH:mm:ss"
+									  @change="shijian()"
 		   			     		      v-model="value2"
 		   			     		      type="datetime"
 		   			     		      placeholder="选择日期时间"
@@ -175,11 +179,11 @@
 					}).catch(e => {
 					
 					});
-					this.$axios.post("http://localhost:8888/huiyi/yuangong").then(r => {
-						this.yg = r.data;
-					}).catch(e => {
+					// this.$axios.post("http://localhost:8888/huiyi/cxkx").then(r => {
+					// 	this.yg = r.data;
+					// }).catch(e => {
 					
-					});
+					// });
 
 				 } ,
 				 addupd(){
@@ -241,6 +245,22 @@
 									        });
 											
 				 },
+				 shijian(){
+						
+					console.log("v",this.value1)
+				 	let url="http://localhost:8888/huiyi/cxkx";
+				 	let param={
+				 	kai:this.value1,
+				 	jie:this.value2,
+				 }
+				  param=this.$Qs.stringify(param);  
+				  this.$axios.post(url,param).then(r=>{
+				 	  this.yg = r.data;
+				 		 }).catch(e=>{
+				 		  alert(e) 
+				 	 });
+				 					
+				 	  },
          
         }, created() {
 			this.huiyishi();

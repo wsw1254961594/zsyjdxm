@@ -50,6 +50,22 @@ public class Emp {
     private List<Contractchange> changes;
     private List<Backlog> backlogs;
 
+    public Emp() {
+    }
+
+    public Emp(Integer empno, String ename) {
+        this.empno = empno;
+        this.ename = ename;
+    }
+
+    @Override
+    public String toString() {
+        return "Emp{" +
+                "empno=" + empno +
+                ", ename='" + ename + '\'' +
+                '}';
+    }
+
     public String getPassword() {
         return password;
     }
@@ -344,23 +360,5 @@ public class Emp {
 
     public void setMypayment(Payment mypayment) {
         this.mypayment = mypayment;
-    }
-
-    @OneToMany(mappedBy = "myemp")
-    public List<Contractchange> getChanges() {
-        return changes;
-    }
-
-    public void setChanges(List<Contractchange> changes) {
-        this.changes = changes;
-    }
-
-    @OneToMany(mappedBy = "myemp")
-    public List<Backlog> getBacklogs() {
-        return backlogs;
-    }
-
-    public void setBacklogs(List<Backlog> backlogs) {
-        this.backlogs = backlogs;
     }
 }
