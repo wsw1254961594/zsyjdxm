@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.IContractchangeMapper">
+    <!--添加变更记录-->
+    <insert id="addChange">
+        insert into contractchange values(#{c.chid},#{c.chtitle},#{c.chcause},#{c.chday},#{c.chtype},#{c.chstate},#{c.mycontract.cid},#{c.myemp.empno})
+    </insert>
+
+    <!--查找最新编号-->
+    <select id="selectChid" resultType="java.lang.Integer">
+        select max(chid) from contractchange
+    </select>
+
+
+    <resultMap id="changes" type="com.study.pojo.Contractchange">
+        <id property="chid" column="chid"/>
+        <result property="chtitle" column="chtitle"/>
+        <result property="chcause" column="chcause"/>
+        <result property="chday" column="chday"/>
+        <result property="chtype" column="chtype"/>
+        <result property="chstate" column="chstate"/>
+        <association property="mycontract" javaType="com.study.pojo.Contract">
+            <id property="cid" column="cid"/>
+            <result property="ctitle" column="ctitle"/>
+            <result property="cbody" column="cbody"/>
+            <result property="cnumber" column="cnumber"/>
+            <result property="cmoney" column="cmoney"/>
+            <result property="ctype" column="ctype"/>
+            <result property="cday" column="cday"/>
+            <result property="cstate" column="cstate"/>
+        </association>
+    </resultMap>
+
+    <!--查询所有变更记录-->
+    <select id="selectAll" resultMap="changes">
+        select * from contractchange cc
+        left join contract c on c.cid=cc.cid
+        where cc.chstate=1 order by cc.chid desc
+    </select>
+</mapper>

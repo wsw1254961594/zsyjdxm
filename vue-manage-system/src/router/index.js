@@ -91,6 +91,10 @@ const routes = [
 	    component: () => import('../components/view/ContractAdd'),
 	    meta: {title: '合同起草'}
 	  },{
+	    path: '/changes',
+	    component: () => import('../components/view/ContractChange'),
+	    meta: {title: '变更申请'}
+	  },{
 	    path: '/contractbacklog',
 	    component: () => import('../components/view/ContractBacklog'),
 	    meta: {title: '我的申请'}
@@ -101,6 +105,10 @@ const routes = [
 	  },{
 	    path: '/cgpost',
 	    component: () => import('../components/view/ContractCgPost'),
+	    meta: {title: '采购合同申请'}
+	  },{
+	    path: '/contractchanges',
+	    component: () => import('../components/view/Changes'),
 	    meta: {title: '采购合同申请'}
 	  },
 
