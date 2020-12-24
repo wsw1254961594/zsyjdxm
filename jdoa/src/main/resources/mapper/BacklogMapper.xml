@@ -98,6 +98,28 @@
         UPDATE contract SET cstate = 1 WHERE cid = #{cid}
     </update>
 
+    <select id="getPmidByTitleAndId" resultType="Payment">
+        SELECT pay.* FROM payment pay
+        INNER JOIN backlog bl ON pay.pmid = bl.bianhao
+        WHERE bl.bianhao = #{pmid}
+    </select>
+
+    <update id="editPaymentState">
+        UPDATE payment SET pmstate = 1 WHERE pmid = #{pmid}
+    </update>
+
+    <select id="getPvidByTitleAndId" resultType="Positive">
+        SELECT e.* FROM positive pos
+        INNER JOIN backlog bl ON pos.pvid = bl.bianhao
+        INNER JOIN emp e ON pos.empno = e.empno
+        WHERE bl.bianhao = #{pvid}
+    </select>
+
+    <update id="editPositiveState">
+        UPDATE emp SET state = 2 WHERE empno = #{empno}
+    </update>
+
+    <select id=""
     <insert id="insert" parameterType="com.study.pojo.Backlog">
          insert into backlog(btetle,bianhao,bcondition,baccept,empid)
         values (#{btetle},#{bianhao},#{bcondition}, #{baccept},
