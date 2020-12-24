@@ -1,6 +1,6 @@
 <template>
 	<div>
-	<div>
+	
 		 <el-tabs v-model="activeName" @tab-click="handleClick">
 		    <el-tab-pane label="新建项目" name="first">
 				<div style="width: 1200px; margin-top: 25px; margin-left: 40px; ">
@@ -31,13 +31,16 @@
 					      <el-option label="市场调查" value="市场调查"></el-option>
 					    </el-select>
 					</span>
-					<span style="margin-left: 135px;">
-					负责人编号：<el-input
-					  placeholder="请输入负责人编号"
-					  style="width: 380px;"
-					  v-model="input2"
-					  clearable>
-					</el-input>
+					<span style="margin-left: 165px;">
+					负责人：<el-select style="width: 380px;"  v-model="input2" 
+					slot="prepend" placeholder="请选择">
+					      <el-option
+					        v-for="item in List"
+					        :key="item.empno"
+					        :label="item.ename"
+					        :value="item.empno">
+					      </el-option>
+					    </el-select>
 					</span>
 					</div>
 					<div style="margin-top: 25px;">
@@ -57,6 +60,41 @@
 					   placeholder="选择日期">
 					</el-date-picker>
 					</span>
+					</div>
+					<div style="margin-top: 25px;">
+						<span style="margin-left: 50px;">
+					项目成员：<el-select style="width: 120px;"  v-model="select4" 
+						slot="prepend" placeholder="请选择">
+					      <el-option
+					        v-for="item in List"
+					        :key="item.empno"
+					        :label="item.ename"
+					        :value="item.empno">
+					      </el-option>
+					    </el-select>
+						</span>
+						<span style="margin-left: 10px;">
+						<el-select style="width: 120px;"  v-model="select5"
+						slot="prepend" placeholder="请选择">
+						      <el-option
+						        v-for="item in List"
+						        :key="item.empno"
+						        :label="item.ename"
+						        :value="item.empno">
+						      </el-option>
+						    </el-select>
+							</span>
+							<span style="margin-left: 10px;">
+							<el-select style="width: 120px;"  v-model="select6"
+							slot="prepend" placeholder="请选择">
+							      <el-option
+							        v-for="item in List"
+							        :key="item.empno"
+							        :label="item.ename"
+							        :value="item.empno">
+							      </el-option>
+							    </el-select>
+						  </span>
 					</div>
 					<div style="margin-top: 35px;">
 						<span style="margin-left: 480px;">
@@ -130,11 +168,9 @@
 						<el-button>取消</el-button>
 						</span>
 					</div>
-				</div></el-tab-pane>
+				</div>
 				</el-tab-pane>
 		  </el-tabs>
-	</div>
-	
 	</div>
 </template>
 
@@ -142,6 +178,7 @@
 	 export default {
 	     data() {
 	       return {
+			 List:[],
 	         input1:"",
 			 input2:"",
 			 input3:"",
@@ -149,15 +186,37 @@
 			 select1:"",
 			 select2:"",
 			 select3:"",
+			 select4:"",
+			 select5:"",
+			 select6:"",
 			 value1:"",
 			 value2:"",
 			 value3:"",
 			 value4:"",
+			 current:1,
+			 pageSize:20,
 			 activeName: 'first',
 			  textarea: ''
 	       }
 	     },
 	     methods: {
+			 loadData(){
+			         let param={
+			           no:this.current,
+			           size:this.pageSize
+			         };
+			         let ppp = this.$Qs.stringify(param);
+			         this.$axios.post("http://localhost:8888/emps/pages",ppp)
+			         .then(r=>{
+			           if(r.status===200){
+			             this.List = r.data.obj.list
+			             this.total = r.data.total;
+			             console.log(this.List)
+			           }
+			         }).catch(e=>{
+			 			  alert(e)
+			 				  })
+			       },
 	       onSubmit(){
 			   let param={
 			     pname:this.input1,
@@ -165,7 +224,10 @@
 				 j:this.select2,
 				 p1:this.value1,
 				 p2:this.value2,
-				 empid:this.input2
+				 empid:this.input2,
+				 em1:this.select4,
+				 em2:this.select5,
+				 em3:this.select6
 			   };
 			   let ppp = this.$Qs.stringify(param);
 			   this.$axios.post("http://localhost:8888/Itemlist/doInsert",ppp)
@@ -176,6 +238,9 @@
 			   }).catch(e=>{
 			   		alert(e)
 			   })
+			   },
+			   a(){
+				   
 			   },
 			   rw(){
 				   let param={
@@ -199,7 +264,10 @@
 			    handleClick(tab, event) {
 			           console.log(tab, event);
 			         }
-	     }
+	     },
+		   mounted() {
+		       this.loadData();
+		     }
 	   }
 </script>
 
