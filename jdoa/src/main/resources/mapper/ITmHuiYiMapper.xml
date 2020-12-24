@@ -2,7 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.study.model.mdao.ITmHuiYiMapper">
-
+<resultMap id="kx" type="com.study.pojo.Emp">
+    <id property="empno" column="empno"/>
+    <result property="ename" column="ename"/>
+    <collection property="ry" ofType="com.study.pojo.Huiyirenyuan">
+        <id column="ehid" property="ehid"/>
+        <association property="xian" javaType="com.study.pojo.Xiangqing">
+            <id property="hydzid" column="hydzid"/>
+            <result column="hyrw" property="hyrw"/>
+            <result property="kaishitimedate" column="kaishitimedate"/>
+            <result column="jieshutime" property="jieshutime"/>
+            <result property="neirong" column="neirong"/>
+            <result property="hyleixi" column="hyleixi"/>
+        </association>
+    </collection>
+</resultMap>
     <select id="cxdz" resultType="com.study.pojo.Dizhi">
         select * from  dizhi
     </select>
@@ -16,4 +30,15 @@
         update dizhi set  hyzt=0 where dzid=#{ids}
     </update>
 
+    <select id="selechyry" resultMap="kx">
+        SELECT e.empno,e.ename FROM emp e LEFT JOIN huiyirenyuan h on e.empno=h.empno LEFT JOIN xiangqing x on  x.hydzid=h.hydzid
+      where (x.kaishitimedate  &lt;= #{kai} and x.jieshutime &gt;=  #{kai})
+        or (x.kaishitimedate  &lt;=  #{jie} and x.jieshutime &gt;= #{jie})
+        or (x.kaishitimedate &lt;=  #{kai} and x.jieshutime &gt;= #{jie})
+        or (x.kaishitimedate &gt;=  #{kai} and x.jieshutime &lt;= #{jie})
+
+    </select>
+    <update id="siyong">
+        update shiyong set zt=1 where xqid=#{syid}
+    </update>
 </mapper>

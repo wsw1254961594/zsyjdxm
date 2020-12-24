@@ -41,26 +41,24 @@
 			<el-table-column prop="" label="状态" sortable>
 				<template slot-scope="scope">
 									
-				<span v-if="tt(scope.row.kaishitimedate)>tt(new Date()) && tt(scope.row.jieshutime)<tt(new Date()) && scope.row.myshiyong.zt==1">
+				<span v-if="Date.parse(scope.row.kaishitimedate) < new Date() && Date.parse(scope.row.jieshutime) > new Date() && scope.row.mydizhi.hyzt==1 && scope.row.myshiyong.zt==1">
 					已开始
 				</span>
-				<span v-if="tt(scope.row.kaishitimedate)<tt(new Date()) && tt(scope.row.jieshutime)>tt(new Date()) && scope.row.myshiyong.zt==1">
+				<span v-if="Date.parse(scope.row.kaishitimedate) > new Date() && scope.row.mydizhi.hyzt==1 && scope.row.myshiyong.zt==1 || Date.parse(scope.row.kaishitimedate) > new Date() && scope.row.mydizhi.hyzt==0 && scope.row.myshiyong.zt==1">
 					未开始
 				</span>
-				<span v-if="tt(scope.row.jieshutime)<tt(new Date()) && scope.row.myshiyong.zt==1">
+				<span v-if=" Date.parse(scope.row.jieshutime) < new Date() && scope.row.mydizhi.hyzt==1 && scope.row.myshiyong.zt==0 ||  Date.parse(scope.row.jieshutime) < new Date() && scope.row.mydizhi.hyzt==0 && scope.row.myshiyong.zt==1 || 
+				 Date.parse(scope.row.jieshutime) < new Date() && scope.row.mydizhi.hyzt==0 && scope.row.myshiyong.zt==0 ||  Date.parse(scope.row.jieshutime) < new Date() && scope.row.mydizhi.hyzt==1 && scope.row.myshiyong.zt==1">
 					已结束
 				</span>
-				<span v-if="scope.row.mydizhi.hyzt==2">
-					待审批
-				</span>	
-							
-		
+				
+
 				</template>
 			</el-table-column>
 			<el-table-column label="操作" prop="name" width="160px;">
 				<template slot-scope="scope">
 					
-					<span v-if="tt(scope.row.jieshutime)<tt(new Date()) && scope.row.myshiyong.zt==1 && scope.row.mydizhi.hyzt==1">
+					<span v-if="Date.parse(scope.row.jieshutime) < new Date() && scope.row.mydizhi.hyzt==1 && scope.row.myshiyong.zt==1 ">
 						<el-button size="mini" @click="jie(scope.row)">结束会议</el-button>
 					</span>
 					
@@ -134,8 +132,7 @@
 				       return time;
 			},
 			jie(row){
-				
-				console.log("id",row.mydizhi.dzid)
+			
 				this.dzid=row.mydizhi.dzid;
 				this.$axios.post("http://localhost:8888/huiyi/jieshu?ids="+this.dzid)
 						.then(r => {
@@ -143,6 +140,14 @@
 						}).catch(e => {
 				
 						});
+						console.log("id",row.myshiyong.xqid)
+						this.syid=row.myshiyong.xqid;
+						this.$axios.post("http://localhost:8888/huiyi/xiugaishiyong?syid="+this.syid)
+								.then(r => {
+								this.dizhi();
+								}).catch(e => {
+						
+								});
 			},
 			cc(r){
 				this.$router.push({path:'/Tianjiahuiyi',query:{params:r}})

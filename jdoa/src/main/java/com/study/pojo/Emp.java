@@ -25,7 +25,6 @@ public class Emp {
     private Integer state;
     @JsonFormat(pattern ="yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Timestamp ofday;
-    
     private List<Borrow> borrow;
     private List<Contract> contracts;
     private Dimission dimissions;
@@ -43,10 +42,25 @@ public class Emp {
     private List<Xiangqing> xiangqings;
     private List<Xiangqing> xqs;
     private List<Huiyirenyuan> ry;
-
     //前台数据接收
     private String password;
     private Payment mypayment;
+
+    public Emp() {
+    }
+
+    public Emp(Integer empno, String ename) {
+        this.empno = empno;
+        this.ename = ename;
+    }
+
+    @Override
+    public String toString() {
+        return "Emp{" +
+                "empno=" + empno +
+                ", ename='" + ename + '\'' +
+                '}';
+    }
 
     public String getPassword() {
         return password;
@@ -132,6 +146,8 @@ public class Emp {
     public Timestamp getOfday() {
         return ofday;
     }
+
+
 
     public void setOfday(Timestamp ofday) {
         this.ofday = ofday;
@@ -303,38 +319,6 @@ public class Emp {
         this.ry = ry;
     }
 
-    @Override
-    public String toString() {
-        return "Emp{" +
-                "empno=" + empno +
-                ", ename='" + ename + '\'' +
-                ", ephone='" + ephone + '\'' +
-                ", sex='" + sex + '\'' +
-                ", mgr=" + mgr +
-                ", sal=" + sal +
-                ", state=" + state +
-                ", ofday=" + ofday +
-                ", borrow=" + borrow +
-                ", contracts=" + contracts +
-                ", dimissions=" + dimissions +
-                ", myjobmsg=" + myjobmsg +
-                ", mydept=" + mydept +
-                ", myempconract=" + myempconract +
-                ", itemlists=" + itemlists +
-                ", jiabans=" + jiabans +
-                ", leaves=" + leaves +
-                ", mypersonal=" + mypersonal +
-                ", positives=" + positives +
-                ", posts=" + posts +
-                ", propertys=" + propertys +
-                ", prreturns=" + prreturns +
-                ", xiangqings=" + xiangqings +
-                ", xqs=" + xqs +
-                ", ry=" + ry +
-                ", password='" + password + '\'' +
-                '}';
-    }
-
     @OneToOne(mappedBy = "myemp")
     public Payment getMypayment() {
         return mypayment;
@@ -343,4 +327,6 @@ public class Emp {
     public void setMypayment(Payment mypayment) {
         this.mypayment = mypayment;
     }
+
+
 }

@@ -1,5 +1,24 @@
 <template>
 	<div>
+		<div>
+			<el-select v-model="cxdz" clearable placeholder="根据会议室查询" @change="duocx()">
+			    <el-option
+			      v-for="item in dz"
+			     :key="item.dzid"
+			     :label="item.leixingname"
+			     :value="item.leixingname">
+			    </el-option>
+			  </el-select>
+				<el-select v-model="cxdz1" clearable placeholder="根据名字查询" @change="duocx()">
+					<el-option
+					 v-for="item in yg"
+					:key="item.empno"
+					 :label="item.ename"
+					:value="item.ename">
+				</el-option>
+				</el-select>
+				
+		</div>
 		 <el-table
 		    :data="tableData.list"
 		    style="width: 100%">
@@ -38,17 +57,19 @@
 		    </el-table-column>
 			<el-table-column prop="" label="状态" sortable>
 				<template slot-scope="scope">
-									
-				<span v-if="scope.row.myshiyong.zt==0">
-					未开始
-				</span>
-				<span v-if="scope.row.myshiyong.zt==1">
-					已结束
-				</span>
-				<span v-if="scope.row.myshiyong.zt==2">
-					待审批
-				</span>	
 					
+			<span v-if="Date.parse(scope.row.kaishitimedate) < new Date() && Date.parse(scope.row.jieshutime) > new Date() && scope.row.mydizhi.hyzt==1 && scope.row.myshiyong.zt==1">
+				已开始
+			</span>
+			<span v-if="Date.parse(scope.row.kaishitimedate) > new Date() && scope.row.mydizhi.hyzt==1 && scope.row.myshiyong.zt==1 || Date.parse(scope.row.kaishitimedate) > new Date() && scope.row.mydizhi.hyzt==0 && scope.row.myshiyong.zt==1">
+				未开始
+			</span>
+			<span v-if=" Date.parse(scope.row.jieshutime) < new Date() && scope.row.mydizhi.hyzt==1 && scope.row.myshiyong.zt==0 ||  Date.parse(scope.row.jieshutime) < new Date() && scope.row.mydizhi.hyzt==0 && scope.row.myshiyong.zt==1 || 
+			 Date.parse(scope.row.jieshutime) < new Date() && scope.row.mydizhi.hyzt==0 && scope.row.myshiyong.zt==0 ||  Date.parse(scope.row.jieshutime) < new Date() && scope.row.mydizhi.hyzt==1 && scope.row.myshiyong.zt==1">
+				已结束
+			</span>
+			
+				
 				</template>
 			</el-table-column>
 			<el-table-column
@@ -95,6 +116,7 @@
 </template>
 
 <script>
+	var moment = require('moment');
 	  export default {
 	    data() {
 	      return {
@@ -104,7 +126,8 @@
 			pageSize: 5,
 			total: 0,
 			dialogFormVisible1: false,
-			
+			cxdz:'',
+			cxdz1:''
 	      }
 	    },
 		methods: {
@@ -139,9 +162,49 @@
 				
 					});
 			},
+			duocx(){
+				console.log("cxdz",this.cxdz)
+				this.dzid=this.cxdz;
+				if(this.cxdz=="" & this.cxdz1==""){
+				this.huiyi();
+				}else{
+				let url="http://localhost:8888/huiyi/mohuhy";
+				let param={
+				hyname:this.cxdz,
+				empname:this.cxdz1,
+				pageNo:this.pageNum,
+				pageSize:this.pageSize
+			}
+			 param=this.$Qs.stringify(param);  
+			 this.$axios.post(url,param).then(r=>{
+				   this.tableData=r.data;
+					 }).catch(e=>{
+					  alert(e) 
+				 });
+								 
+					}
+				  },
+				  tt(time){
+				  	time = moment(time).unix();
+				  	       return time;
+				  },
+				  xiala(){
+				  	this.$axios.post("http://localhost:8888/huiyi/xla").then(r => {
+				  		this.dz = r.data;
+				  		console.log("11" ,r)
+				  	}).catch(e => {
+				  	
+				  	});
+				  	this.$axios.post("http://localhost:8888/huiyi/yuangong").then(r => {
+				  		this.yg = r.data;
+				  	}).catch(e => {
+				  	
+				  	});
+				  },
 			
 		},
 		created() {
+			this.xiala();
 			this.huiyi();
 			
 		}

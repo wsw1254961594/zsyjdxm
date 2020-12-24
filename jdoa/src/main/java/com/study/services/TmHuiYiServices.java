@@ -10,6 +10,9 @@ import com.study.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -48,10 +51,33 @@ public class TmHuiYiServices {
         return hy.cxdz();
     }
   //查询所有员工
-    public List<Emp> yg()
-    {
+    public List<Emp> yg(){
+
         return hy.selectm();
     }
+    //查询空闲的员工
+    public List<Emp> kx(String kai,String jie){
+        List<Emp> all= hy.selectm();
+        List<Emp> k = hy.selechyry(kai,jie);
+
+
+        List<String> namelist = new ArrayList<String>();
+         for (int i = 0; i<k.size();i++){
+             for (int j= 0 ;j<all.size();j++){
+                 if (all.get(j).getEname().equals(k.get(i).getEname())){
+                     all.remove(j);
+                 }
+
+             }
+
+
+         }
+
+        return  all;
+    }
+
+
+
 
     //添加会议
     public void huiyi(Xiangqing c){
@@ -78,7 +104,7 @@ public class TmHuiYiServices {
 
         Shiyong shiyong = new Shiyong(
                 null,
-                "2",hydzid
+                "0",hydzid
         );
         hy.shiyong(shiyong);
 
@@ -119,6 +145,10 @@ public class TmHuiYiServices {
         PageInfo<Xiangqing> info = new PageInfo<>(list);
         //返回
         return info;
+    }
+
+    public Integer siyong(Integer syid){
+        return hy.siyong(syid);
     }
 
 }

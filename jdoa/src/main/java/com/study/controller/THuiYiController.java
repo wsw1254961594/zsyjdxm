@@ -1,16 +1,21 @@
 package com.study.controller;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.pagehelper.PageInfo;
 import com.study.pojo.*;
 import com.study.services.TmHuiYiServices;
 import com.study.services.TmXiangQingServices;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -96,6 +101,19 @@ public class THuiYiController{
         Integer no = (pageNo != null && pageNo >= 1) ? pageNo : 1;
         Integer size = (pageSize != null) ? pageSize : 5;
         return hys.selcemohu(no, size,empname,hyname);
+    }
+    //查询空闲的员工
+    @RequestMapping("/cxkx")
+    public List<Emp> kxs( @JsonFormat(pattern ="yyyy-MM-dd hh:mm:ss", timezone = "GMT+8") String kai,
+                          @JsonFormat(pattern ="yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")String jie){
+        System.out.println("开始"+kai);
+
+        System.out.println(hys.kx(kai,jie));
+        return hys.kx(kai,jie);
+    }
+    @RequestMapping("/xiugaishiyong")
+    public Integer ss(@RequestParam(required = false,value = "syid") Integer syid){
+        return hys.siyong(syid);
     }
 
 }

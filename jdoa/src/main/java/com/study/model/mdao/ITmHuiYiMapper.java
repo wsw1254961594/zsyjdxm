@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -31,6 +32,9 @@ public interface ITmHuiYiMapper {
      //查询所有员工
     List<Emp> selectm();
 
+    //邀请会议人员查询不在这个时间段的人员
+    List<Emp> selechyry(@Param("kai") String kai,@Param("jie")String jie);
+
    //添加会议室记录
    void huiyitian(@Param("x") Xiangqing c);
     //查询新添的会议记录id
@@ -56,4 +60,7 @@ public interface ITmHuiYiMapper {
 
     //根据名字 会议室查询
     List<Xiangqing> mohu(@Param("empname") String empname,@Param("hyname") String hyname);
+
+    //添加成功修改使用表记录
+    Integer siyong(Integer syid);
 }

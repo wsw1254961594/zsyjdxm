@@ -1,5 +1,8 @@
 package com.study.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -14,7 +17,9 @@ import java.util.Objects;
 public class Xiangqing {
     private Integer hydzid;
     private String hyrw;
+    @JsonFormat(pattern ="yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Timestamp kaishitimedate;
+    @JsonFormat(pattern ="yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Timestamp jieshutime;
     private String neirong;
     private Dizhi mydizhi;
@@ -22,10 +27,10 @@ public class Xiangqing {
     private List<Huiyirenyuan> rrr;
     private String hyleixi;
     private Shiyong myshiyong;
+
+
     public Xiangqing() {
     }
-
-
 
     public Xiangqing(Integer hydzid, String hyrw, Timestamp kaishitimedate, Timestamp jieshutime, String neirong,String hyleixi, Dizhi mydizhi, Emp ese) {
         this.hydzid = hydzid;
@@ -77,6 +82,7 @@ public class Xiangqing {
 
     @Basic
     @Column(name = "kaishitimedate", nullable = true)
+
     public Timestamp getKaishitimedate() {
         return kaishitimedate;
     }
@@ -170,4 +176,6 @@ public class Xiangqing {
     public void setHyleixi(String hyleixi) {
         this.hyleixi = hyleixi;
     }
+
+
 }
