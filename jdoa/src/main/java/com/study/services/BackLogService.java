@@ -115,7 +115,8 @@ public class BackLogService {
                 backlogs.get(i).setApplicantResp(byJnIdToLeaves.getEname());
             }
             if (backlogs.get(i).getBtetle().equals("转正申请")) {
-
+                Emp empByTitleAndId = backLogMapper.getEmpByTitleAndId(backlogs.get(i).getBianhao());
+                backlogs.get(i).setApplicantResp(empByTitleAndId.getEname());
             }
             if (backlogs.get(i).getBtetle().equals("合同结项申请")) {
 

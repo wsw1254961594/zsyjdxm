@@ -61,11 +61,11 @@
         </trim>
         WHERE blid = #{blid}
     </update>
-    
+
     <select id="getBackLog" resultType="Backlog">
         SELECT * FROM backlog WHERE blid = #{blid}
     </select>
-    
+
     <select id="listBackLog" resultType="Backlog" parameterType="Backlog">
         SELECT * FROM backlog
         <where>
@@ -98,12 +98,14 @@
         UPDATE contract SET cstate = 1 WHERE cid = #{cid}
     </update>
 
-    <insert id="insert" parameterType="com.study.pojo.Backlog">
+    <!--<insert id="insert" parameterType="com.study.pojo.Backlog">
          insert into backlog(btetle,bianhao,bcondition,baccept,empid)
         values (#{btetle},#{bianhao},#{bcondition}, #{baccept},
          #{empid}
         )
-    </insert>
+    </insert>-->
+
+
     <select id="getPmidByTitleAndId" resultType="Payment">
         SELECT pay.* FROM payment pay
         INNER JOIN backlog bl ON pay.pmid = bl.bianhao
@@ -114,17 +116,16 @@
         UPDATE payment SET pmstate = 1 WHERE pmid = #{pmid}
     </update>
 
-    <select id="getPvidByTitleAndId" resultType="Positive">
+    <select id="getEmpByTitleAndId" resultType="Emp">
         SELECT e.* FROM positive pos
         INNER JOIN backlog bl ON pos.pvid = bl.bianhao
         INNER JOIN emp e ON pos.empno = e.empno
         WHERE bl.bianhao = #{pvid}
     </select>
 
-    <update id="editPositiveState">
+    <update id="editEmpState">
         UPDATE emp SET state = 2 WHERE empno = #{empno}
     </update>
-
 
     <insert id="insert" parameterType="com.study.pojo.Backlog">
          insert into backlog(btetle,bianhao,bcondition,baccept,empid)
@@ -132,4 +133,6 @@
          #{empid}
         )
     </insert>
+
+
 </mapper>
