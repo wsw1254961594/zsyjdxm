@@ -74,7 +74,7 @@ public class PropertyServices {
             Emp emp = empMapper.leavesGetEmp(propertyVo.getMyemp().getEmpno());
             Backlog backlog = new Backlog();
             backlog.setBtetle("资产借用");
-            backlog.setBianhao(propertyVo.getCpid());
+            backlog.setBianhao(cpid);
             backlog.setBcondition(0);
             backlog.setBaccept(DateUtils.getDate());
             backlog.setEmpid(emp.getMgr());

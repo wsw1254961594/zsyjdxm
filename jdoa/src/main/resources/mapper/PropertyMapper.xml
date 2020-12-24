@@ -82,8 +82,8 @@
         <selectKey keyColumn="cpid" keyProperty="cpid" resultType="Integer" order="AFTER">
             SELECT LAST_INSERT_ID();
         </selectKey>
-        insert into property(pserial,pname,pstate,pquantity,punits,pstorage,pget,pvalue,premark)
-        values(#{property.pserial},#{property.pname},#{property.pstate},#{property.pquantity},#{property.punits}
+        insert into property(empno,pserial,pname,pstate,pquantity,punits,pstorage,pget,pvalue,premark)
+        values(#{property.empno},#{property.pserial},#{property.pname},'待办',#{property.pquantity},#{property.punits}
         ,#{property.pstorage},#{property.pget},#{property.pvalue},#{property.premark})
     </insert>
    <!-- <insert id="insertProperty" parameterType="com.study.vo.PropertyVo" useGeneratedKeys="true" keyProperty="cpid" keyColumn="cpid">
