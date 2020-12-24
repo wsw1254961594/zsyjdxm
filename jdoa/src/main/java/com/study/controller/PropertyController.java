@@ -40,10 +40,21 @@ public class PropertyController {
     }
     /*新增我的资产表*/
     @RequestMapping("/insert")
+    public MyResult insertProperty(@RequestBody PropertyVo propertyVo){
+        System.out.println("当前的参数"+propertyVo);
+
+        Integer result=propertyServices.insertProperty(propertyVo);
+        return result>0?MyResult.SUCCESS:MyResult.ERROR("新增失败");
+    }
+/* public void insertProperty(@RequestBody PropertyVo propertyVo){
+     propertyServices.insertProperty(propertyVo);
+    }*/
+  /*  *//*新增我的资产表*//*
+    @RequestMapping("/insert")
     public void propxz(@RequestBody PropertyVo property){
     propertyServices.propxz(property);
 
-    }
+    }*/
     /*高级查询我的资产根据 名称 领取日期 价格来查询*/
     @RequestMapping("/pages")
     public MyResult selectsProperty(@RequestParam(value = "pname", required = false) String pname,

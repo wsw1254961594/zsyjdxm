@@ -51,6 +51,20 @@
             </collection>
         </association>
     </resultMap>
+
+    <resultMap id="PropertyResult" type="com.study.vo.PropertyVo">
+        <id property="cpid" column="cpid"/>
+        <result property="pserial" column="pserial"/>
+        <result property="pname" column="pname"/>
+        <result property="pstate" column="pstate"/>
+        <result property="pquantity" column="pquantity"/>
+        <result property="punits" column="punits"/>
+        <result property="pstorage" column="pstorage"/>
+        <result property="pget" column="pget"/>
+        <result property="pvalue" column="pvalue"/>
+        <result property="premark" column="premark"/>
+    </resultMap>
+
     <!--查询我的资产全部信息-->
     <select id="selectPropertyAll" resultMap="IProperty">
         select pr.* from property pr
@@ -62,18 +76,82 @@
     </select>
 
 
+
     <!--新增我的资产表-->
-    <insert id="insertProperty" parameterType="com.study.vo.PropertyVo" useGeneratedKeys="true" keyProperty="cpid" keyColumn="cpid">
-        insert into property
-        values(#{pserial},#{pname},#{pstate},
-        #{pquantity},#{punits},#{pstorage},#{pget},
-        #{pvalue},#{premark})
+    <insert id="insertProperty" parameterType="com.study.vo.PropertyVo" >
+        <selectKey keyColumn="cpid" keyProperty="cpid" resultType="Integer" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        insert into property(pserial,pname,pstate,pquantity,punits,pstorage,pget,pvalue,premark)
+        values(#{property.pserial},#{property.pname},#{property.pstate},#{property.pquantity},#{property.punits}
+        ,#{property.pstorage},#{property.pget},#{property.pvalue},#{property.premark})
     </insert>
+   <!-- <insert id="insertProperty" parameterType="com.study.vo.PropertyVo" useGeneratedKeys="true" keyProperty="cpid" keyColumn="cpid">
+        insert into property
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pserial != null and pserial != ''">
+                pserial,
+            </if>
+            <if test="pname != null and pname != ''">
+                pname,
+            </if>
+            <if test="pstate != null and pstate != ''">
+                pstate,
+            </if>
+            <if test="pquantity != null">
+                pquantity,
+            </if>
+            <if test="punits != null and punits != ''">
+                punits,
+            </if>
+            <if test="pstorage != null">
+                pstorage,
+            </if>
+            <if test="pget != null">
+                pget,
+            </if>
+            <if test="pvalue != null and pvalue != ''">
+                pvalue,
+            </if>
+            <if test="premark != null and premark != ''">
+                premark,
+            </if>
+        </trim>
+        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+            <if test="pserial != null and pserial != ''">
+                #{pserial},
+            </if>
+            <if test="pname != null and pname != ''">
+                #{pname},
+            </if>
+            <if test="pstate != null and pstate != ''">
+                #{pstate},
+            </if>
+            <if test="pquantity != null">
+                #{pquantity},
+            </if>
+            <if test="punits != null and punits != ''">
+                #{punits},
+            </if>
+            <if test="pstorage != null">
+                #{pstorage},
+            </if>
+            <if test="pget != null">
+                #{pget},
+            </if>
+            <if test="pvalue != null and pvalue != ''">
+                #{pvalue},
+            </if>
+            <if test="premark != null and premark != ''">
+                #{premark},
+            </if>
+        </trim>
+    </insert>-->
 
 
     <!--查询主键新增id-->
-    <select id="selectCpid" resultType="com.study.pojo.Property">
-        select * from property where cpid=(select max(cpid) from property)
+    <select id="selectCpid" resultType="java.lang.Integer">
+        select max(cpid) from property
     </select>
     <!--高级查询我的资产根据 名称 领取日期 价格来查询-->
     <select id="selectsProperty" resultMap="IProperty">
@@ -94,5 +172,9 @@
                 and pvalue like concat('%',#{pvalue},'%')
             </if>
         </where>
+    </select>
+
+    <select id="selectAllId" resultMap="PropertyResult">
+        SELECT * FROM property
     </select>
 </mapper>

@@ -26,6 +26,20 @@ public class Asset {
     private List<Property> propertys;
     private List<Prreturn> prreturns;
 
+    @Override
+    public String toString() {
+        return "Asset{" +
+                "atid=" + atid +
+                ", atname='" + atname + '\'' +
+                ", atmodel='" + atmodel + '\'' +
+                ", atnum=" + atnum +
+                ", atstate='" + atstate + '\'' +
+                ", aunits='" + aunits + '\'' +
+                ", astorage=" + astorage +
+                ", price=" + price +
+                '}';
+    }
+
     @Id
     @Column(name = "atid", nullable = false)
     public Integer getAtid() {

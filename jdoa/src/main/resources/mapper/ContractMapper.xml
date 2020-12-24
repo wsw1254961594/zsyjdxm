@@ -95,7 +95,7 @@
     </insert>
 
     <!--查询新增的主键-->
-    <select id="selectCid" resultType="com.study.pojo.Contract">
+    <select id="selecselectCidtCid" resultType="com.study.pojo.Contract">
         select * from contract where cid=(select max(cid) from contract)
     </select>
 
