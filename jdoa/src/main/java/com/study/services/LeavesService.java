@@ -46,6 +46,7 @@ public class LeavesService {
         backlog.setBcondition(0);
         backlog.setBaccept(DateUtils.getDate());
         backlog.setEmpid(emp.getMgr());
+        backlog.setMyemp(emp);
         int addBackLog = backLogMapper.addBackLog(backlog);
         if (addBackLog != 1) {
             return MyResult.ERROR("请假失败，稍后重试");

@@ -5,12 +5,8 @@ import com.github.pagehelper.PageInfo;
 import com.study.config.MyResult;
 import com.study.model.mdao.IBackLogMapper;
 import com.study.model.mdao.IEmpMapper;
-import com.study.pojo.Approval;
+import com.study.pojo.*;
 import com.study.model.mdao.*;
-import com.study.pojo.Backlog;
-import com.study.pojo.Contract;
-import com.study.pojo.Emp;
-import com.study.pojo.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,13 +70,28 @@ public class BackLogService {
             }
         }
         if (backLogResult.getBtetle().equals("合同解除申请")) {
+            Contractchange byContractByBianhao = backLogMapper.getByContractChangeByBianhao(backLogResult.getBianhao());
 
-        }
-        if (backLogResult.getBtetle().equals("调岗申请")) {
-
+            int editContractState = backLogMapper.editContractState(byContractByBianhao.getMycontract().getCid());
+            if (editContractState != 1) {
+                return MyResult.ERROR("合同解除失败");
+            }
+            int editContractChange = backLogMapper.editContractChange(byContractByBianhao.getChid(), 3);
+            if (editContractChange != 1) {
+                return MyResult.ERROR("合同解除失败");
+            }
         }
         if (backLogResult.getBtetle().equals("合同结项申请")) {
+            Contractchange byContractByBianhao = backLogMapper.getByContractChangeByBianhao(backLogResult.getBianhao());
 
+            int editContractState = backLogMapper.editContractState(byContractByBianhao.getMycontract().getCid());
+            if (editContractState != 1) {
+                return MyResult.ERROR("合同解除失败");
+            }
+            int editContractChange = backLogMapper.editContractChange(byContractByBianhao.getChid(), 2);
+            if (editContractChange != 1) {
+                return MyResult.ERROR("合同解除失败");
+            }
         }
         if (backLogResult.getBtetle().equals("资产借用")) {
 

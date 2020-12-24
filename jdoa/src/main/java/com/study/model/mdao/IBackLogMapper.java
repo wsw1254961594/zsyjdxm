@@ -70,4 +70,37 @@ public interface IBackLogMapper {
      * @return
      */
     List<Backlog> listByMineFlow(@Param("bl") Backlog backlog);
+
+    /**
+     * 查询合同解除申请
+     * @param bianhao
+     * @return
+     */
+    Contractchange getByContractChangeByBianhao(Integer bianhao);
+
+    /**
+     * 修改合同解除状态
+     * @param chid
+     * @return
+     */
+    int editContractChange(@Param("chid") Integer chid,
+                           @Param("cstate") Integer cstate);
+
+
+    /**
+     * 合同解除修改为3
+     * @param cid
+     * @return
+     */
+    int relieveContract(Integer cid);
+
+    /**
+     * 合同结项修改为2
+     * @param cid
+     * @return
+     */
+    int conclusionContract(Integer cid);
+
+    int selectByContractChangeByBianhao(Integer bianhao);
+
 }

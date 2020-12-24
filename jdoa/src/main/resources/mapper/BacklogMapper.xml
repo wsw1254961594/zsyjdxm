@@ -122,8 +122,17 @@
         WHERE bl.bianhao = #{bianhao}
     </select>
 
+    <update id="editContractChange">
+        UPDATE contractchange SET cstate = #{cstate}
+        WHERE chid = #{chid}
+    </update>
+
     <update id="editContractState">
         UPDATE contract SET cstate = 1 WHERE cid = #{cid}
+    </update>
+
+    <update id="relieveContract">
+        UPDATE contract SET cstate = 3 WHERE cid = #{cid}
     </update>
 
     <!--<insert id="insert" parameterType="com.study.pojo.Backlog">
@@ -166,4 +175,17 @@
         SELECT b.* FROM backlog b
         WHERE b.empno = #{bl.myemp.empno} AND b.bcondition = 0
     </select>
+
+    <select id="getByContractChangeByBianhao" resultType="ContractChange">
+        SELECT con.* FROM contractchange con
+        INNER JOIN backlog bl ON con.chid = bl.bianhao
+        WHERE bl.bianhao = #{bianhao} AND bl.btetle = '合同解除申请'
+    </select>
+
+    <select id="selectByContractChangeByBianhao" resultType="ContractChange">
+        SELECT con.* FROM contractchange con
+        INNER JOIN backlog bl ON con.chid = bl.bianhao
+        WHERE bl.bianhao = #{bianhao} AND bl.btetle = '合同结项申请'
+    </select>
+
 </mapper>
