@@ -36,5 +36,15 @@ export const backLogHttp = {
       }
     }
     return postJson(params)
+  },
+  listMineFlow:function (reqEmp,pageNum) {
+    let params = {
+      url:'/backlog/mine_flow',
+      data:{
+        'reqEmp':reqEmp,
+        'pageNum':pageNum
+      }
+    }
+    return get(params)
   }
 }

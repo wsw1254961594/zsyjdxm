@@ -31,4 +31,9 @@ public class BackLogController {
     public MyResult rejectBackLog(@RequestBody Backlog backlog) {
         return backLogService.updateBackLog(backlog);
     }
+
+    @GetMapping("/mine_flow")
+    public MyResult mineFlow(Backlog backlog,Integer pageNum) {
+        return backLogService.listAllByMineFlowPath(backlog,pageNum);
+    }
 }

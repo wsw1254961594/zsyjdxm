@@ -20,7 +20,7 @@ public class Contract {
     private BigDecimal cmoney;
     private Integer ctype;
     private Date cday;
-    private Integer cstate;
+    private Integer cstate;//结项2，解除3，contractchange同意为1，不同意为2
     private Emp myemp;
     private Customer mycustomer;
     private List<Gathering> gatherings;

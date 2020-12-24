@@ -2,6 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.study.model.mdao.IBackLogMapper">
+    <resultMap id="BacklogResult" type="com.study.pojo.Backlog">
+        <id column="blid" property="blid"/>
+        <result column="btetle" property="btetle"/>
+        <result column="bianhao" property="bianhao"/>
+        <result column="bcondition" property="bcondition"/>
+        <result column="baccept" property="baccept"/>
+        <result column="empid" property="empid"/>
+        <association property="myemp" resultMap="EmpResult"/>
+    </resultMap>
+
+    <resultMap id="EmpResult" type="com.study.pojo.Emp">
+        <id property="empno" column="empno"/>
+        <result property="ename" column="ename"/>
+        <result property="ephone" column="ephone"/>
+        <result property="sex" column="sex"/>
+        <result property="mgr" column="mgr"/>
+        <result property="sal" column="sal"/>
+        <result property="state" column="state"/>
+        <result property="ofday" column="ofday"/>
+    </resultMap>
+
     <insert id="addBackLog" parameterType="com.study.pojo.Backlog">
         INSERT INTO backlog
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -67,31 +88,32 @@
         </trim>
         WHERE blid = #{blid}
     </update>
-    
+
     <select id="getBackLog" resultType="Backlog">
         SELECT * FROM backlog WHERE blid = #{blid}
     </select>
-    
-    <select id="listBackLog" resultType="Backlog" parameterType="Backlog">
-        SELECT * FROM backlog
+
+    <select id="listBackLog" resultMap="BacklogResult" parameterType="Backlog">
+        SELECT * FROM backlog b
+        LEFT JOIN emp e ON e.empno = b.empno
         <where>
             <if test="btetle != null and btetle != ''">
-                AND btetle LIKE CONCAT('%',#{btetle},'%')
+                AND b.btetle LIKE CONCAT('%',#{btetle},'%')
             </if>
             <if test="bianhao != null">
-                AND bianhao = #{bianhao}
+                AND b.bianhao = #{bianhao}
             </if>
             <if test="bcondition != null">
-                AND bcondition = #{bcondition}
+                AND b.bcondition = #{bcondition}
             </if>
             <if test="baccept != null">
-                AND baccept = #{baccept}
+                AND b.baccept = #{baccept}
             </if>
             <if test="empid != null">
-                AND empid = #{empid}
+                AND b.empid = #{empid}
             </if>
         </where>
-        ORDER BY baccept DESC
+        ORDER BY b.baccept DESC
     </select>
 
     <select id="getByTitleAndId" resultType="Contract">
@@ -100,9 +122,26 @@
         WHERE bl.bianhao = #{bianhao}
     </select>
 
+    <update id="editContractChange">
+        UPDATE contractchange SET cstate = #{cstate}
+        WHERE chid = #{chid}
+    </update>
+
     <update id="editContractState">
         UPDATE contract SET cstate = 1 WHERE cid = #{cid}
     </update>
+
+    <update id="relieveContract">
+        UPDATE contract SET cstate = 3 WHERE cid = #{cid}
+    </update>
+
+    <!--<insert id="insert" parameterType="com.study.pojo.Backlog">
+         insert into backlog(btetle,bianhao,bcondition,baccept,empid)
+        values (#{btetle},#{bianhao},#{bcondition}, #{baccept},
+         #{empid}
+        )
+    </insert>-->
+
 
     <select id="getPmidByTitleAndId" resultType="Payment">
         SELECT pay.* FROM payment pay
@@ -114,17 +153,16 @@
         UPDATE payment SET pmstate = 1 WHERE pmid = #{pmid}
     </update>
 
-    <select id="getPvidByTitleAndId" resultType="Positive">
+    <select id="getEmpByTitleAndId" resultType="Emp">
         SELECT e.* FROM positive pos
         INNER JOIN backlog bl ON pos.pvid = bl.bianhao
         INNER JOIN emp e ON pos.empno = e.empno
         WHERE bl.bianhao = #{pvid}
     </select>
 
-    <update id="editPositiveState">
+    <update id="editEmpState">
         UPDATE emp SET state = 2 WHERE empno = #{empno}
     </update>
-
 
     <insert id="insert" parameterType="com.study.pojo.Backlog">
          insert into backlog(btetle,bianhao,bcondition,baccept,empid)
@@ -132,4 +170,22 @@
          #{empid}
         )
     </insert>
+
+    <select id="listByMineFlow" resultMap="BacklogResult">
+        SELECT b.* FROM backlog b
+        WHERE b.empno = #{bl.myemp.empno} AND b.bcondition = 0
+    </select>
+
+    <select id="getByContractChangeByBianhao" resultType="ContractChange">
+        SELECT con.* FROM contractchange con
+        INNER JOIN backlog bl ON con.chid = bl.bianhao
+        WHERE bl.bianhao = #{bianhao} AND bl.btetle = '合同解除申请'
+    </select>
+
+    <select id="selectByContractChangeByBianhao" resultType="ContractChange">
+        SELECT con.* FROM contractchange con
+        INNER JOIN backlog bl ON con.chid = bl.bianhao
+        WHERE bl.bianhao = #{bianhao} AND bl.btetle = '合同结项申请'
+    </select>
+
 </mapper>

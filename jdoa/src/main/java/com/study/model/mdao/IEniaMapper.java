@@ -1,5 +1,6 @@
 package com.study.model.mdao;
 
+import com.study.pojo.Emp;
 import com.study.pojo.Positive;
 import org.springframework.stereotype.Repository;
 
@@ -17,5 +18,10 @@ public interface IEniaMapper {
      */
     Positive getByPvIdToLeaves(Integer pvid);
 
-
+    /**
+     * 查询时设置申请人，获取emp
+     * @param chid
+     * @return
+     */
+    Emp getContractChangeByChId(Integer chid);
 }

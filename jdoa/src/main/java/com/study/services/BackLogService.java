@@ -5,12 +5,8 @@ import com.github.pagehelper.PageInfo;
 import com.study.config.MyResult;
 import com.study.model.mdao.IBackLogMapper;
 import com.study.model.mdao.IEmpMapper;
-import com.study.pojo.Approval;
+import com.study.pojo.*;
 import com.study.model.mdao.*;
-import com.study.pojo.Backlog;
-import com.study.pojo.Contract;
-import com.study.pojo.Emp;
-import com.study.pojo.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,6 +69,35 @@ public class BackLogService {
                 return MyResult.ERROR("转正申请失败");
             }
         }
+        if (backLogResult.getBtetle().equals("合同解除申请")) {
+            Contractchange byContractByBianhao = backLogMapper.getByContractChangeByBianhao(backLogResult.getBianhao());
+
+            int editContractState = backLogMapper.editContractState(byContractByBianhao.getMycontract().getCid());
+            if (editContractState != 1) {
+                return MyResult.ERROR("合同解除失败");
+            }
+            int editContractChange = backLogMapper.editContractChange(byContractByBianhao.getChid(), 3);
+            if (editContractChange != 1) {
+                return MyResult.ERROR("合同解除失败");
+            }
+        }
+        if (backLogResult.getBtetle().equals("合同结项申请")) {
+            Contractchange byContractByBianhao = backLogMapper.getByContractChangeByBianhao(backLogResult.getBianhao());
+
+            int editContractState = backLogMapper.editContractState(byContractByBianhao.getMycontract().getCid());
+            if (editContractState != 1) {
+                return MyResult.ERROR("合同解除失败");
+            }
+            int editContractChange = backLogMapper.editContractChange(byContractByBianhao.getChid(), 2);
+            if (editContractChange != 1) {
+                return MyResult.ERROR("合同解除失败");
+            }
+        }
+        if (backLogResult.getBtetle().equals("资产借用")) {
+
+        }
+
+
         int editBackLog = backLogMapper.editBackLog(backlog);
         if (editBackLog != 1) {
             return MyResult.ERROR("待办修改失败");
@@ -101,7 +126,7 @@ public class BackLogService {
             } else {
                 backlogs.get(i).setMgrResp(emp.getEname());
             }
-            //设置返回申请人
+            /*//设置返回申请人
             if (backlogs.get(i).getBtetle().equals("采购合同申请")) {
                 Emp byCidToLeaves = contractMapper.getByCidToLeaves(backlogs.get(i).getBianhao());
                 backlogs.get(i).setApplicantResp(byCidToLeaves.getEname());
@@ -115,7 +140,8 @@ public class BackLogService {
                 backlogs.get(i).setApplicantResp(byJnIdToLeaves.getEname());
             }
             if (backlogs.get(i).getBtetle().equals("转正申请")) {
-
+                Emp empByTitleAndId = backLogMapper.getEmpByTitleAndId(backlogs.get(i).getBianhao());
+                backlogs.get(i).setApplicantResp(empByTitleAndId.getEname());
             }
             if (backlogs.get(i).getBtetle().equals("合同结项申请")) {
 
@@ -126,14 +152,12 @@ public class BackLogService {
             if (backlogs.get(i).getBtetle().equals("合同付款申请")) {
                 Emp byPmIdToLeaves = paymentMapper.getByPmIdToLeaves(backlogs.get(i).getBianhao());
                 backlogs.get(i).setApplicantResp(byPmIdToLeaves.getEname());
-            }
+            }*/
         }
         PageHelper.startPage(pageNum,10);
         PageInfo<Backlog> list = new PageInfo<>(backlogs);
         return MyResult.okAndpage(list);
     }
-
-
 
     //新增转正信息
     public Integer doinsert(Backlog backlog){
@@ -143,5 +167,15 @@ public class BackLogService {
             e.printStackTrace();
             return -1;
         }
+    }
+
+    public MyResult listAllByMineFlowPath(Backlog backlog,Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        Emp emp = new Emp();
+        emp.setEmpno(backlog.getReqEmp());
+        backlog.setMyemp(emp);
+        List<Backlog> backlogs = backLogMapper.listByMineFlow(backlog);
+        PageInfo<Backlog> list = new PageInfo<>(backlogs);
+        return MyResult.okAndpage(list);
     }
 }
