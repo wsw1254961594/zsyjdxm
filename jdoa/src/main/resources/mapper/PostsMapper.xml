@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.model.mdao.IPostsMapper">
+    <resultMap id="postsResult" type="com.study.pojo.Posts">
+        <id property="postid" column="postid"/>
+        <result property="pcause" column="pcause"/>
+        <result property="yuanpost" column="yuanpost"/>
+        <result property="xinpost" column="xinpost"/>
+        <result property="yuandept" column="yuandept"/>
+        <result property="xindept" column="xindept"/>
+        <result property="yuanmgr" column="yuanmgr"/>
+        <result property="xinmgr" column="xinmgr"/>
+        <result property="title" column="title"/>
+    </resultMap>
+
+    <insert id="insertpost" parameterType="com.study.pojo.Posts">
+        insert into posts(pcause,yuanpost,xinpost,yuandept,xindept,title,empno)
+        values (#{pcause},#{yuanpost},#{xinpost},#{yuandept},#{xindept},#{title},
+        #{myemp.empno,jdbcType=INTEGER})
+    </insert>
+
+    <select id="selectmax" resultType="java.lang.Integer">
+        select max(postid) from posts
+    </select>
+</mapper>

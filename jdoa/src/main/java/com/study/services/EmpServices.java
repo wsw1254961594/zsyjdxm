@@ -22,6 +22,10 @@ public class EmpServices {
         return info;
     }
 
+    public List<Emp> selectall(){
+        List<Emp> list=mapper.selectall();
+        return list;
+    }
     public Emp selectByeid(Integer eid){
         Emp emp=mapper.selectByeid(eid);
         return emp;
@@ -36,6 +40,14 @@ public class EmpServices {
         }
     }
 
+    public  Integer updatestate(Integer empno){
+        try {
+            return mapper.updatestate(empno);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
     //新增员工
     public Integer doinsert(Emp emp){
         try {
